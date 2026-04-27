@@ -1,0 +1,45 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="56" y1="48" x2="448" y2="456" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#253345"/>
+      <stop offset="0.55" stop-color="#141B25"/>
+      <stop offset="1" stop-color="#0B0F15"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="106" y1="320" x2="402" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5C6674"/>
+      <stop offset="0.5" stop-color="#87909E"/>
+      <stop offset="1" stop-color="#4B5563"/>
+    </linearGradient>
+    <linearGradient id="ember" x1="218" y1="112" x2="286" y2="298" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE1B0"/>
+      <stop offset="0.35" stop-color="#FFB054"/>
+      <stop offset="0.72" stop-color="#FF7A1C"/>
+      <stop offset="1" stop-color="#C84D0C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 240) rotate(90) scale(112 92)">
+      <stop stop-color="#FF9A3C" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FF9A3C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="28" y="28" width="456" height="456" rx="112" fill="url(#bg)"/>
+  <rect x="40" y="40" width="432" height="432" rx="100" stroke="#344152" stroke-width="4"/>
+
+  <ellipse cx="256" cy="240" rx="92" ry="112" fill="url(#glow)"/>
+
+  <path d="M132 340C132 316 151 296 175 296H337C361 296 380 316 380 340V366H132V340Z" fill="url(#metal)"/>
+  <rect x="154" y="314" width="204" height="20" rx="10" fill="#A0A8B4" fill-opacity="0.45"/>
+  <path d="M166 366H346L332 402H180L166 366Z" fill="#394351"/>
+  <rect x="186" y="382" width="140" height="12" rx="6" fill="#202833"/>
+
+  <path d="M258 122C287 150 297 182 291 209C286 229 273 243 273 260C273 278 286 290 301 301C268 298 246 281 241 253C237 233 246 218 246 201C246 182 239 166 222 145C233 145 245 138 258 122Z" fill="url(#ember)"/>
+  <path d="M226 184C247 201 255 221 251 237C248 249 239 259 239 272C239 284 248 292 259 299C235 297 218 285 214 266C211 252 217 242 217 230C217 218 212 205 198 190C209 190 217 188 226 184Z" fill="#FFD08D"/>
+  <path d="M257 122C286 150 296 182 290 208C285 228 272 242 272 259C272 277 285 289 300 300" stroke="#FFE7C8" stroke-opacity="0.4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M168 156L184 130L200 156" stroke="#FFB054" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M198 118L214 92L230 118" stroke="#FF8B2C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M318 146L332 124L346 146" stroke="#FFB054" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M338 112L350 94L362 112" stroke="#FF8B2C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+
+  <path d="M102 308L394 308" stroke="#1A2029" stroke-width="10" stroke-linecap="round" opacity="0.55"/>
+</svg>

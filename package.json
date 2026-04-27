@@ -1,0 +1,74 @@
+{
+  "name": "scrappy-suite",
+  "version": "1.0.0",
+  "productName": "Scrappy Suite",
+  "description": "A freeware Electron workspace from Ravenforge Creations Studio with panels for writing, files, planning, and help.",
+  "main": "main.js",
+  "author": {
+    "name": "Ravenforge Creations Studio",
+    "url": "https://ravenforge.info"
+  },
+  "homepage": "https://ravenforge.info",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "start": "electron .",
+    "pack": "npx electron-builder --dir",
+    "dist": "npx electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "info.ravenforge.scrappysuite",
+    "productName": "Scrappy Suite",
+    "artifactName": "${productName}-Setup-${version}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "launcher_window.html",
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "style.css",
+      "modules/**/*",
+      "README.md",
+      "HELP.md",
+      "RELEASE_NOTES.md",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "main.js"
+    },
+    "win": {
+      "icon": "assets/icons/scrappy-suite-icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "publisherName": "Ravenforge Creations Studio"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Scrappy Suite",
+      "uninstallDisplayName": "Scrappy Suite",
+      "installerIcon": "assets/icons/scrappy-suite-icon.ico",
+      "uninstallerIcon": "assets/icons/scrappy-suite-icon.ico",
+      "installerHeaderIcon": "assets/icons/scrappy-suite-icon.ico",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^41.2.0"
+  },
+  "dependencies": {
+    "html-to-docx": "^1.8.0",
+    "mammoth": "^1.12.0",
+    "marked": "^18.0.0",
+    "turndown": "^7.2.4"
+  }
+}

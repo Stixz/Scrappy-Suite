@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scrappy Suite</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="header draggable-area">
+    <div class="brand-lockup">
+      <span class="brand-name">Scrappy Suite <span class="accent">&#9679;</span></span>
+      <span class="brand-byline">by Ravenforge Creations Studio</span>
+    </div>
+    <nav id="module-switcher">
+      <button class="icon-btn" data-module="calendar" title="Calendar" aria-label="Calendar">&#9715;</button>
+      <button class="icon-btn" data-module="writer" title="DirT Writer" aria-label="DirT Writer">&#9636;</button>
+      <button class="icon-btn" data-module="files" title="Fogre" aria-label="Fogre">&#9635;</button>
+      <button class="icon-btn" data-module="help" title="Help" aria-label="Help">?</button>
+      <button class="icon-btn" id="launcher-btn" title="Launcher" aria-label="Launcher">&#9712;</button>
+      <button class="icon-btn" id="add-panel-btn" title="Add Panel" aria-label="Add Panel">&#65291;</button>
+    </nav>
+
+    <div class="window-controls">
+      <button class="window-btn" id="win-min" title="Minimize">&#x2212;</button>
+      <button class="window-btn" id="win-max" title="Maximize">&#x25A1;</button>
+      <button class="window-btn window-btn-close" id="win-close" title="Close">&#x2715;</button>
+    </div>
+  </div>
+  <div class="panels" id="panels">
+    <div class="panel" data-panel="0">
+      <div class="panel-content" id="panel-content-0"></div>
+      <div class="drag-handle" data-handle="0"></div>
+    </div>
+    <div class="panel" data-panel="1">
+      <div class="panel-content" id="panel-content-1"></div>
+    </div>
+  </div>
+
+  <footer id="scrappy-footer">
+    <span id="scrappy-footer-text">Freeware from Ravenforge Creations Studio</span>
+    <div class="scrappy-footer-actions">
+      <button class="footer-link-btn" data-open-brand-modal>About</button>
+      <button class="footer-link-btn" data-studio-link>Visit Studio</button>
+    </div>
+  </footer>
+
+  <div class="brand-modal-overlay" id="brand-modal-overlay" hidden>
+    <div class="brand-modal">
+      <div class="brand-modal__eyebrow">Welcome</div>
+      <h2 class="brand-modal__title">Scrappy Suite</h2>
+      <p class="brand-modal__copy">
+        A freeware workspace from Ravenforge Creations Studio. Use it freely, kick the tires, and if the studio link looks interesting, that was absolutely the plan.
+      </p>
+      <div class="brand-modal__meta">
+        <span class="brand-modal__meta-chip">Freeware</span>
+        <span class="brand-modal__meta-chip">Ravenforge Creations Studio</span>
+      </div>
+      <div class="brand-modal__actions">
+        <button class="brand-modal__btn brand-modal__btn--ghost" data-close-brand-modal>Close</button>
+        <button class="brand-modal__btn brand-modal__btn--primary" data-studio-link>Visit Studio</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="renderer.js"></script>
+</body>
+</html>
+
