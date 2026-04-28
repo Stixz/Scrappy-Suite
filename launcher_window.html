@@ -137,6 +137,12 @@
       text-transform: uppercase;
     }
 
+    .launcher-shortcut-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
     .launcher-select {
       background: rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -152,6 +158,44 @@
       border-color: var(--scrappy-accent);
       box-shadow: 0 0 0 2px rgba(255, 154, 60, 0.16);
       background: rgba(0, 0, 0, 0.42);
+    }
+
+    .launcher-shortcut-input {
+      flex: 1;
+      min-width: 0;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--scrappy-white);
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .launcher-shortcut-input:focus {
+      border-color: var(--scrappy-accent);
+      box-shadow: 0 0 0 2px rgba(255, 154, 60, 0.16);
+      background: rgba(0, 0, 0, 0.42);
+    }
+
+    .launcher-inline-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: var(--scrappy-white);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 10px 12px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .launcher-inline-btn:hover {
+      background: rgba(255, 154, 60, 0.14);
+      border-color: rgba(255, 154, 60, 0.3);
+      color: var(--scrappy-accent);
     }
 
     .launcher-search-input {
@@ -469,6 +513,8 @@
       align-items: center;
       justify-content: center;
       z-index: 2000;
+      padding: 18px;
+      overflow-y: auto;
     }
     
     .modal {
@@ -482,6 +528,28 @@
       flex-direction: column;
       gap: 18px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      max-height: calc(100vh - 36px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 154, 60, 0.35) rgba(255, 255, 255, 0.04);
+    }
+
+    .modal::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 999px;
+    }
+
+    .modal::-webkit-scrollbar-thumb {
+      background: rgba(255, 154, 60, 0.35);
+      border-radius: 999px;
+    }
+
+    .modal::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 154, 60, 0.5);
     }
     
     .modal h3 {
@@ -495,6 +563,78 @@
       font-size: 12px;
       line-height: 1.45;
       margin-top: -6px;
+    }
+
+    .calculator-modal {
+      max-width: 360px;
+    }
+
+    .calculator-display-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .calculator-history {
+      min-height: 18px;
+      color: rgba(248, 250, 252, 0.52);
+      font-size: 12px;
+      text-align: right;
+      word-break: break-all;
+    }
+
+    .calculator-display {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.46);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: var(--scrappy-white);
+      padding: 14px 16px;
+      font-size: 24px;
+      font-weight: 700;
+      font-family: 'Consolas', 'Courier New', monospace;
+      text-align: right;
+      outline: none;
+    }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .calculator-btn {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--scrappy-white);
+      min-height: 54px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .calculator-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .calculator-btn--accent {
+      background: rgba(255, 154, 60, 0.18);
+      border-color: rgba(255, 154, 60, 0.35);
+      color: var(--scrappy-accent);
+    }
+
+    .calculator-btn--action {
+      background: rgba(255, 154, 60, 0.9);
+      border-color: rgba(255, 154, 60, 0.95);
+      color: #111;
+    }
+
+    .calculator-btn--wide {
+      grid-column: span 2;
     }
     
     .form-group {
@@ -778,6 +918,22 @@
             <option value="recent">Recent Launches</option>
           </select>
         </div>
+        <div class="launcher-tool-group">
+          <label for="theme-select">Appearance</label>
+          <select class="launcher-select" id="theme-select">
+            <option value="scrappy-default">Scrappy Default</option>
+            <option value="ember">Ember</option>
+            <option value="frosted-glass">Frosted Glass</option>
+            <option value="midnight-mint">Midnight Mint</option>
+          </select>
+        </div>
+        <div class="launcher-tool-group">
+          <label for="launcher-shortcut">Launcher Key</label>
+          <div class="launcher-shortcut-row">
+            <input class="launcher-shortcut-input" id="launcher-shortcut" type="text" placeholder="CommandOrControl+Space" autocomplete="off">
+            <button class="launcher-inline-btn" id="save-launcher-shortcut" type="button">Save</button>
+          </div>
+        </div>
       </div>
       <div class="launcher-status" id="launcher-status" aria-live="polite"></div>
       <div class="cards-scroll">
@@ -789,6 +945,11 @@
               <div class="card-icon">+</div>
               <div class="card-title">Add Shortcut</div>
               <div class="card-meta">Ctrl+N</div>
+            </div>
+            <div class="card" id="calculator-card-btn" tabindex="0" role="button" aria-label="Open calculator">
+              <div class="card-icon">=</div>
+              <div class="card-title">Calculator</div>
+              <div class="card-meta">Quick Math</div>
             </div>
           </div>
         </div>
@@ -864,6 +1025,42 @@
     </div>
   </div>
 
+  <div class="modal-overlay" id="calculator-overlay">
+    <div class="modal calculator-modal" role="dialog" aria-modal="true" aria-labelledby="calculator-title">
+      <h3 id="calculator-title">Calculator</h3>
+      <p class="modal-copy">Enough math to be helpful, not enough to become a personality trait.</p>
+      <div class="calculator-display-wrap">
+        <div class="calculator-history" id="calculator-history"></div>
+        <input class="calculator-display" id="calculator-display" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" value="0" aria-label="Calculator display">
+      </div>
+      <div class="calculator-grid">
+        <button class="calculator-btn calculator-btn--accent" data-calc-action="clear" type="button">AC</button>
+        <button class="calculator-btn calculator-btn--accent" data-calc-action="backspace" type="button">⌫</button>
+        <button class="calculator-btn calculator-btn--accent" data-calc-value="(" type="button">(</button>
+        <button class="calculator-btn calculator-btn--accent" data-calc-value=")" type="button">)</button>
+        <button class="calculator-btn" data-calc-value="7" type="button">7</button>
+        <button class="calculator-btn" data-calc-value="8" type="button">8</button>
+        <button class="calculator-btn" data-calc-value="9" type="button">9</button>
+        <button class="calculator-btn calculator-btn--accent" data-calc-value="/" type="button">÷</button>
+        <button class="calculator-btn" data-calc-value="4" type="button">4</button>
+        <button class="calculator-btn" data-calc-value="5" type="button">5</button>
+        <button class="calculator-btn" data-calc-value="6" type="button">6</button>
+        <button class="calculator-btn calculator-btn--accent" data-calc-value="*" type="button">×</button>
+        <button class="calculator-btn" data-calc-value="1" type="button">1</button>
+        <button class="calculator-btn" data-calc-value="2" type="button">2</button>
+        <button class="calculator-btn" data-calc-value="3" type="button">3</button>
+        <button class="calculator-btn calculator-btn--accent" data-calc-value="-" type="button">−</button>
+        <button class="calculator-btn calculator-btn--wide" data-calc-value="0" type="button">0</button>
+        <button class="calculator-btn" data-calc-value="." type="button">.</button>
+        <button class="calculator-btn calculator-btn--accent" data-calc-value="+" type="button">+</button>
+        <button class="calculator-btn calculator-btn--wide calculator-btn--action" data-calc-action="equals" type="button">=</button>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" id="calculator-close" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const BRANDING = {
       studioName: 'Ravenforge Creations Studio',
@@ -873,6 +1070,7 @@
     const cardsGrid = document.getElementById('cards-grid');
     const cardsSections = document.getElementById('cards-sections');
     const addCardBtn = document.getElementById('add-card-btn');
+    const calculatorCardBtn = document.getElementById('calculator-card-btn');
     const hideBtn = document.getElementById('hide-launcher');
     const refreshBtn = document.getElementById('refresh-launcher');
     const visitStudioBtn = document.getElementById('visit-studio-btn');
@@ -881,9 +1079,16 @@
     const clearSearchBtn = document.getElementById('clear-search');
     const categoryFilter = document.getElementById('category-filter');
     const sortModeSelect = document.getElementById('sort-mode');
+    const themeSelect = document.getElementById('theme-select');
+    const launcherShortcutInput = document.getElementById('launcher-shortcut');
+    const saveLauncherShortcutBtn = document.getElementById('save-launcher-shortcut');
     
     const contextMenu = document.getElementById('context-menu');
     const modalOverlay = document.getElementById('modal-overlay');
+    const calculatorOverlay = document.getElementById('calculator-overlay');
+    const calculatorDisplay = document.getElementById('calculator-display');
+    const calculatorHistory = document.getElementById('calculator-history');
+    const calculatorClose = document.getElementById('calculator-close');
     const modalTitle = document.getElementById('modal-title');
     const modalError = document.getElementById('modal-error');
     const shortcutTitle = document.getElementById('shortcut-title');
@@ -910,6 +1115,51 @@
     let sortMode = 'favorites';
     let draggedShortcutId = null;
     let statusTimer = null;
+    let calculatorExpression = '0';
+    let calculatorLastAnswer = '';
+
+    const THEMES = {
+      'scrappy-default': {
+        '--scrappy-bg': '#0c0f14',
+        '--scrappy-header': '#1e293b',
+        '--scrappy-panel': '#141922',
+        '--scrappy-accent': '#ff9a3c',
+        '--scrappy-grey': '#b0b7c3',
+        '--scrappy-white': '#f8fafc',
+        '--scrappy-charcoal': '#3a404a',
+        '--scrappy-orange': '#ff9a3c'
+      },
+      ember: {
+        '--scrappy-bg': '#140907',
+        '--scrappy-header': '#2a120d',
+        '--scrappy-panel': '#1f0d0a',
+        '--scrappy-accent': '#ff6a1f',
+        '--scrappy-grey': '#d0a497',
+        '--scrappy-white': '#fff5ef',
+        '--scrappy-charcoal': '#6c3529',
+        '--scrappy-orange': '#ff6a1f'
+      },
+      'frosted-glass': {
+        '--scrappy-bg': '#0b1118',
+        '--scrappy-header': '#182433',
+        '--scrappy-panel': '#101924',
+        '--scrappy-accent': '#8ee5ff',
+        '--scrappy-grey': '#bfd1de',
+        '--scrappy-white': '#f5fbff',
+        '--scrappy-charcoal': '#4b6277',
+        '--scrappy-orange': '#8ee5ff'
+      },
+      'midnight-mint': {
+        '--scrappy-bg': '#091112',
+        '--scrappy-header': '#122326',
+        '--scrappy-panel': '#0f1a1d',
+        '--scrappy-accent': '#62e4c1',
+        '--scrappy-grey': '#a9c4c2',
+        '--scrappy-white': '#f2fffc',
+        '--scrappy-charcoal': '#355557',
+        '--scrappy-orange': '#62e4c1'
+      }
+    };
     
     function createShortcutId() {
       return `shortcut-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -967,6 +1217,117 @@
     function setModalError(message = '') {
       modalError.textContent = message;
       modalError.classList.toggle('visible', Boolean(message));
+    }
+
+    function refreshCalculatorDisplay() {
+      calculatorDisplay.value = calculatorExpression || '0';
+      calculatorHistory.textContent = calculatorLastAnswer;
+    }
+
+    function sanitizeCalculatorExpression(expression) {
+      return String(expression || '')
+        .replace(/[×x]/g, '*')
+        .replace(/[÷]/g, '/')
+        .replace(/[−]/g, '-')
+        .replace(/\s+/g, '');
+    }
+
+    function evaluateCalculatorExpression(expression) {
+      const sanitized = sanitizeCalculatorExpression(expression);
+      if (!sanitized) {
+        return '0';
+      }
+      if (!/^[0-9+\-*/().]+$/.test(sanitized)) {
+        throw new Error('Only numbers and basic operators are supported.');
+      }
+
+      const result = Function(`"use strict"; return (${sanitized});`)();
+      if (!Number.isFinite(result)) {
+        throw new Error('That expression did not produce a usable number.');
+      }
+
+      return String(Number.parseFloat(result.toFixed(10)));
+    }
+
+    function openCalculator() {
+      calculatorOverlay.style.display = 'flex';
+      refreshCalculatorDisplay();
+      setTimeout(() => {
+        calculatorDisplay.focus();
+        calculatorDisplay.select();
+      }, 0);
+    }
+
+    function closeCalculator() {
+      calculatorOverlay.style.display = 'none';
+    }
+
+    function appendCalculatorValue(value) {
+      const nextValue = String(value || '');
+      if (!nextValue) {
+        return;
+      }
+
+      if (calculatorExpression === '0' && /[0-9.]/.test(nextValue)) {
+        calculatorExpression = nextValue === '.' ? '0.' : nextValue;
+      } else {
+        calculatorExpression += nextValue;
+      }
+      refreshCalculatorDisplay();
+    }
+
+    function clearCalculator() {
+      calculatorExpression = '0';
+      calculatorLastAnswer = '';
+      refreshCalculatorDisplay();
+    }
+
+    function backspaceCalculator() {
+      if (calculatorExpression.length <= 1) {
+        calculatorExpression = '0';
+      } else {
+        calculatorExpression = calculatorExpression.slice(0, -1);
+      }
+      refreshCalculatorDisplay();
+    }
+
+    function runCalculator() {
+      try {
+        const sourceExpression = calculatorExpression;
+        const result = evaluateCalculatorExpression(sourceExpression);
+        calculatorLastAnswer = `${sourceExpression} = ${result}`;
+        calculatorExpression = result;
+        refreshCalculatorDisplay();
+      } catch (error) {
+        setStatus(error.message || 'That calculation did not work.', 'error', 3200);
+      }
+    }
+
+    function applyLauncherTheme(themeName) {
+      const nextTheme = THEMES[themeName] ? themeName : 'scrappy-default';
+      const themeVars = THEMES[nextTheme];
+      Object.entries(themeVars).forEach(([key, value]) => {
+        document.documentElement.style.setProperty(key, value);
+      });
+      if (themeSelect) {
+        themeSelect.value = nextTheme;
+      }
+    }
+
+    async function loadSettings() {
+      if (!window.settingsApi?.get) {
+        return;
+      }
+
+      try {
+        const settings = await window.settingsApi.get();
+        applyLauncherTheme(settings?.theme || 'scrappy-default');
+        if (launcherShortcutInput) {
+          launcherShortcutInput.value = settings?.launcherShortcut || '';
+        }
+      } catch (error) {
+        setStatus(`Could not load launcher settings: ${error.message}`, 'error', 4200);
+      }
     }
     
     function loadShortcuts() {
@@ -1592,6 +1953,58 @@
       sortMode = event.target.value || 'favorites';
       renderCards();
     });
+
+    themeSelect.addEventListener('change', async (event) => {
+      const nextTheme = event.target.value || 'scrappy-default';
+      applyLauncherTheme(nextTheme);
+
+      if (!window.settingsApi?.update) {
+        setStatus('Theme settings are not available in this build.', 'warning', 3200);
+        return;
+      }
+
+      const result = await window.settingsApi.update({ theme: nextTheme });
+      if (!result?.success) {
+        setStatus(result?.error || 'Scrappy could not save that theme.', 'error', 4200);
+        return;
+      }
+
+      setStatus(`Theme changed to ${event.target.options[event.target.selectedIndex]?.text || 'the selected theme'}.`, 'success', 2200);
+    });
+
+    async function saveLauncherShortcut() {
+      const nextShortcut = launcherShortcutInput.value.trim();
+      if (!nextShortcut) {
+        setStatus('Enter a launcher shortcut first.', 'warning', 3200);
+        launcherShortcutInput.focus();
+        return;
+      }
+
+      if (!window.settingsApi?.update) {
+        setStatus('Shortcut settings are not available in this build.', 'warning', 3200);
+        return;
+      }
+
+      const result = await window.settingsApi.update({ launcherShortcut: nextShortcut });
+      if (!result?.success) {
+        setStatus(result?.error || 'Scrappy could not save that launcher shortcut.', 'error', 4200);
+        return;
+      }
+
+      launcherShortcutInput.value = result.settings?.launcherShortcut || nextShortcut;
+      setStatus(`Launcher shortcut set to ${launcherShortcutInput.value}.`, 'success', 2400);
+    }
+
+    saveLauncherShortcutBtn.addEventListener('click', () => {
+      saveLauncherShortcut();
+    });
+
+    launcherShortcutInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        saveLauncherShortcut();
+      }
+    });
     
     hideBtn.addEventListener('click', () => {
       window.launcherApi.hide();
@@ -1612,6 +2025,13 @@
       });
     }
 
+    window.settingsApi?.onChanged?.((settings) => {
+      applyLauncherTheme(settings?.theme || 'scrappy-default');
+      if (launcherShortcutInput && typeof settings?.launcherShortcut === 'string') {
+        launcherShortcutInput.value = settings.launcherShortcut;
+      }
+    });
+
     addCardBtn.addEventListener('click', () => openModal());
     addCardBtn.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' || event.key === ' ') {
@@ -1620,9 +2040,75 @@
       }
     });
 
+    calculatorCardBtn.addEventListener('click', () => openCalculator());
+    calculatorCardBtn.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openCalculator();
+      }
+    });
+
     modalOverlay.addEventListener('mousedown', (event) => {
       if (event.target === modalOverlay) {
         modalOverlay.style.display = 'none';
+      }
+    });
+
+    calculatorOverlay.addEventListener('mousedown', (event) => {
+      if (event.target === calculatorOverlay) {
+        closeCalculator();
+      }
+    });
+
+    calculatorClose.addEventListener('click', () => {
+      closeCalculator();
+    });
+
+    calculatorOverlay.querySelector('.calculator-grid').addEventListener('click', (event) => {
+      const button = event.target.closest('button');
+      if (!button) {
+        return;
+      }
+      const action = button.dataset.calcAction;
+      const value = button.dataset.calcValue;
+      if (action === 'clear') {
+        clearCalculator();
+      } else if (action === 'backspace') {
+        backspaceCalculator();
+      } else if (action === 'equals') {
+        runCalculator();
+      } else if (value) {
+        appendCalculatorValue(value);
+      }
+    });
+
+    calculatorDisplay.addEventListener('input', (event) => {
+      calculatorExpression = event.target.value || '0';
+    });
+
+    calculatorDisplay.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        runCalculator();
+        return;
+      }
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeCalculator();
+        return;
+      }
+
+      if (event.key === 'Backspace') {
+        return;
+      }
+
+      if (event.ctrlKey || event.metaKey || event.altKey) {
+        return;
+      }
+
+      if (!/[\d+\-*/().]/.test(event.key) && !['ArrowLeft', 'ArrowRight', 'Delete', 'Tab', 'Home', 'End'].includes(event.key)) {
+        event.preventDefault();
       }
     });
 
@@ -1643,6 +2129,11 @@
       }
 
       if (event.key === 'Escape') {
+        if (calculatorOverlay.style.display === 'flex') {
+          event.preventDefault();
+          closeCalculator();
+          return;
+        }
         if (modalOverlay.style.display === 'flex') {
           event.preventDefault();
           modalOverlay.style.display = 'none';
@@ -1658,7 +2149,9 @@
     });
     
     loadShortcuts();
+    loadSettings();
     updateTypeUi();
+    refreshCalculatorDisplay();
   </script>
 </body>
 </html>

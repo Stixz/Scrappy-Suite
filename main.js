@@ -11,9 +11,18 @@ let htmlToDocxModule = null;
 let launcherWin = null;
 let mainWindow = null;
 let closeConfirmationRequestId = 0;
+let launcherActionRequestId = 0;
+const pendingLauncherActions = new Map();
 const APP_ICON_PATH = path.join(__dirname, 'assets', 'icons', 'scrappy-suite-icon.ico');
 const CACHE_DIR = path.join(app.getPath('temp'), 'scrappy-suite-cache');
 const PANEL_STATE_FILE = path.join(app.getPath('userData'), 'panel-state.json');
+const APP_SETTINGS_FILE = path.join(app.getPath('userData'), 'app-settings.json');
+const DEFAULT_APP_SETTINGS = {
+  theme: 'scrappy-default',
+  launcherShortcut: 'CommandOrControl+Space'
+};
+let appSettings = { ...DEFAULT_APP_SETTINGS };
+let registeredLauncherShortcut = null;
 app.disableHardwareAcceleration();
 app.commandLine.appendSwitch('disk-cache-dir', CACHE_DIR);
 app.commandLine.appendSwitch('disable-gpu-shader-disk-cache');
@@ -64,6 +73,78 @@ async function savePanelStateFile(state) {
   } catch (error) {
     console.error('Failed saving panel state:', error);
     return { success: false, error: error.message };
+  }
+}
+
+function normalizeAppSettings(raw = {}) {
+  const theme = typeof raw.theme === 'string' && raw.theme.trim()
+    ? raw.theme.trim()
+    : DEFAULT_APP_SETTINGS.theme;
+  const launcherShortcut = typeof raw.launcherShortcut === 'string' && raw.launcherShortcut.trim()
+    ? raw.launcherShortcut.trim()
+    : DEFAULT_APP_SETTINGS.launcherShortcut;
+
+  return {
+    theme,
+    launcherShortcut
+  };
+}
+
+async function loadAppSettings() {
+  try {
+    const data = await fs.readFile(APP_SETTINGS_FILE, 'utf8');
+    appSettings = normalizeAppSettings(JSON.parse(data));
+  } catch {
+    appSettings = { ...DEFAULT_APP_SETTINGS };
+  }
+
+  return appSettings;
+}
+
+async function saveAppSettings() {
+  await fs.writeFile(APP_SETTINGS_FILE, JSON.stringify(appSettings, null, 2), 'utf8');
+}
+
+function broadcastSettingsChanged() {
+  const payload = { ...appSettings };
+  if (mainWindow && !mainWindow.isDestroyed()) {
+    mainWindow.webContents.send('settings:changed', payload);
+  }
+  if (launcherWin && !launcherWin.isDestroyed()) {
+    launcherWin.webContents.send('settings:changed', payload);
+  }
+}
+
+function registerLauncherShortcut(accelerator) {
+  const nextShortcut = typeof accelerator === 'string' ? accelerator.trim() : '';
+  if (!nextShortcut) {
+    return { success: false, error: 'A launcher shortcut is required.' };
+  }
+
+  try {
+    if (registeredLauncherShortcut) {
+      globalShortcut.unregister(registeredLauncherShortcut);
+      registeredLauncherShortcut = null;
+    }
+
+    const didRegister = globalShortcut.register(nextShortcut, () => {
+      createLauncherWindow();
+    });
+
+    if (!didRegister) {
+      return {
+        success: false,
+        error: 'Scrappy could not register that shortcut. It may already be in use.'
+      };
+    }
+
+    registeredLauncherShortcut = nextShortcut;
+    return { success: true };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message || 'That launcher shortcut is not valid.'
+    };
   }
 }
 
@@ -284,6 +365,65 @@ function buildHtmlDocument(title, bodyHtml) {
   ].join('\n');
 }
 
+function buildPrintableDocument(title, bodyHtml) {
+  const safeTitle = (title || 'Untitled Document')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+
+  return [
+    '<!DOCTYPE html>',
+    '<html lang="en">',
+    '<head>',
+    '  <meta charset="UTF-8">',
+    '  <meta name="viewport" content="width=device-width, initial-scale=1.0">',
+    `  <title>${safeTitle}</title>`,
+    '  <style>',
+    '    @page { margin: 0.7in; }',
+    '    :root { color-scheme: light; }',
+    '    * { box-sizing: border-box; }',
+    '    body { margin: 0; color: #111827; background: #ffffff; font: 12pt/1.55 Georgia, "Times New Roman", serif; }',
+    '    main { width: 100%; }',
+    '    h1, h2, h3, h4, h5, h6 { color: #0f172a; margin: 0 0 0.45em; line-height: 1.2; page-break-after: avoid; }',
+    '    h1 { font-size: 24pt; margin-bottom: 0.7em; }',
+    '    h2 { font-size: 18pt; margin-top: 1.2em; }',
+    '    h3 { font-size: 15pt; margin-top: 1em; }',
+    '    p, ul, ol, blockquote, pre, table { margin: 0 0 0.85em; }',
+    '    ul, ol { padding-left: 1.4em; }',
+    '    blockquote { margin-left: 0; padding: 0.35em 0 0.35em 1em; border-left: 3px solid #d97706; color: #374151; }',
+    '    code { font-family: "Cascadia Code", Consolas, "Courier New", monospace; font-size: 0.92em; background: #f3f4f6; padding: 0.08em 0.28em; border-radius: 4px; }',
+    '    pre { background: #f8fafc; border: 1px solid #dbe3ee; border-radius: 10px; padding: 12px 14px; overflow: hidden; white-space: pre-wrap; word-break: break-word; }',
+    '    pre code { background: transparent; padding: 0; }',
+    '    img { max-width: 100%; height: auto; page-break-inside: avoid; border-radius: 6px; }',
+    '    table { width: 100%; border-collapse: collapse; }',
+    '    th, td { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; vertical-align: top; }',
+    '    th { background: #f8fafc; }',
+    '    hr { border: none; border-top: 1px solid #cbd5e1; margin: 1.2em 0; }',
+    '  </style>',
+    '</head>',
+    `<body><main>${bodyHtml ?? ''}</main></body>`,
+    '</html>',
+    ''
+  ].join('\n');
+}
+
+async function createPrintPreviewWindow(html) {
+  const printWindow = new BrowserWindow({
+    show: false,
+    width: 900,
+    height: 1100,
+    autoHideMenuBar: true,
+    backgroundColor: '#ffffff',
+    webPreferences: {
+      sandbox: true
+    }
+  });
+
+  await printWindow.loadURL(`data:text/html;charset=UTF-8,${encodeURIComponent(html)}`);
+  return printWindow;
+}
+
 async function openDocxDocument(filePath) {
   const result = await convertDocxFileToHtml(filePath);
 
@@ -417,6 +557,92 @@ async function handleSaveDocumentAs(event, payload) {
   return saveDocument(window, payload, true);
 }
 
+async function handlePrintDocument(event, payload = {}) {
+  const window = getWindowFromEvent(event);
+  if (!window) {
+    return { success: false, error: 'Window is not available.' };
+  }
+
+  let printWindow = null;
+  try {
+    const html = buildPrintableDocument(payload.title, payload.contentHtml);
+    printWindow = await createPrintPreviewWindow(html);
+
+    const result = await new Promise((resolve) => {
+      printWindow.webContents.print(
+        {
+          silent: false,
+          printBackground: true,
+          color: true
+        },
+        (success, failureReason) => {
+          if (success) {
+            resolve({ success: true });
+            return;
+          }
+
+          if (!failureReason || /cancel/i.test(failureReason)) {
+            resolve({ success: false, canceled: true, error: 'Print canceled.' });
+            return;
+          }
+
+          resolve({ success: false, error: failureReason });
+        }
+      );
+    });
+
+    return result;
+  } catch (error) {
+    return { success: false, error: error.message || 'Print failed.' };
+  } finally {
+    if (printWindow && !printWindow.isDestroyed()) {
+      printWindow.close();
+    }
+  }
+}
+
+async function handleSaveDocumentPdf(event, payload = {}) {
+  const window = getWindowFromEvent(event);
+  if (!window) {
+    return { success: false, error: 'Window is not available.' };
+  }
+
+  const title = payload.title || 'Untitled Document';
+  const defaultPdfPath = getDefaultSavePath(null, title, 'pdf');
+  const saveResult = await dialog.showSaveDialog(window, {
+    title: 'Save as PDF',
+    defaultPath: defaultPdfPath,
+    filters: [{ name: 'PDF Documents', extensions: ['pdf'] }]
+  });
+
+  if (saveResult.canceled || !saveResult.filePath) {
+    return { success: false, canceled: true, error: 'PDF save canceled.' };
+  }
+
+  let printWindow = null;
+  try {
+    const html = buildPrintableDocument(payload.title, payload.contentHtml);
+    printWindow = await createPrintPreviewWindow(html);
+    const pdfBuffer = await printWindow.webContents.printToPDF({
+      printBackground: true,
+      pageSize: 'Letter',
+      landscape: false
+    });
+
+    await fs.writeFile(saveResult.filePath, pdfBuffer);
+    return {
+      success: true,
+      filePath: saveResult.filePath
+    };
+  } catch (error) {
+    return { success: false, error: error.message || 'PDF export failed.' };
+  } finally {
+    if (printWindow && !printWindow.isDestroyed()) {
+      printWindow.close();
+    }
+  }
+}
+
 function handleDocumentDirtyState(event, dirty) {
   const window = getWindowFromEvent(event);
   if (!window) {
@@ -457,6 +683,48 @@ function handleCloseConfirmationResponse(event, payload = {}) {
   }
 
   window.close();
+}
+
+function handleLauncherActionResult(event, payload = {}) {
+  const requestId = payload?.requestId;
+  if (!requestId || !pendingLauncherActions.has(requestId)) {
+    return;
+  }
+
+  const { resolve, timer } = pendingLauncherActions.get(requestId);
+  clearTimeout(timer);
+  pendingLauncherActions.delete(requestId);
+  resolve(payload?.result || { success: false, error: 'Launcher action did not return a result.' });
+}
+
+async function handleGetSettings() {
+  return { ...appSettings };
+}
+
+async function handleUpdateSettings(event, updates = {}) {
+  const nextSettings = normalizeAppSettings({
+    ...appSettings,
+    ...updates
+  });
+
+  if (nextSettings.launcherShortcut !== appSettings.launcherShortcut) {
+    const registration = registerLauncherShortcut(nextSettings.launcherShortcut);
+    if (!registration.success) {
+      if (appSettings.launcherShortcut) {
+        registerLauncherShortcut(appSettings.launcherShortcut);
+      }
+      return registration;
+    }
+  }
+
+  appSettings = nextSettings;
+  await saveAppSettings();
+  broadcastSettingsChanged();
+
+  return {
+    success: true,
+    settings: { ...appSettings }
+  };
 }
 
 async function handleListDir(event, dirPath) {
@@ -550,8 +818,8 @@ function createLauncherWindow() {
   }
 
   launcherWin = new BrowserWindow({
-    width: 450,
-    height: 600,
+    width: 610,
+    height: 720,
     x: x,
     y: y,
     frame: false,
@@ -811,6 +1079,12 @@ async function handleGenerateThought(event, prompt) {
 }
 
 app.whenReady().then(async () => {
+  await loadAppSettings();
+  const shortcutRegistration = registerLauncherShortcut(appSettings.launcherShortcut);
+  if (!shortcutRegistration.success) {
+    console.warn('Failed to register launcher shortcut:', shortcutRegistration.error);
+  }
+
   ipcMain.on('launcher:open', () => {
     createLauncherWindow();
   });
@@ -820,12 +1094,22 @@ app.whenReady().then(async () => {
       return { success: false, error: 'Main window is not available.' };
     }
 
-    mainWindow.webContents.send('launcher:action', payload);
+    const requestId = `launcher-action-${++launcherActionRequestId}`;
+    const resultPromise = new Promise((resolve) => {
+      const timer = setTimeout(() => {
+        pendingLauncherActions.delete(requestId);
+        resolve({ success: false, error: 'Launcher action timed out before Scrappy confirmed the result.' });
+      }, 5000);
+
+      pendingLauncherActions.set(requestId, { resolve, timer });
+    });
+
+    mainWindow.webContents.send('launcher:action', { ...payload, requestId });
     if (!mainWindow.isVisible()) {
       mainWindow.show();
     }
     mainWindow.focus();
-    return { success: true };
+    return resultPromise;
   });
 
   ipcMain.on('window:minimize', (event) => {
@@ -860,10 +1144,15 @@ app.whenReady().then(async () => {
       launcherWin.hide();
     }
   });
+  ipcMain.on('launcher:action-result', handleLauncherActionResult);
+  ipcMain.handle('settings:get', handleGetSettings);
+  ipcMain.handle('settings:update', handleUpdateSettings);
 
   ipcMain.handle('document:open', handleOpenDocument);
   ipcMain.handle('document:save', handleSaveDocument);
   ipcMain.handle('document:save-as', handleSaveDocumentAs);
+  ipcMain.handle('document:print', handlePrintDocument);
+  ipcMain.handle('document:save-pdf', handleSaveDocumentPdf);
   ipcMain.on('document:set-dirty', handleDocumentDirtyState);
   ipcMain.on('window:close-confirmation-response', handleCloseConfirmationResponse);
 

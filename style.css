@@ -22,12 +22,6 @@
 #module-switcher, #module-switcher *, .icon-btn {
 	-webkit-app-region: no-drag;
 }
-.dragging-panel {
-	opacity: 0.6;
-}
-.drag-over-panel {
-	outline: 2px dashed var(--scrappy-orange);
-}
 .panel-content {
 	padding: 20px 20px 18px 20px;
 	box-sizing: border-box;
@@ -48,16 +42,43 @@
 	gap: 12px;
 }
 
-.panel-drag-handle {
-	cursor: grab;
-}
-
-.panel-drag-handle:active {
-	cursor: grabbing;
-}
-
 .module-title {
 	margin: 0;
+}
+
+.panel-header-actions {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-left: auto;
+	flex: 0 0 auto;
+}
+
+.panel-move-btn {
+	background: transparent;
+	color: var(--scrappy-white);
+	border: 1px solid #394150;
+	width: 32px;
+	height: 32px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 0.95rem;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 120ms, color 120ms, border-color 120ms, opacity 120ms;
+}
+
+.panel-move-btn:hover:not(:disabled) {
+	background: #2a313d;
+	border-color: #3a404a;
+	color: var(--scrappy-orange);
+}
+
+.panel-move-btn:disabled {
+	opacity: 0.35;
+	cursor: default;
 }
 
 .module-close-btn {
@@ -1660,6 +1681,7 @@ body {
 
 .writer-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: auto;
   padding-top: 12px;

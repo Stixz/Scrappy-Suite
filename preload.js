@@ -20,6 +20,8 @@ contextBridge.exposeInMainWorld('documentApi', {
   open: () => ipcRenderer.invoke('document:open'),
   save: (payload) => ipcRenderer.invoke('document:save', payload),
   saveAs: (payload) => ipcRenderer.invoke('document:save-as', payload),
+  print: (payload) => ipcRenderer.invoke('document:print', payload),
+  savePdf: (payload) => ipcRenderer.invoke('document:save-pdf', payload),
   setDirty: (dirty) => ipcRenderer.send('document:set-dirty', dirty)
 });
 
@@ -52,6 +54,7 @@ contextBridge.exposeInMainWorld('launcherApi', {
   open: () => ipcRenderer.send('launcher:open'),
   hide: () => ipcRenderer.send('launcher:hide'),
   requestAction: (payload) => ipcRenderer.invoke('launcher:action', payload),
+  respondActionResult: (payload) => ipcRenderer.send('launcher:action-result', payload),
   onActionRequested: (callback) => {
     ipcRenderer.on('launcher:action', (_event, payload) => callback(payload));
   }
@@ -64,4 +67,12 @@ contextBridge.exposeInMainWorld('appStateApi', {
 
 contextBridge.exposeInMainWorld('thoughtApi', {
   generate: (prompt) => ipcRenderer.invoke('thoughts:generate', prompt)
+});
+
+contextBridge.exposeInMainWorld('settingsApi', {
+  get: () => ipcRenderer.invoke('settings:get'),
+  update: (updates) => ipcRenderer.invoke('settings:update', updates),
+  onChanged: (callback) => {
+    ipcRenderer.on('settings:changed', (_event, payload) => callback(payload));
+  }
 });

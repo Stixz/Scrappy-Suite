@@ -25,16 +25,13 @@ const panelState = new Map();
 const MIN_PANEL_WIDTH = 120;
 let selectedPanel = 0;
 let resizeState = null;
-let panelDragState = null;
-let panelDragIsDragging = false;
-let panelDragTargetPanel = null;
-let globalPanelEventsBound = false;
 const PANEL_ENTER_DURATION = 220;
 const PANEL_EXIT_DURATION = 180;
 const MODULE_SWAP_OUT_DURATION = 90;
 const MODULE_SWAP_IN_DURATION = 190;
 const SCRAPPY_THEME_KEY = 'scrappy_theme';
 const SCRAPPY_THEMES = ['scrappy-default', 'ember', 'frosted-glass', 'midnight-mint'];
+let currentTheme = 'scrappy-default';
 
 function getBrandPromoHtml() {
   return `
@@ -201,21 +198,46 @@ function savePanelState() {
 }
 
 function getCurrentTheme() {
-  const storedTheme = localStorage.getItem(SCRAPPY_THEME_KEY);
-  return SCRAPPY_THEMES.includes(storedTheme) ? storedTheme : 'scrappy-default';
+  return currentTheme;
 }
 
-function applyTheme(themeName, persist = true) {
+function applyTheme(themeName, options = {}) {
+  const { persist = true } = options;
   const nextTheme = SCRAPPY_THEMES.includes(themeName) ? themeName : 'scrappy-default';
+  currentTheme = nextTheme;
   document.body.dataset.theme = nextTheme;
 
   if (persist) {
-    localStorage.setItem(SCRAPPY_THEME_KEY, nextTheme);
+    if (window.settingsApi?.update) {
+      window.settingsApi.update({ theme: nextTheme }).catch((error) => {
+        console.warn('Failed to persist theme to settings:', error);
+        localStorage.setItem(SCRAPPY_THEME_KEY, nextTheme);
+      });
+    } else {
+      localStorage.setItem(SCRAPPY_THEME_KEY, nextTheme);
+    }
   }
 
   document.dispatchEvent(new CustomEvent('scrappy:theme-changed', {
     detail: { theme: nextTheme }
   }));
+}
+
+async function loadInitialTheme() {
+  if (window.settingsApi?.get) {
+    try {
+      const settings = await window.settingsApi.get();
+      const configuredTheme = settings?.theme;
+      if (SCRAPPY_THEMES.includes(configuredTheme)) {
+        return configuredTheme;
+      }
+    } catch (error) {
+      console.warn('Failed to load theme from settings:', error);
+    }
+  }
+
+  const storedTheme = localStorage.getItem(SCRAPPY_THEME_KEY);
+  return SCRAPPY_THEMES.includes(storedTheme) ? storedTheme : 'scrappy-default';
 }
 
 async function loadPanelState() {
@@ -546,59 +568,76 @@ async function openPathInFogre(targetPath, options = {}) {
 }
 
 async function handleLauncherAction(payload = {}) {
+  const requestId = payload?.requestId;
   const action = payload?.action;
   const shortcut = payload?.shortcut || {};
   const target = shortcut.target;
   const type = shortcut.type || 'app';
+  const respond = (result) => {
+    if (requestId && window.launcherApi?.respondActionResult) {
+      window.launcherApi.respondActionResult({ requestId, result });
+    }
+    return result;
+  };
 
   if (!action || !target) {
-    return;
+    return respond({ success: false, error: 'Launcher action is missing a valid target.' });
   }
 
-  if (action === 'open-in-fogre') {
-    if (/^(https?:|mailto:)/i.test(target)) {
-      return;
-    }
-    await openPathInFogre(target, { isDirectory: type === 'folder' });
-    return;
-  }
-
-  if (action === 'open-in-writer') {
-    if (/^(https?:|mailto:)/i.test(target) || type === 'folder') {
-      return;
-    }
-    await window.openFileInWriter(target);
-    return;
-  }
-
-  if (action === 'send-to-selected-panel') {
-    const selectedState = getSelectedPanelModuleState();
-    if (!selectedState) {
-      return;
+  try {
+    if (action === 'open-in-fogre') {
+      if (/^(https?:|mailto:)/i.test(target)) {
+        return respond({ success: false, error: 'Fogre can only open local files and folders.' });
+      }
+      await openPathInFogre(target, { isDirectory: type === 'folder' });
+      return respond({ success: true });
     }
 
-    if (selectedState.moduleKey === 'writer' || selectedState.moduleKey === 'data') {
-      selectedState.store?.emit('data:insert', {
-        type: 'text',
+    if (action === 'open-in-writer') {
+      if (/^(https?:|mailto:)/i.test(target)) {
+        return respond({ success: false, error: 'DirT Writer cannot open web links directly.' });
+      }
+      if (type === 'folder') {
+        return respond({ success: false, error: 'DirT Writer cannot open folders.' });
+      }
+      await window.openFileInWriter(target);
+      return respond({ success: true });
+    }
+
+    if (action === 'send-to-selected-panel') {
+      const selectedState = getSelectedPanelModuleState();
+      if (!selectedState) {
+        return respond({ success: false, error: 'Select a panel first so Scrappy knows where to send the target.' });
+      }
+
+      if (selectedState.moduleKey === 'writer' || selectedState.moduleKey === 'data') {
+        selectedState.store?.emit('data:insert', {
+          type: 'text',
+          data: target,
+          targetPanelIdx: selectedPanel
+        });
+        return respond({ success: true });
+      }
+
+      if (selectedState.moduleKey === 'files' && !/^(https?:|mailto:)/i.test(target)) {
+        await openPathInFogre(target, {
+          isDirectory: type === 'folder',
+          targetPanelIdx: selectedPanel
+        });
+        return respond({ success: true });
+      }
+
+      await window.openDataPanel({
+        title: shortcut.title || 'Launcher Target',
         data: target,
-        targetPanelIdx: selectedPanel
+        type: 'text'
       });
-      return;
+      return respond({ success: true });
     }
 
-    if (selectedState.moduleKey === 'files' && !/^(https?:|mailto:)/i.test(target)) {
-      await openPathInFogre(target, {
-        isDirectory: type === 'folder',
-        targetPanelIdx: selectedPanel
-      });
-      return;
-    }
-
-    await window.openDataPanel({
-      title: shortcut.title || 'Launcher Target',
-      data: target,
-      type: 'text'
-    });
+    return respond({ success: false, error: `Scrappy does not recognize the launcher action "${action}".` });
+  } catch (error) {
+    return respond({ success: false, error: error?.message || 'Scrappy could not complete that launcher action.' });
   }
 }
 
@@ -815,6 +854,21 @@ function bindModuleCloseInteractions(panelIdx) {
   }
 }
 
+function movePanel(panelIdx, direction) {
+  const panels = getPanels();
+  if (panels.length < 2) {
+    return;
+  }
+
+  const targetIdx = direction === 'left' ? panelIdx - 1 : panelIdx + 1;
+  if (targetIdx < 0 || targetIdx >= panels.length) {
+    return;
+  }
+
+  swapPanels(panelIdx, targetIdx);
+  selectPanel(targetIdx);
+}
+
 function swapPanels(fromIdx, toIdx) {
   if (fromIdx === toIdx) {
     return;
@@ -834,6 +888,57 @@ function swapPanels(fromIdx, toIdx) {
   savePanelState();
 }
 
+function ensurePanelHeaderControls(panel) {
+  const panelIdx = Number(panel.dataset.panel);
+  const header = panel.querySelector('.module-topbar');
+  if (!header) {
+    return;
+  }
+
+  let actions = header.querySelector('.panel-header-actions');
+  if (!actions) {
+    actions = document.createElement('div');
+    actions.className = 'panel-header-actions';
+  }
+
+  let moveLeftBtn = actions.querySelector('.panel-move-btn[data-direction="left"]');
+  if (!moveLeftBtn) {
+    moveLeftBtn = document.createElement('button');
+    moveLeftBtn.type = 'button';
+    moveLeftBtn.className = 'panel-move-btn';
+    moveLeftBtn.dataset.direction = 'left';
+    moveLeftBtn.title = 'Move panel left';
+    moveLeftBtn.setAttribute('aria-label', 'Move panel left');
+    moveLeftBtn.innerHTML = '&#8592;';
+    actions.appendChild(moveLeftBtn);
+  }
+
+  let moveRightBtn = actions.querySelector('.panel-move-btn[data-direction="right"]');
+  if (!moveRightBtn) {
+    moveRightBtn = document.createElement('button');
+    moveRightBtn.type = 'button';
+    moveRightBtn.className = 'panel-move-btn';
+    moveRightBtn.dataset.direction = 'right';
+    moveRightBtn.title = 'Move panel right';
+    moveRightBtn.setAttribute('aria-label', 'Move panel right');
+    moveRightBtn.innerHTML = '&#8594;';
+    actions.appendChild(moveRightBtn);
+  }
+
+  const closeBtn = header.querySelector(`[data-close-panel="${panelIdx}"]`);
+  if (closeBtn && closeBtn.parentElement !== actions) {
+    actions.appendChild(closeBtn);
+  }
+
+  if (actions.parentElement !== header) {
+    header.appendChild(actions);
+  }
+
+  const panelCount = getPanels().length;
+  moveLeftBtn.disabled = panelIdx === 0;
+  moveRightBtn.disabled = panelIdx >= panelCount - 1;
+}
+
 function setupPanelEvents() {
   getPanels().forEach((panel) => {
     panel.onclick = (event) => {
@@ -843,86 +948,20 @@ function setupPanelEvents() {
 
       selectPanel(Number(panel.dataset.panel));
     };
-
-    const header = panel.querySelector('.module-topbar');
-    if (header) {
-      header.classList.add('panel-drag-handle');
-    }
+    ensurePanelHeaderControls(panel);
   });
 
-  if (!globalPanelEventsBound) {
-    document.addEventListener('mousedown', (e) => {
-      const header = e.target.closest('.panel-drag-handle');
-      if (!header || resizeState) return;
-
-      const panel = header.closest('.panel');
-      if (!panel) return;
-
-      if (e.target.closest('input, textarea, [contenteditable="true"], button')) return;
-
-      e.preventDefault();
-
-      panelDragState = {
-        panelIdx: Number(panel.dataset.panel),
-        startX: e.clientX,
-        startY: e.clientY,
-        panel
-      };
-      panelDragIsDragging = false;
-      panelDragTargetPanel = null;
-    });
-
-    document.addEventListener('mousemove', (e) => {
-      if (!panelDragState) return;
-
-      const dx = e.clientX - panelDragState.startX;
-      const dy = e.clientY - panelDragState.startY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance > 10) {
-        panelDragIsDragging = true;
-        panelDragState.panel.classList.add('dragging-panel');
-
-        getPanels().forEach((panel) => {
-          if (panel === panelDragState.panel) {
-            return;
-          }
-
-          const rect = panel.getBoundingClientRect();
-          if (
-            e.clientX >= rect.left &&
-            e.clientX <= rect.right &&
-            e.clientY >= rect.top &&
-            e.clientY <= rect.bottom
-          ) {
-            panel.classList.add('drag-over-panel');
-            panelDragTargetPanel = panel;
-          } else {
-            panel.classList.remove('drag-over-panel');
-            if (panelDragTargetPanel === panel) panelDragTargetPanel = null;    
-          }
-        });
+  document.querySelectorAll('.panel-move-btn').forEach((button) => {
+    button.onclick = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const panel = button.closest('.panel');
+      if (!panel) {
+        return;
       }
-    });
-
-    document.addEventListener('mouseup', () => {
-      if (!panelDragState) return;
-
-      panelDragState.panel.classList.remove('dragging-panel');
-
-      if (panelDragIsDragging && panelDragTargetPanel) {
-        swapPanels(panelDragState.panelIdx, Number(panelDragTargetPanel.dataset.panel));
-      }
-
-      getPanels().forEach((panel) => panel.classList.remove('drag-over-panel'));
-
-      panelDragState = null;
-      panelDragIsDragging = false;
-      panelDragTargetPanel = null;
-    });
-
-    globalPanelEventsBound = true;
-  }
+      movePanel(Number(panel.dataset.panel), button.dataset.direction);
+    };
+  });
 
   document.querySelectorAll('.drag-handle').forEach((handle) => {
     handle.onmousedown = (event) => {
@@ -1068,7 +1107,7 @@ function setupContextTracking() {
 }
 
 async function initialize() {
-  applyTheme(getCurrentTheme(), false);
+  applyTheme(await loadInitialTheme(), { persist: false });
   setupHeaderButtons();
   bindBrandingInteractions();
   setupContextTracking();
@@ -1105,6 +1144,13 @@ async function initialize() {
 }
 
 initialize();
+
+window.settingsApi?.onChanged?.((settings) => {
+  const nextTheme = settings?.theme;
+  if (SCRAPPY_THEMES.includes(nextTheme) && nextTheme !== currentTheme) {
+    applyTheme(nextTheme, { persist: false });
+  }
+});
 
 // Persist panel state when the window is about to close
 window.addEventListener('beforeunload', () => {
