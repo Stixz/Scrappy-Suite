@@ -1,0 +1,199 @@
+Ohhh yes — let’s **forge the second Scrappy module** so you can *see* how two Scrappy modules talk to each other using the lightweight hybrid architecture.
+
+You already have **Module 1: Notes** from the template.
+
+Now we’ll build:
+
+# 🜁 **Module 2: Tasks**  
+A simple, Scrappy‑native module that:
+
+- uses the same tiny module contract  
+- stores its data in `scrappy.db.tasks`  
+- emits events  
+- listens to events  
+- can open items via deep links  
+- can react to Notes (optional example included)  
+
+This will show you EXACTLY how module‑to‑module communication works in Scrappy Suite.
+
+---
+
+# 🜂 **SCRAPPY MODULE #2 — TASKS**  
+*(Copy/paste ready, matches the Notes module structure)*
+
+```
+const tasks = {
+  id: "tasks",
+  name: "Tasks",
+  icon: "🧷",
+  color: "#8fbf88",
+
+  state: {
+    selected: null,
+    filter: "",
+    items: []
+  },
+
+  actions: {
+    create(data) {
+      const id = "task-" + Date.now().toString(36)
+      scrappy.db.tasks.push({
+        id,
+        title: data.title || "Untitled Task",
+        done: false,
+        noteLink: data.noteLink || null,   // optional link to a note
+        created: Date.now()
+      })
+
+      scrappy.emit("tasks:created", { id })
+      return id
+    },
+
+    open(id) {
+      tasks.state.selected = id
+      scrappy.emit("tasks:opened", { id })
+    },
+
+    save(id, data) {
+      const item = scrappy.db.tasks.find(t => t.id === id)
+      Object.assign(item, data)
+      scrappy.emit("tasks:saved", { id })
+    },
+
+    remove(id) {
+      scrappy.db.tasks = scrappy.db.tasks.filter(t => t.id !== id)
+      scrappy.emit("tasks:removed", { id })
+    },
+
+    toggle(id) {
+      const item = scrappy.db.tasks.find(t => t.id === id)
+      item.done = !item.done
+      scrappy.emit("tasks:toggled", { id, done: item.done })
+    }
+  },
+
+  renderMain(container) {
+    container.innerHTML = `
+      <h1>Tasks</h1>
+      <button id="newTaskBtn">New Task</button>
+      <ul id="taskList"></ul>
+    `
+
+    const list = container.querySelector("#taskList")
+
+    list.innerHTML = scrappy.db.tasks
+      .map(t => `
+        <li data-id="${t.id}">
+          <input type="checkbox" ${t.done ? "checked" : ""}>
+          <span>${t.title}</span>
+          ${t.noteLink ? `<a href="${t.noteLink}">🗒️</a>` : ""}
+        </li>
+      `)
+      .join("")
+
+    list.addEventListener("click", (e) => {
+      const li = e.target.closest("li")
+      if (!li) return
+      const id = li.dataset.id
+
+      if (e.target.tagName === "INPUT") {
+        tasks.actions.toggle(id)
+      } else {
+        tasks.actions.open(id)
+      }
+    })
+
+    container.querySelector("#newTaskBtn").onclick = () => {
+      const id = tasks.actions.create({ title: "New Task" })
+      tasks.actions.open(id)
+    }
+  },
+
+  renderSide(container) {
+    const id = tasks.state.selected
+    if (!id) {
+      container.innerHTML = "<p>No task selected.</p>"
+      return
+    }
+
+    const item = scrappy.db.tasks.find(t => t.id === id)
+
+    container.innerHTML = `
+      <h2>${item.title}</h2>
+      <p>Status: ${item.done ? "Done" : "Not Done"}</p>
+      ${item.noteLink ? `<p>Linked Note: <a href="${item.noteLink}">${item.noteLink}</a></p>` : ""}
+    `
+  }
+}
+
+scrappy.register(tasks)
+```
+
+---
+
+# 🜃 **How This Module Talks to Notes (Module 1)**  
+Here’s the magic:  
+Scrappy Suite uses **events** and **deep links**, not DB contracts.
+
+### Example: Notes creates a task automatically  
+Add this anywhere after both modules are registered:
+
+```
+scrappy.on("notes:created", ({ id }) => {
+  tasks.actions.create({
+    title: "Follow up on note",
+    noteLink: `scrappy://notes/${id}`
+  })
+})
+```
+
+Now when you create a note:
+
+- Scrappy emits `notes:created`
+- Tasks hears it
+- Tasks creates a linked task
+- The task contains a deep link back to the note
+
+This is Scrappy Suite’s version of module‑to‑module communication.
+
+---
+
+# 🜄 **What You Just Built**  
+You now have:
+
+### ✔ Module 1: Notes  
+### ✔ Module 2: Tasks  
+### ✔ Shared data layer  
+### ✔ Shared event bus  
+### ✔ Shared linking protocol  
+### ✔ Shared UI hooks  
+### ✔ Cross‑module communication  
+
+This is the **Scrappy Hybrid Architecture** in action.
+
+It’s:
+
+- lightweight  
+- flexible  
+- personal  
+- Ravenforge‑flavored  
+- and NOT over‑engineered like TOW  
+
+Scrappy Suite now has a real ecosystem.
+
+---
+
+# 🜅 If you want, I can now build:  
+### **A) Module 3: Ideas**  
+(Your creative brain dump module)
+
+### **B) Module 4: Journal**  
+(Daily logs, mood, thoughts)
+
+### **C) Module 5: Projects**  
+(A lightweight version of TOW’s Projects)
+
+### **D) The Scrappy Core Engine**  
+(The tiny runtime that powers all modules)
+
+Just tell me which one you want to forge next.

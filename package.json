@@ -12,6 +12,9 @@
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "start": "electron .",
+    "check": "node -e \"const { readdirSync } = require('node:fs'); const { spawnSync } = require('node:child_process'); const files = ['main.js', 'preload.js', 'renderer.js', ...readdirSync('modules').filter((file) => file.endsWith('.js')).map((file) => `modules/${file}`)]; for (const file of files) { const result = spawnSync(process.execPath, ['--check', file], { stdio: 'inherit' }); if (result.status) process.exit(result.status); }\"",
+    "build:icon": "node -e \"const { writeFileSync } = require('node:fs'); const pngToIco = require('png-to-ico').default; pngToIco('assets/icons/scrappy-suite-icon.png').then((buffer) => writeFileSync('assets/icons/scrappy-suite-icon.ico', buffer));\"",
+    "verify": "npm run check && npm audit --omit=dev && npm run pack",
     "pack": "npx electron-builder --dir",
     "dist": "npx electron-builder --win nsis"
   },
@@ -40,6 +43,7 @@
     },
     "win": {
       "icon": "assets/icons/scrappy-suite-icon.ico",
+      "signAndEditExecutable": false,
       "target": [
         {
           "target": "nsis",
@@ -47,8 +51,7 @@
             "x64"
           ]
         }
-      ],
-      "publisherName": "Ravenforge Creations Studio"
+      ]
     },
     "nsis": {
       "oneClick": false,
@@ -63,7 +66,9 @@
     }
   },
   "devDependencies": {
-    "electron": "^41.2.0"
+    "electron": "^41.2.0",
+    "electron-builder": "^26.8.1",
+    "png-to-ico": "^3.0.1"
   },
   "dependencies": {
     "html-to-docx": "^1.8.0",

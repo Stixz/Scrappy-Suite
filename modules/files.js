@@ -290,6 +290,10 @@ export async function bindInteractions(panelIdx, initialState, store) {
 
     if (isDir) {
       navigateTo(panelIdx, path);
+    } else {
+      window.shellApi.openPath(path).catch((err) => {
+        alert(`Could not open file: ${err.message}`);
+      });
     }
   };
 
@@ -357,10 +361,11 @@ function showContextMenu(panelIdx, x, y, dataset, store) {
 
     addItem('Open', 'open', () => {
         if (isDir) navigateTo(panelIdx, path);
-        else showPreview(panelIdx, path);
+        else window.shellApi.openPath(path);
     });
 
     if (!isDir) {
+        addItem('Preview', 'preview', () => showPreview(panelIdx, path));
         addItem('Open in Writer', 'writer', () => window.openFileInWriter(path));
     }
 
@@ -502,22 +507,22 @@ async function showPreview(panelIdx, filePath, options = {}) {
       content.innerHTML = html || '<p>No content.</p>';
     } else if (ext === 'pdf') {
       content.replaceChildren(renderPdfPreview(filePath));
+    } else if (['mp4', 'mov', 'm4v', 'webm', 'avi', 'mkv'].includes(ext)) {
+      content.replaceChildren(renderVideoPreview(filePath));
     } else if (ext === 'zip') {
       content.replaceChildren(await renderZipPreview(panelIdx, filePath));
     } else if (ext === 'url') {
       const text = await window.fileApi.readFile(filePath);
       content.replaceChildren(renderUrlPreview(text));
-    } else if (['txt', 'md', 'markdown', 'html', 'js', 'json', 'css'].includes(ext)) {
+    } else if (['txt', 'md', 'markdown', 'html', 'js', 'json', 'css', 'ini'].includes(ext)) {
       const text = await window.fileApi.readFile(filePath);
       if (ext === 'md' || ext === 'markdown') {
         content.replaceChildren(renderMarkdownPreview(text));
       } else {
-        const pre = document.createElement('pre');
-        pre.textContent = text;
-        content.replaceChildren(pre);
+        content.replaceChildren(renderTextPreview(filePath, text, ext));
       }
     } else {
-      content.innerHTML = `<button class="module-action-btn" style="width:100%" onclick="window.openFileInWriter('${filePath.replace(/\\/g, '\\\\')}')">Open in Writer</button>`;
+      content.replaceChildren(renderGenericFilePreview(filePath));
     }
   } catch (err) {
     content.textContent = `Error: ${err.message}`;
@@ -1067,6 +1072,94 @@ function renderPdfPreview(filePath) {
   return wrapper;
 }
 
+function renderTextPreview(filePath, text, extension = '') {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'text-preview';
+
+  const toolbar = document.createElement('div');
+  toolbar.className = 'file-preview-toolbar';
+
+  const openButton = document.createElement('button');
+  openButton.className = 'module-action-btn';
+  openButton.type = 'button';
+  openButton.textContent = extension === 'ini' ? 'Open INI' : 'Open File';
+  openButton.onclick = () => window.shellApi.openPath(filePath);
+
+  toolbar.appendChild(openButton);
+  wrapper.appendChild(toolbar);
+
+  const pre = document.createElement('pre');
+  pre.textContent = text;
+  wrapper.appendChild(pre);
+
+  return wrapper;
+}
+
+function renderVideoPreview(filePath) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'video-preview';
+
+  const toolbar = document.createElement('div');
+  toolbar.className = 'file-preview-toolbar';
+
+  const openButton = document.createElement('button');
+  openButton.className = 'module-action-btn';
+  openButton.type = 'button';
+  openButton.textContent = 'Open Video';
+  openButton.onclick = () => window.shellApi.openPath(filePath);
+
+  toolbar.appendChild(openButton);
+  wrapper.appendChild(toolbar);
+
+  const video = document.createElement('video');
+  video.className = 'video-preview-player';
+  video.src = toLocalFileUrl(filePath);
+  video.controls = true;
+  video.preload = 'metadata';
+
+  const fallback = document.createElement('p');
+  fallback.className = 'file-preview-meta';
+  fallback.textContent = 'Video preview unavailable in this view. Use Open Video if it refuses to cooperate.';
+
+  video.onerror = () => {
+    wrapper.replaceChildren(toolbar, fallback);
+  };
+
+  wrapper.appendChild(video);
+  return wrapper;
+}
+
+function renderGenericFilePreview(filePath) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'generic-file-preview';
+
+  const meta = document.createElement('div');
+  meta.className = 'file-preview-meta';
+  meta.textContent = 'No inline preview is available for this file type.';
+
+  const actions = document.createElement('div');
+  actions.className = 'file-preview-toolbar';
+
+  const openButton = document.createElement('button');
+  openButton.className = 'module-action-btn';
+  openButton.type = 'button';
+  openButton.textContent = 'Open File';
+  openButton.onclick = () => window.shellApi.openPath(filePath);
+
+  const writerButton = document.createElement('button');
+  writerButton.className = 'module-action-btn module-action-btn-secondary';
+  writerButton.type = 'button';
+  writerButton.textContent = 'Open in Writer';
+  writerButton.onclick = () => window.openFileInWriter(filePath);
+
+  actions.appendChild(openButton);
+  actions.appendChild(writerButton);
+  wrapper.appendChild(meta);
+  wrapper.appendChild(actions);
+
+  return wrapper;
+}
+
 function renderUrlPreview(text) {
   const wrapper = document.createElement('div');
   wrapper.className = 'url-preview';
@@ -1608,20 +1701,27 @@ function getFileIcon(entry) {
 
   const ext = entry.name.includes('.') ? entry.name.split('.').pop().toLowerCase() : '';
   const iconMap = {
+    avi: 'VID',
     css: 'CSS',
     docx: 'DOC',
     gif: 'IMG',
     htm: 'WEB',
     html: 'WEB',
+    ini: 'INI',
     jpeg: 'IMG',
     jpg: 'IMG',
     js: 'JS',
     json: 'JSON',
+    m4v: 'VID',
+    mkv: 'VID',
     markdown: 'MD',
     md: 'MD',
+    mov: 'VID',
+    mp4: 'VID',
     png: 'IMG',
     svg: 'SVG',
     txt: 'TXT',
+    webm: 'VID',
     webp: 'IMG',
     zip: 'ZIP'
   };

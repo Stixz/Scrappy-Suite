@@ -1,18 +1,74 @@
+:root {
+  --ghost-opacity: 0.4;
+  --growth-speed: 400ms;
+  --scale-factor: 1.1;
+  --dock-rotation: 12deg;
+}
+
+:root {
+  --ghost-opacity: 0.4;
+  --growth-speed: 400ms;
+  --scale-factor: 1.1;
+  --dock-rotation: 12deg;
+  --transition-120ms: background 120ms, color 120ms, border-color 120ms, opacity 120ms;
+  /* @label Transition 120ms | @desc Auto-extracted from transition in selector .panel-move-btn. */
+  --animation-1350ms: scrappy-hover-breath 1350ms ease-in-out infinite;
+  /* @label Animation 1350ms | @desc Auto-extracted from animation in selector .panel-move-btn:hover:not(:disabled). */
+  --transition-120ms-2: background 120ms, color 120ms, border-color 120ms;
+  /* @label Transition 120ms 2 | @desc Auto-extracted from transition in selector .module-close-btn. */
+  --width-440px: min(440px, 100%);
+  /* @label Width 440px | @desc Auto-extracted from width in selector .module-empty-state. */
+  --color-248: rgba(248, 250, 252, 0.74);
+  /* @label Color 248 | @desc Auto-extracted from color in selector .module-empty-state__copy. */
+  --color-248-2: rgba(248, 250, 252, 0.82);
+  /* @label Color 248 2 | @desc Auto-extracted from color in selector .module-empty-state__chip. */
+  --border-top-1px: 1px solid rgba(255, 255, 255, 0.08);
+  /* @label Border Top 1px | @desc Auto-extracted from border-top in selector .brand-promo. */
+  --color-255: rgba(255, 154, 60, 0.8);
+  /* @label Color 255 | @desc Auto-extracted from color in selector .brand-promo__label. */
+  --color-248-3: rgba(248, 250, 252, 0.68);
+  /* @label Color 248 3 | @desc Auto-extracted from color in selector .brand-promo__copy. */
+  --transition-120ms-3: background 120ms, color 120ms, border-color 120ms;
+  /* @label Transition 120ms 3 | @desc Auto-extracted from transition in selector .brand-link-btn. */
+  --border-color-255: rgba(255, 154, 60, 0.28);
+  /* @label Border Color 255 | @desc Auto-extracted from border-color in selector .brand-link-btn:hover. */
+  --animation-1400ms: scrappy-hover-breath 1400ms ease-in-out infinite;
+  /* @label Animation 1400ms | @desc Auto-extracted from animation in selector .brand-link-btn:hover. */
+  --color-248-4: rgba(248, 250, 252, 0.78);
+  /* @label Color 248 4 | @desc Auto-extracted from color in selector .help-section p. */
+  --color-248-5: rgba(248, 250, 252, 0.82);
+  /* @label Color 248 5 | @desc Auto-extracted from color in selector .help-list. */
+  --grid-template-columns-180px: repeat(auto-fit, minmax(180px, 1fr));
+  /* @label Grid Template Columns 180px | @desc Auto-extracted from grid-template-columns in selector .help-grid. */
+  --border-color-255-2: rgba(255, 154, 60, 0.24);
+  /* @label Border Color 255 2 | @desc Auto-extracted from border-color in selector .help-card-request. */
+  --grid-template-columns-220px: repeat(auto-fit, minmax(220px, 1fr));
+  /* @label Grid Template Columns 220px | @desc Auto-extracted from grid-template-columns in selector .theme-picker-grid. */
+  --transition-150ms: transform 150ms ease, border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
+  /* @label Transition 150ms | @desc Auto-extracted from transition in selector .theme-option-btn. */
+}
+
+:root {
+  --ghost-opacity: 0.4;
+  --growth-speed: 400ms;
+  --dock-rotation: 12deg;
+}
+
 .doc-writer-textarea {
 	width: 100%;
 	max-width: 100%;
-	min-height: 120px;
+	min-height: var(--min-height-120px);
 	box-sizing: border-box;
-	border-radius: 8px;
+	border-radius: var(--border-radius-8px);
 	border: 1px solid #444;
-	background: #10151f;
-	color: #fff;
-	padding: 12px;
-	font-size: 1rem;
+	background: var(--background-color-10151f);
+	color: var(--color-color-fff);
+	padding: var(--padding-12px);
+	font-size: var(--font-size-1rem);
 	resize: none;
 	display: block;
 	overflow-y: hidden;
-	transition: height 0.15s;
+	transition: var(--transition-0-15000ms);
 }
 .draggable-area {
 	-webkit-app-region: drag;
@@ -32,14 +88,14 @@
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	gap: 14px;
+	gap: var(--gap-14px);
 }
 
 .module-topbar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 12px;
+	gap: var(--gap-12px);
 }
 
 .module-title {
@@ -49,7 +105,7 @@
 .panel-header-actions {
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
+	gap: var(--gap-8px);
 	margin-left: auto;
 	flex: 0 0 auto;
 }
@@ -58,11 +114,11 @@
 	background: transparent;
 	color: var(--scrappy-white);
 	border: 1px solid #394150;
-	width: 32px;
-	height: 32px;
-	border-radius: 8px;
+	width: var(--width-32px);
+	height: var(--height-32px);
+	border-radius: var(--border-radius-8px-2);
 	cursor: pointer;
-	font-size: 0.95rem;
+	font-size: var(--font-size-0-95rem);
 	line-height: 1;
 	display: inline-flex;
 	align-items: center;
@@ -71,13 +127,16 @@
 }
 
 .panel-move-btn:hover:not(:disabled) {
-	background: #2a313d;
-	border-color: #3a404a;
+	background: var(--background-color-2a313d);
+	border-color: var(--border-color-color-3a404a);
 	color: var(--scrappy-orange);
+	box-shadow: 0 0 0 1px rgba(255, 154, 60, 0.12), 0 0 14px rgba(255, 154, 60, 0.12);
+	transform: var(--transform-neg-1px);
+	animation: scrappy-hover-breath 1350ms ease-in-out infinite;
 }
 
 .panel-move-btn:disabled {
-	opacity: 0.35;
+	opacity: var(--opacity-0-35);
 	cursor: default;
 }
 
@@ -85,26 +144,28 @@
 	background: transparent;
 	color: var(--scrappy-white);
 	border: 1px solid #394150;
-	width: 32px;
-	height: 32px;
-	border-radius: 8px;
+	width: var(--width-32px-2);
+	height: var(--height-32px-2);
+	border-radius: var(--border-radius-8px-3);
 	cursor: pointer;
-	font-size: 1rem;
+	font-size: var(--font-size-1rem-2);
 	line-height: 1;
 	flex: 0 0 auto;
 	transition: background 120ms, color 120ms, border-color 120ms;
 }
 
 .module-close-btn:hover {
-	background: #7f1d1d;
-	border-color: #a33;
-	color: #fff;
+	background: var(--background-color-7f1d1d);
+	border-color: var(--border-color-color-a33);
+	color: var(--color-color-fff-2);
+	box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.18), 0 0 14px rgba(220, 38, 38, 0.16);
+	transform: var(--transform-neg-1px-2);
 }
 
 .module-body {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: var(--gap-12px-2);
 	min-height: 0;
 }
 
@@ -118,7 +179,7 @@
 	width: min(440px, 100%);
 	padding: 32px 28px;
 	border: 1px solid rgba(255, 154, 60, 0.16);
-	border-radius: 18px;
+	border-radius: var(--border-radius-18px);
 	background:
 		linear-gradient(180deg, rgba(255, 154, 60, 0.08), rgba(255, 154, 60, 0.02)),
 		radial-gradient(circle at top right, rgba(255, 154, 60, 0.12), transparent 38%),
@@ -127,17 +188,17 @@
 }
 
 .module-empty-state__eyebrow {
-	margin-bottom: 10px;
+	margin-bottom: var(--margin-bottom-10px);
 	color: var(--scrappy-orange);
-	font-size: 0.72rem;
+	font-size: var(--font-size-0-72rem);
 	font-weight: 700;
-	letter-spacing: 0.12em;
+	letter-spacing: var(--letter-spacing-0-12em);
 	text-transform: uppercase;
 }
 
 .module-empty-state__title {
 	margin: 0 0 10px;
-	font-size: 1.45rem;
+	font-size: var(--font-size-1-45rem);
 	line-height: 1.2;
 	color: var(--scrappy-white);
 }
@@ -151,42 +212,42 @@
 .module-empty-state__chips {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
-	margin-top: 18px;
+	gap: var(--gap-10px);
+	margin-top: var(--margin-top-18px);
 }
 
 .module-empty-state__chip {
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
+	gap: var(--gap-8px-2);
 	padding: 8px 12px;
 	border: 1px solid rgba(255, 154, 60, 0.18);
-	border-radius: 999px;
+	border-radius: var(--border-radius-999px);
 	background: rgba(255, 255, 255, 0.03);
 	color: rgba(248, 250, 252, 0.82);
-	font-size: 0.86rem;
+	font-size: var(--font-size-0-86rem);
 }
 
 .module-empty-state__chip-icon {
 	color: var(--scrappy-orange);
-	font-size: 0.95rem;
+	font-size: var(--font-size-0-95rem-2);
 	line-height: 1;
 }
 
 .brand-promo {
-	margin-top: 18px;
-	padding-top: 18px;
+	margin-top: var(--margin-top-18px-2);
+	padding-top: var(--padding-top-18px);
 	border-top: 1px solid rgba(255, 255, 255, 0.08);
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: var(--gap-10px-2);
 }
 
 .brand-promo__label {
 	color: rgba(255, 154, 60, 0.8);
-	font-size: 0.72rem;
+	font-size: var(--font-size-0-72rem-2);
 	font-weight: 700;
-	letter-spacing: 0.12em;
+	letter-spacing: var(--letter-spacing-0-12em-2);
 	text-transform: uppercase;
 }
 
@@ -198,7 +259,7 @@
 
 .brand-promo__actions {
 	display: flex;
-	gap: 10px;
+	gap: var(--gap-10px-3);
 	flex-wrap: wrap;
 }
 
@@ -206,10 +267,10 @@
 	background: rgba(255, 255, 255, 0.04);
 	color: var(--scrappy-white);
 	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 999px;
+	border-radius: var(--border-radius-999px-2);
 	padding: 8px 14px;
 	cursor: pointer;
-	font-size: 0.85rem;
+	font-size: var(--font-size-0-85rem);
 	transition: background 120ms, color 120ms, border-color 120ms;
 }
 
@@ -217,21 +278,24 @@
 	background: rgba(255, 154, 60, 0.14);
 	border-color: rgba(255, 154, 60, 0.28);
 	color: var(--scrappy-orange);
+	box-shadow: 0 0 18px rgba(255, 154, 60, 0.12);
+	transform: var(--transform-neg-1px-3);
+	animation: scrappy-hover-breath 1400ms ease-in-out infinite;
 }
 
 .module-actions {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: var(--gap-12px-3);
 	flex-wrap: wrap;
 }
 
 .module-action-btn {
 	background: var(--scrappy-orange);
-	color: #fff;
+	color: var(--color-color-fff-3);
 	border: none;
 	padding: 8px 18px;
-	border-radius: 6px;
+	border-radius: var(--border-radius-6px);
 	cursor: pointer;
 }
 
@@ -241,7 +305,7 @@
 
 .help-body {
 	overflow-y: auto;
-	padding-right: 6px;
+	padding-right: var(--padding-right-6px);
 	scrollbar-width: none;
 	-ms-overflow-style: none;
 }
@@ -251,22 +315,22 @@
 }
 
 .help-section {
-	background: #10151f;
+	background: var(--background-color-10151f-2);
 	border: 1px solid #2a313d;
-	border-radius: 12px;
+	border-radius: var(--border-radius-12px);
 	padding: 16px 18px;
 }
 
 .help-section h3 {
 	margin: 0 0 10px;
 	color: var(--scrappy-orange);
-	font-size: 1rem;
+	font-size: var(--font-size-1rem-3);
 }
 
 .help-section h4 {
 	margin: 0 0 6px;
 	color: var(--scrappy-white);
-	font-size: 0.95rem;
+	font-size: var(--font-size-0-95rem-3);
 }
 
 .help-section p {
@@ -285,13 +349,13 @@
 .help-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-	gap: 12px;
+	gap: var(--gap-12px-4);
 }
 
 .help-card {
 	background: rgba(255, 255, 255, 0.03);
 	border: 1px solid rgba(255, 255, 255, 0.07);
-	border-radius: 10px;
+	border-radius: var(--border-radius-10px);
 	padding: 12px 14px;
 }
 
@@ -309,18 +373,18 @@
 .theme-picker-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-	gap: 12px;
-	margin-top: 12px;
+	gap: var(--gap-12px-5);
+	margin-top: var(--margin-top-12px);
 }
 
 .theme-option-btn {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: var(--gap-12px-6);
 	width: 100%;
 	text-align: left;
 	padding: 12px 14px;
-	border-radius: 12px;
+	border-radius: var(--border-radius-12px-2);
 	border: 1px solid rgba(255, 255, 255, 0.08);
 	background: rgba(255, 255, 255, 0.03);
 	color: var(--scrappy-white);
@@ -329,7 +393,7 @@
 }
 
 .theme-option-btn:hover {
-	transform: translateY(-1px);
+	transform: var(--transform-neg-1px-4);
 	border-color: rgba(255, 154, 60, 0.28);
 	background: rgba(255, 255, 255, 0.05);
 }
@@ -341,9 +405,9 @@
 }
 
 .theme-option-btn__swatch {
-	width: 44px;
-	height: 44px;
-	border-radius: 12px;
+	width: var(--width-44px);
+	height: var(--height-44px);
+	border-radius: var(--border-radius-12px-3);
 	flex: 0 0 auto;
 	border: 1px solid rgba(255, 255, 255, 0.14);
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -368,17 +432,17 @@
 .theme-option-btn__content {
 	display: flex;
 	flex-direction: column;
-	gap: 3px;
+	gap: var(--gap-3px);
 	min-width: 0;
 }
 
 .theme-option-btn__content strong {
-	font-size: 0.92rem;
+	font-size: var(--font-size-0-92rem);
 }
 
 .theme-option-btn__content span {
 	color: rgba(248, 250, 252, 0.72);
-	font-size: 0.82rem;
+	font-size: var(--font-size-0-82rem);
 	line-height: 1.45;
 }
 
@@ -396,6 +460,898 @@
 	--scrappy-charcoal: #3a404a;
 	/*--scrappy-orange: #ff8800;*/
 	--scrappy-orange: #ff9a3c;
+	--min-height-120px: 120px;
+	/* @label Min Height 120px | @desc Auto-extracted from min-height in selector .doc-writer-textarea. */
+	--border-radius-8px: 8px;
+	/* @label Border Radius 8px | @desc Auto-extracted from border-radius in selector .doc-writer-textarea. */
+	--background-color-10151f: #10151f;
+	/* @label Background Color 10151f | @desc Auto-extracted from background in selector .doc-writer-textarea. */
+	--color-color-fff: #fff;
+	/* @label Color Color Fff | @desc Auto-extracted from color in selector .doc-writer-textarea. */
+	--padding-12px: 12px;
+	/* @label Padding 12px | @desc Auto-extracted from padding in selector .doc-writer-textarea. */
+	--font-size-1rem: 1rem;
+	/* @label Font Size 1rem | @desc Auto-extracted from font-size in selector .doc-writer-textarea. */
+	--transition-0-15000ms: height 150ms;
+	/* @label Transition 0 15000ms | @desc Auto-extracted from transition in selector .doc-writer-textarea. */
+	--gap-14px: 14px;
+	/* @label Gap 14px | @desc Auto-extracted from gap in selector .module-shell. */
+	--gap-12px: 12px;
+	/* @label Gap 12px | @desc Auto-extracted from gap in selector .module-topbar. */
+	--gap-8px: 8px;
+	/* @label Gap 8px | @desc Auto-extracted from gap in selector .panel-header-actions. */
+	--width-32px: 32px;
+	/* @label Width 32px | @desc Auto-extracted from width in selector .panel-move-btn. */
+	--height-32px: 32px;
+	/* @label Height 32px | @desc Auto-extracted from height in selector .panel-move-btn. */
+	--border-radius-8px-2: 8px;
+	/* @label Border Radius 8px 2 | @desc Auto-extracted from border-radius in selector .panel-move-btn. */
+	--font-size-0-95rem: 0.95rem;
+	/* @label Font Size 0 95rem | @desc Auto-extracted from font-size in selector .panel-move-btn. */
+	--background-color-2a313d: #2a313d;
+	/* @label Background Color 2a313d | @desc Auto-extracted from background in selector .panel-move-btn:hover:not(:disabled). */
+	--border-color-color-3a404a: #3a404a;
+	/* @label Border Color Color 3a404a | @desc Auto-extracted from border-color in selector .panel-move-btn:hover:not(:disabled). */
+	--transform-neg-1px: translateY(-1px);
+	/* @label Transform Neg 1px | @desc Auto-extracted from transform in selector .panel-move-btn:hover:not(:disabled). */
+	--opacity-0-35: 0.35;
+	/* @label Opacity 0 35 | @desc Auto-extracted from opacity in selector .panel-move-btn:disabled. */
+	--width-32px-2: 32px;
+	/* @label Width 32px 2 | @desc Auto-extracted from width in selector .module-close-btn. */
+	--height-32px-2: 32px;
+	/* @label Height 32px 2 | @desc Auto-extracted from height in selector .module-close-btn. */
+	--border-radius-8px-3: 8px;
+	/* @label Border Radius 8px 3 | @desc Auto-extracted from border-radius in selector .module-close-btn. */
+	--font-size-1rem-2: 1rem;
+	/* @label Font Size 1rem 2 | @desc Auto-extracted from font-size in selector .module-close-btn. */
+	--background-color-7f1d1d: #7f1d1d;
+	/* @label Background Color 7f1d1d | @desc Auto-extracted from background in selector .module-close-btn:hover. */
+	--border-color-color-a33: #a33;
+	/* @label Border Color Color A33 | @desc Auto-extracted from border-color in selector .module-close-btn:hover. */
+	--color-color-fff-2: #fff;
+	/* @label Color Color Fff 2 | @desc Auto-extracted from color in selector .module-close-btn:hover. */
+	--transform-neg-1px-2: translateY(-1px);
+	/* @label Transform Neg 1px 2 | @desc Auto-extracted from transform in selector .module-close-btn:hover. */
+	--gap-12px-2: 12px;
+	/* @label Gap 12px 2 | @desc Auto-extracted from gap in selector .module-body. */
+	--border-radius-18px: 18px;
+	/* @label Border Radius 18px | @desc Auto-extracted from border-radius in selector .module-empty-state. */
+	--margin-bottom-10px: 10px;
+	/* @label Margin Bottom 10px | @desc Auto-extracted from margin-bottom in selector .module-empty-state__eyebrow. */
+	--font-size-0-72rem: 0.72rem;
+	/* @label Font Size 0 72rem | @desc Auto-extracted from font-size in selector .module-empty-state__eyebrow. */
+	--letter-spacing-0-12em: 0.12em;
+	/* @label Letter Spacing 0 12em | @desc Auto-extracted from letter-spacing in selector .module-empty-state__eyebrow. */
+	--font-size-1-45rem: 1.45rem;
+	/* @label Font Size 1 45rem | @desc Auto-extracted from font-size in selector .module-empty-state__title. */
+	--gap-10px: 10px;
+	/* @label Gap 10px | @desc Auto-extracted from gap in selector .module-empty-state__chips. */
+	--margin-top-18px: 18px;
+	/* @label Margin Top 18px | @desc Auto-extracted from margin-top in selector .module-empty-state__chips. */
+	--gap-8px-2: 8px;
+	/* @label Gap 8px 2 | @desc Auto-extracted from gap in selector .module-empty-state__chip. */
+	--border-radius-999px: 999px;
+	/* @label Border Radius 999px | @desc Auto-extracted from border-radius in selector .module-empty-state__chip. */
+	--font-size-0-86rem: 0.86rem;
+	/* @label Font Size 0 86rem | @desc Auto-extracted from font-size in selector .module-empty-state__chip. */
+	--font-size-0-95rem-2: 0.95rem;
+	/* @label Font Size 0 95rem 2 | @desc Auto-extracted from font-size in selector .module-empty-state__chip-icon. */
+	--margin-top-18px-2: 18px;
+	/* @label Margin Top 18px 2 | @desc Auto-extracted from margin-top in selector .brand-promo. */
+	--padding-top-18px: 18px;
+	/* @label Padding Top 18px | @desc Auto-extracted from padding-top in selector .brand-promo. */
+	--gap-10px-2: 10px;
+	/* @label Gap 10px 2 | @desc Auto-extracted from gap in selector .brand-promo. */
+	--font-size-0-72rem-2: 0.72rem;
+	/* @label Font Size 0 72rem 2 | @desc Auto-extracted from font-size in selector .brand-promo__label. */
+	--letter-spacing-0-12em-2: 0.12em;
+	/* @label Letter Spacing 0 12em 2 | @desc Auto-extracted from letter-spacing in selector .brand-promo__label. */
+	--gap-10px-3: 10px;
+	/* @label Gap 10px 3 | @desc Auto-extracted from gap in selector .brand-promo__actions. */
+	--border-radius-999px-2: 999px;
+	/* @label Border Radius 999px 2 | @desc Auto-extracted from border-radius in selector .brand-link-btn. */
+	--font-size-0-85rem: 0.85rem;
+	/* @label Font Size 0 85rem | @desc Auto-extracted from font-size in selector .brand-link-btn. */
+	--transform-neg-1px-3: translateY(-1px);
+	/* @label Transform Neg 1px 3 | @desc Auto-extracted from transform in selector .brand-link-btn:hover. */
+	--gap-12px-3: 12px;
+	/* @label Gap 12px 3 | @desc Auto-extracted from gap in selector .module-actions. */
+	--color-color-fff-3: #fff;
+	/* @label Color Color Fff 3 | @desc Auto-extracted from color in selector .module-action-btn. */
+	--border-radius-6px: 6px;
+	/* @label Border Radius 6px | @desc Auto-extracted from border-radius in selector .module-action-btn. */
+	--padding-right-6px: 6px;
+	/* @label Padding Right 6px | @desc Auto-extracted from padding-right in selector .help-body. */
+	--background-color-10151f-2: #10151f;
+	/* @label Background Color 10151f 2 | @desc Auto-extracted from background in selector .help-section. */
+	--border-radius-12px: 12px;
+	/* @label Border Radius 12px | @desc Auto-extracted from border-radius in selector .help-section. */
+	--font-size-1rem-3: 1rem;
+	/* @label Font Size 1rem 3 | @desc Auto-extracted from font-size in selector .help-section h3. */
+	--font-size-0-95rem-3: 0.95rem;
+	/* @label Font Size 0 95rem 3 | @desc Auto-extracted from font-size in selector .help-section h4. */
+	--gap-12px-4: 12px;
+	/* @label Gap 12px 4 | @desc Auto-extracted from gap in selector .help-grid. */
+	--border-radius-10px: 10px;
+	/* @label Border Radius 10px | @desc Auto-extracted from border-radius in selector .help-card. */
+	--gap-12px-5: 12px;
+	/* @label Gap 12px 5 | @desc Auto-extracted from gap in selector .theme-picker-grid. */
+	--margin-top-12px: 12px;
+	/* @label Margin Top 12px | @desc Auto-extracted from margin-top in selector .theme-picker-grid. */
+	--gap-12px-6: 12px;
+	/* @label Gap 12px 6 | @desc Auto-extracted from gap in selector .theme-option-btn. */
+	--border-radius-12px-2: 12px;
+	/* @label Border Radius 12px 2 | @desc Auto-extracted from border-radius in selector .theme-option-btn. */
+	--transform-neg-1px-4: translateY(-1px);
+	/* @label Transform Neg 1px 4 | @desc Auto-extracted from transform in selector .theme-option-btn:hover. */
+	--width-44px: 44px;
+	/* @label Width 44px | @desc Auto-extracted from width in selector .theme-option-btn__swatch. */
+	--height-44px: 44px;
+	/* @label Height 44px | @desc Auto-extracted from height in selector .theme-option-btn__swatch. */
+	--border-radius-12px-3: 12px;
+	/* @label Border Radius 12px 3 | @desc Auto-extracted from border-radius in selector .theme-option-btn__swatch. */
+	--gap-3px: 3px;
+	/* @label Gap 3px | @desc Auto-extracted from gap in selector .theme-option-btn__content. */
+	--font-size-0-92rem: 0.92rem;
+	/* @label Font Size 0 92rem | @desc Auto-extracted from font-size in selector .theme-option-btn__content strong. */
+	--font-size-0-82rem: 0.82rem;
+	/* @label Font Size 0 82rem | @desc Auto-extracted from font-size in selector .theme-option-btn__content span. */
+	--height-100vh: 100vh;
+	/* @label Height 100vh | @desc Auto-extracted from height in selector body. */
+	--gap-2px: 2px;
+	/* @label Gap 2px | @desc Auto-extracted from gap in selector .brand-lockup. */
+	--font-size-1rem-4: 1rem;
+	/* @label Font Size 1rem 4 | @desc Auto-extracted from font-size in selector .brand-name. */
+	--letter-spacing-0-01em: 0.01em;
+	/* @label Letter Spacing 0 01em | @desc Auto-extracted from letter-spacing in selector .brand-name. */
+	--font-size-0-72rem-3: 0.72rem;
+	/* @label Font Size 0 72rem 3 | @desc Auto-extracted from font-size in selector .brand-byline. */
+	--letter-spacing-0-08em: 0.08em;
+	/* @label Letter Spacing 0 08em | @desc Auto-extracted from letter-spacing in selector .brand-byline. */
+	--height-60px: 60px;
+	/* @label Height 60px | @desc Auto-extracted from height in selector .header. */
+	--background-color-181f2a: #181f2a;
+	/* @label Background Color 181f2a | @desc Auto-extracted from background in selector .header. */
+	--gap-0px: 0px;
+	/* @label Gap 0px | @desc Auto-extracted from gap in selector .panels. */
+	--min-width-120px: 120px;
+	/* @label Min Width 120px | @desc Auto-extracted from min-width in selector .panel. */
+	--background-color-181f2a-2: #181f2a;
+	/* @label Background Color 181f2a 2 | @desc Auto-extracted from background in selector .panel. */
+	--border-radius-10px-2: 10px;
+	/* @label Border Radius 10px 2 | @desc Auto-extracted from border-radius in selector .panel. */
+	--width-8px: 8px;
+	/* @label Width 8px | @desc Auto-extracted from width in selector .drag-handle. */
+	--font-size-1-35rem: 1.35rem;
+	/* @label Font Size 1 35rem | @desc Auto-extracted from font-size in selector .icon-btn. */
+	--margin-left-14px: 14px;
+	/* @label Margin Left 14px | @desc Auto-extracted from margin-left in selector .icon-btn. */
+	--border-radius-8px-4: 8px;
+	/* @label Border Radius 8px 4 | @desc Auto-extracted from border-radius in selector .icon-btn. */
+	--min-width-38px: 38px;
+	/* @label Min Width 38px | @desc Auto-extracted from min-width in selector .icon-btn. */
+	--background-color-2a313d-2: #2a313d;
+	/* @label Background Color 2a313d 2 | @desc Auto-extracted from background in selector .icon-btn:hover. */
+	--border-color-color-3a404a-2: #3a404a;
+	/* @label Border Color Color 3a404a 2 | @desc Auto-extracted from border-color in selector .icon-btn:hover. */
+	--transform-neg-1px-5: translateY(-1px);
+	/* @label Transform Neg 1px 5 | @desc Auto-extracted from transform in selector .icon-btn:hover. */
+	--gap-4px: 4px;
+	/* @label Gap 4px | @desc Auto-extracted from gap in selector #module-switcher. */
+	--gap-8px-3: 8px;
+	/* @label Gap 8px 3 | @desc Auto-extracted from gap in selector .window-controls. */
+	--margin-left-24px: 24px;
+	/* @label Margin Left 24px | @desc Auto-extracted from margin-left in selector .window-controls. */
+	--font-size-1-2rem: 1.2rem;
+	/* @label Font Size 1 2rem | @desc Auto-extracted from font-size in selector .window-btn. */
+	--width-32px-3: 32px;
+	/* @label Width 32px 3 | @desc Auto-extracted from width in selector .window-btn. */
+	--height-32px-3: 32px;
+	/* @label Height 32px 3 | @desc Auto-extracted from height in selector .window-btn. */
+	--border-radius-8px-5: 8px;
+	/* @label Border Radius 8px 5 | @desc Auto-extracted from border-radius in selector .window-btn. */
+	--transform-neg-1px-6: translateY(-1px);
+	/* @label Transform Neg 1px 6 | @desc Auto-extracted from transform in selector .window-btn:hover. */
+	--background-color-7f1d1d-2: #7f1d1d;
+	/* @label Background Color 7f1d1d 2 | @desc Auto-extracted from background in selector .window-btn-close:hover. */
+	--color-color-fff-4: #fff;
+	/* @label Color Color Fff 4 | @desc Auto-extracted from color in selector .window-btn-close:hover. */
+	--opacity-0-22: 0.22;
+	/* @label Opacity 0 22 | @desc Auto-extracted from opacity in selector .panel-content.module-swap-out. */
+	--transform-8px: translateY(8px) scale(0.987);
+	/* @label Transform 8px | @desc Auto-extracted from transform in selector .panel-content.module-swap-out. */
+	--filter-5px: blur(5px) saturate(0.9);
+	/* @label Filter 5px | @desc Auto-extracted from filter in selector .panel-content.module-swap-out. */
+	--height-32px-4: 32px;
+	/* @label Height 32px 4 | @desc Auto-extracted from height in selector #scrappy-footer. */
+	--background-color-181f2a-3: #181f2a;
+	/* @label Background Color 181f2a 3 | @desc Auto-extracted from background in selector #scrappy-footer. */
+	--transform-14px: translateY(14px) scale(0.985);
+	/* @label Transform 14px | @desc Auto-extracted from transform in selector from. */
+	--filter-0-88: saturate(0.88);
+	/* @label Filter 0 88 | @desc Auto-extracted from filter in selector from. */
+	--transform-10px: translateY(10px) scale(0.986);
+	/* @label Transform 10px | @desc Auto-extracted from transform in selector to. */
+	--transform-12px: translateY(12px) scale(0.992);
+	/* @label Transform 12px | @desc Auto-extracted from transform in selector from. */
+	--filter-5px-2: blur(5px);
+	/* @label Filter 5px 2 | @desc Auto-extracted from filter in selector from. */
+	--font-size-12px: 12px;
+	/* @label Font Size 12px | @desc Auto-extracted from font-size in selector #scrappy-footer-text. */
+	--right-18px: 18px;
+	/* @label Right 18px | @desc Auto-extracted from right in selector .scrappy-footer-actions. */
+	--gap-10px-4: 10px;
+	/* @label Gap 10px 4 | @desc Auto-extracted from gap in selector .scrappy-footer-actions. */
+	--border-radius-999px-3: 999px;
+	/* @label Border Radius 999px 3 | @desc Auto-extracted from border-radius in selector .footer-link-btn. */
+	--font-size-11px: 11px;
+	/* @label Font Size 11px | @desc Auto-extracted from font-size in selector .footer-link-btn. */
+	--transform-neg-1px-7: translateY(-1px);
+	/* @label Transform Neg 1px 7 | @desc Auto-extracted from transform in selector .footer-link-btn:hover. */
+	--padding-24px: 24px;
+	/* @label Padding 24px | @desc Auto-extracted from padding in selector .brand-modal-overlay. */
+	--backdrop-filter-10px: blur(10px);
+	/* @label Backdrop Filter 10px | @desc Auto-extracted from backdrop-filter in selector .brand-modal-overlay. */
+	--border-radius-22px: 22px;
+	/* @label Border Radius 22px | @desc Auto-extracted from border-radius in selector .brand-modal. */
+	--font-size-0-74rem: 0.74rem;
+	/* @label Font Size 0 74rem | @desc Auto-extracted from font-size in selector .brand-modal__eyebrow. */
+	--letter-spacing-0-14em: 0.14em;
+	/* @label Letter Spacing 0 14em | @desc Auto-extracted from letter-spacing in selector .brand-modal__eyebrow. */
+	--font-size-2rem: 2rem;
+	/* @label Font Size 2rem | @desc Auto-extracted from font-size in selector .brand-modal__title. */
+	--gap-10px-5: 10px;
+	/* @label Gap 10px 5 | @desc Auto-extracted from gap in selector .brand-modal__meta. */
+	--margin-top-18px-3: 18px;
+	/* @label Margin Top 18px 3 | @desc Auto-extracted from margin-top in selector .brand-modal__meta. */
+	--border-radius-999px-4: 999px;
+	/* @label Border Radius 999px 4 | @desc Auto-extracted from border-radius in selector .brand-modal__meta-chip. */
+	--font-size-0-84rem: 0.84rem;
+	/* @label Font Size 0 84rem | @desc Auto-extracted from font-size in selector .brand-modal__meta-chip. */
+	--gap-10px-6: 10px;
+	/* @label Gap 10px 6 | @desc Auto-extracted from gap in selector .brand-modal__actions. */
+	--margin-top-22px: 22px;
+	/* @label Margin Top 22px | @desc Auto-extracted from margin-top in selector .brand-modal__actions. */
+	--border-radius-999px-5: 999px;
+	/* @label Border Radius 999px 5 | @desc Auto-extracted from border-radius in selector .brand-modal__btn. */
+	--font-size-0-9rem: 0.9rem;
+	/* @label Font Size 0 9rem | @desc Auto-extracted from font-size in selector .brand-modal__btn. */
+	--transform-neg-1px-8: translateY(-1px);
+	/* @label Transform Neg 1px 8 | @desc Auto-extracted from transform in selector .brand-modal__btn:hover. */
+	--color-color-111: #111;
+	/* @label Color Color 111 | @desc Auto-extracted from color in selector .brand-modal__btn--primary. */
+	--color-color-ff6b6b: #ff6b6b;
+	/* @label Color Color Ff6b6b | @desc Auto-extracted from color in selector .scrappy-glitch. */
+	--opacity-0-8: 0.8;
+	/* @label Opacity 0 8 | @desc Auto-extracted from opacity in selector 20%. */
+	--opacity-0-6: 0.6;
+	/* @label Opacity 0 6 | @desc Auto-extracted from opacity in selector 40%. */
+	--opacity-0-9: 0.9;
+	/* @label Opacity 0 9 | @desc Auto-extracted from opacity in selector 60%. */
+	--opacity-0-7: 0.7;
+	/* @label Opacity 0 7 | @desc Auto-extracted from opacity in selector 80%. */
+	--opacity-0-5: 0.5;
+	/* @label Opacity 0 5 | @desc Auto-extracted from opacity in selector 50%. */
+	--transform-0: translateY(0) rotate(0deg);
+	/* @label Transform 0 | @desc Auto-extracted from transform in selector 0%. */
+	--transform-2px: translateY(2px) rotate(1deg);
+	/* @label Transform 2px | @desc Auto-extracted from transform in selector 50%. */
+	--opacity-0-8-2: 0.8;
+	/* @label Opacity 0 8 2 | @desc Auto-extracted from opacity in selector 50%. */
+	--transform-5px: translateY(5px) rotate(-2deg);
+	/* @label Transform 5px | @desc Auto-extracted from transform in selector 100%. */
+	--margin-bottom-12px: 12px;
+	/* @label Margin Bottom 12px | @desc Auto-extracted from margin-bottom in selector .calendar-toolbar. */
+	--gap-12px-7: 12px;
+	/* @label Gap 12px 7 | @desc Auto-extracted from gap in selector .calendar-toolbar. */
+	--gap-4px-2: 4px;
+	/* @label Gap 4px 2 | @desc Auto-extracted from gap in selector .calendar-nav-group, .calendar-view-group. */
+	--background-color-2a313d-3: #2a313d;
+	/* @label Background Color 2a313d 3 | @desc Auto-extracted from background in selector .calendar-view-btn. */
+	--font-size-0-85rem-2: 0.85rem;
+	/* @label Font Size 0 85rem 2 | @desc Auto-extracted from font-size in selector .calendar-view-btn. */
+	--color-color-fff-5: #fff;
+	/* @label Color Color Fff 5 | @desc Auto-extracted from color in selector .calendar-view-btn.active. */
+	--gap-12px-8: 12px;
+	/* @label Gap 12px 8 | @desc Auto-extracted from gap in selector .calendar-summary. */
+	--font-size-1-1rem: 1.1rem;
+	/* @label Font Size 1 1rem | @desc Auto-extracted from font-size in selector .calendar-month-label. */
+	--background-color-10151f-3: #10151f;
+	/* @label Background Color 10151f 3 | @desc Auto-extracted from background in selector .calendar-surface. */
+	--border-radius-8px-6: 8px;
+	/* @label Border Radius 8px 6 | @desc Auto-extracted from border-radius in selector .calendar-surface. */
+	--padding-8px: 8px;
+	/* @label Padding 8px | @desc Auto-extracted from padding in selector .calendar-surface. */
+	--font-size-0-8rem: 0.8rem;
+	/* @label Font Size 0 8rem | @desc Auto-extracted from font-size in selector .calendar-weekdays. */
+	--margin-bottom-8px: 8px;
+	/* @label Margin Bottom 8px | @desc Auto-extracted from margin-bottom in selector .calendar-weekdays. */
+	--gap-2px-2: 2px;
+	/* @label Gap 2px 2 | @desc Auto-extracted from gap in selector .calendar-grid. */
+	--gap-12px-9: 12px;
+	/* @label Gap 12px 9 | @desc Auto-extracted from gap in selector .calendar-grid--year. */
+	--padding-4px: 4px;
+	/* @label Padding 4px | @desc Auto-extracted from padding in selector .calendar-grid--year. */
+	--background-color-1a222f: #1a222f;
+	/* @label Background Color 1a222f | @desc Auto-extracted from background in selector .calendar-day. */
+	--border-radius-4px: 4px;
+	/* @label Border Radius 4px | @desc Auto-extracted from border-radius in selector .calendar-day. */
+	--padding-4px-2: 4px;
+	/* @label Padding 4px 2 | @desc Auto-extracted from padding in selector .calendar-day. */
+	--min-height-80px: 80px;
+	/* @label Min Height 80px | @desc Auto-extracted from min-height in selector .calendar-day. */
+	--transition-0-15000ms-2: background 150ms;
+	/* @label Transition 0 15000ms 2 | @desc Auto-extracted from transition in selector .calendar-day. */
+	--background-color-252d3d: #252d3d;
+	/* @label Background Color 252d3d | @desc Auto-extracted from background in selector .calendar-day:hover. */
+	--transform-neg-1px-9: translateY(-1px);
+	/* @label Transform Neg 1px 9 | @desc Auto-extracted from transform in selector .calendar-day:hover. */
+	--background-color-2d3748: #2d3748;
+	/* @label Background Color 2d3748 | @desc Auto-extracted from background in selector .calendar-day.selected. */
+	--opacity-0-3: 0.3;
+	/* @label Opacity 0 3 | @desc Auto-extracted from opacity in selector .calendar-day.other-month. */
+	--font-size-0-85rem-3: 0.85rem;
+	/* @label Font Size 0 85rem 3 | @desc Auto-extracted from font-size in selector .calendar-day-num. */
+	--gap-10px-7: 10px;
+	/* @label Gap 10px 7 | @desc Auto-extracted from gap in selector .calendar-year-month. */
+	--padding-12px-2: 12px;
+	/* @label Padding 12px 2 | @desc Auto-extracted from padding in selector .calendar-year-month. */
+	--border-radius-12px-4: 12px;
+	/* @label Border Radius 12px 4 | @desc Auto-extracted from border-radius in selector .calendar-year-month. */
+	--gap-10px-8: 10px;
+	/* @label Gap 10px 8 | @desc Auto-extracted from gap in selector .calendar-year-month__header. */
+	--font-size-0-95rem-4: 0.95rem;
+	/* @label Font Size 0 95rem 4 | @desc Auto-extracted from font-size in selector .calendar-year-month__title. */
+	--font-size-0-72rem-4: 0.72rem;
+	/* @label Font Size 0 72rem 4 | @desc Auto-extracted from font-size in selector .calendar-year-month__meta. */
+	--letter-spacing-0-08em-2: 0.08em;
+	/* @label Letter Spacing 0 08em 2 | @desc Auto-extracted from letter-spacing in selector .calendar-year-month__meta. */
+	--gap-6px: 6px;
+	/* @label Gap 6px | @desc Auto-extracted from gap in selector .calendar-year-month__weekdays,
+.calendar-year-month__days. */
+	--font-size-0-68rem: 0.68rem;
+	/* @label Font Size 0 68rem | @desc Auto-extracted from font-size in selector .calendar-year-month__weekdays. */
+	--min-height-34px: 34px;
+	/* @label Min Height 34px | @desc Auto-extracted from min-height in selector .calendar-year-day. */
+	--transform-neg-1px-10: translateY(-1px);
+	/* @label Transform Neg 1px 10 | @desc Auto-extracted from transform in selector .calendar-year-day:hover. */
+	--min-height-34px-2: 34px;
+	/* @label Min Height 34px 2 | @desc Auto-extracted from min-height in selector .calendar-year-day--placeholder. */
+	--font-size-0-8rem-2: 0.8rem;
+	/* @label Font Size 0 8rem 2 | @desc Auto-extracted from font-size in selector .calendar-year-day__number. */
+	--right-4px: 4px;
+	/* @label Right 4px | @desc Auto-extracted from right in selector .calendar-year-day__count. */
+	--bottom-3px: 3px;
+	/* @label Bottom 3px | @desc Auto-extracted from bottom in selector .calendar-year-day__count. */
+	--min-width-14px: 14px;
+	/* @label Min Width 14px | @desc Auto-extracted from min-width in selector .calendar-year-day__count. */
+	--height-14px: 14px;
+	/* @label Height 14px | @desc Auto-extracted from height in selector .calendar-year-day__count. */
+	--border-radius-999px-6: 999px;
+	/* @label Border Radius 999px 6 | @desc Auto-extracted from border-radius in selector .calendar-year-day__count. */
+	--font-size-0-58rem: 0.58rem;
+	/* @label Font Size 0 58rem | @desc Auto-extracted from font-size in selector .calendar-year-day__count. */
+	--line-height-14px: 14px;
+	/* @label Line Height 14px | @desc Auto-extracted from line-height in selector .calendar-year-day__count. */
+	--gap-8px-4: 8px;
+	/* @label Gap 8px 4 | @desc Auto-extracted from gap in selector .calendar-events-list. */
+	--padding-8px-2: 8px;
+	/* @label Padding 8px 2 | @desc Auto-extracted from padding in selector .calendar-events-list. */
+	--background-color-1a222f-2: #1a222f;
+	/* @label Background Color 1a222f 2 | @desc Auto-extracted from background in selector .calendar-event-item. */
+	--padding-10px: 10px;
+	/* @label Padding 10px | @desc Auto-extracted from padding in selector .calendar-event-item. */
+	--border-radius-4px-2: 4px;
+	/* @label Border Radius 4px 2 | @desc Auto-extracted from border-radius in selector .calendar-event-item. */
+	--font-size-0-75rem: 0.75rem;
+	/* @label Font Size 0 75rem | @desc Auto-extracted from font-size in selector .calendar-event-date. */
+	--margin-bottom-4px: 4px;
+	/* @label Margin Bottom 4px | @desc Auto-extracted from margin-bottom in selector .calendar-event-date. */
+	--margin-top-12px-2: 12px;
+	/* @label Margin Top 12px 2 | @desc Auto-extracted from margin-top in selector .calendar-detail-card. */
+	--background-color-181f2a-4: #181f2a;
+	/* @label Background Color 181f2a 4 | @desc Auto-extracted from background in selector .calendar-detail-card. */
+	--border-radius-8px-7: 8px;
+	/* @label Border Radius 8px 7 | @desc Auto-extracted from border-radius in selector .calendar-detail-card. */
+	--padding-12px-3: 12px;
+	/* @label Padding 12px 3 | @desc Auto-extracted from padding in selector .calendar-detail-card. */
+	--gap-8px-5: 8px;
+	/* @label Gap 8px 5 | @desc Auto-extracted from gap in selector .calendar-detail-card. */
+	--font-size-0-75rem-2: 0.75rem;
+	/* @label Font Size 0 75rem 2 | @desc Auto-extracted from font-size in selector .calendar-detail-label. */
+	--font-size-0-9rem-2: 0.9rem;
+	/* @label Font Size 0 9rem 2 | @desc Auto-extracted from font-size in selector .calendar-detail-notes. */
+	--background-color-181f2a-5: #181f2a;
+	/* @label Background Color 181f2a 5 | @desc Auto-extracted from background in selector .event-modal. */
+	--border-radius-12px-5: 12px;
+	/* @label Border Radius 12px 5 | @desc Auto-extracted from border-radius in selector .event-modal. */
+	--max-width-400px: 400px;
+	/* @label Max Width 400px | @desc Auto-extracted from max-width in selector .event-modal. */
+	--padding-20px: 20px;
+	/* @label Padding 20px | @desc Auto-extracted from padding in selector .event-modal. */
+	--gap-12px-10: 12px;
+	/* @label Gap 12px 10 | @desc Auto-extracted from gap in selector .event-modal. */
+	--background-color-10151f-4: #10151f;
+	/* @label Background Color 10151f 4 | @desc Auto-extracted from background in selector .event-modal input, .event-modal textarea. */
+	--color-color-fff-6: #fff;
+	/* @label Color Color Fff 6 | @desc Auto-extracted from color in selector .event-modal input, .event-modal textarea. */
+	--padding-8px-3: 8px;
+	/* @label Padding 8px 3 | @desc Auto-extracted from padding in selector .event-modal input, .event-modal textarea. */
+	--border-radius-4px-3: 4px;
+	/* @label Border Radius 4px 3 | @desc Auto-extracted from border-radius in selector .event-modal input, .event-modal textarea. */
+	--gap-12px-11: 12px;
+	/* @label Gap 12px 11 | @desc Auto-extracted from gap in selector .event-modal-actions. */
+	--margin-top-8px: 8px;
+	/* @label Margin Top 8px | @desc Auto-extracted from margin-top in selector .event-modal-actions. */
+	--border-radius-4px-4: 4px;
+	/* @label Border Radius 4px 4 | @desc Auto-extracted from border-radius in selector .event-modal-btn. */
+	--color-color-fff-7: #fff;
+	/* @label Color Color Fff 7 | @desc Auto-extracted from color in selector .event-modal-btn.save. */
+	--background-color-3a404a: #3a404a;
+	/* @label Background Color 3a404a | @desc Auto-extracted from background in selector .event-modal-btn.cancel. */
+	--color-color-fff-8: #fff;
+	/* @label Color Color Fff 8 | @desc Auto-extracted from color in selector .event-modal-btn.cancel. */
+	--max-width-540px: 540px;
+	/* @label Max Width 540px | @desc Auto-extracted from max-width in selector .unsaved-modal. */
+	--font-size-0-72rem-5: 0.72rem;
+	/* @label Font Size 0 72rem 5 | @desc Auto-extracted from font-size in selector .unsaved-modal__eyebrow. */
+	--letter-spacing-0-14em-2: 0.14em;
+	/* @label Letter Spacing 0 14em 2 | @desc Auto-extracted from letter-spacing in selector .unsaved-modal__eyebrow. */
+	--margin-bottom-neg-4px: -4px;
+	/* @label Margin Bottom Neg 4px | @desc Auto-extracted from margin-bottom in selector .unsaved-modal__eyebrow. */
+	--gap-10px-9: 10px;
+	/* @label Gap 10px 9 | @desc Auto-extracted from gap in selector .unsaved-modal__list. */
+	--max-height-260px: 260px;
+	/* @label Max Height 260px | @desc Auto-extracted from max-height in selector .unsaved-modal__list. */
+	--padding-right-4px: 4px;
+	/* @label Padding Right 4px | @desc Auto-extracted from padding-right in selector .unsaved-modal__list. */
+	--border-radius-10px-3: 10px;
+	/* @label Border Radius 10px 3 | @desc Auto-extracted from border-radius in selector .unsaved-change-item. */
+	--color-color-f8fafc: #f8fafc;
+	/* @label Color Color F8fafc | @desc Auto-extracted from color in selector .unsaved-change-item__title. */
+	--margin-bottom-4px-2: 4px;
+	/* @label Margin Bottom 4px 2 | @desc Auto-extracted from margin-bottom in selector .unsaved-change-item__title. */
+	--font-size-0-82rem-2: 0.82rem;
+	/* @label Font Size 0 82rem 2 | @desc Auto-extracted from font-size in selector .unsaved-change-item__meta. */
+	--margin-bottom-4px-3: 4px;
+	/* @label Margin Bottom 4px 3 | @desc Auto-extracted from margin-bottom in selector .unsaved-change-item__meta. */
+	--font-size-0-85rem-4: 0.85rem;
+	/* @label Font Size 0 85rem 4 | @desc Auto-extracted from font-size in selector .unsaved-change-item__detail. */
+	--gap-4px-3: 4px;
+	/* @label Gap 4px 3 | @desc Auto-extracted from gap in selector .calendar-day-events. */
+	--margin-top-4px: 4px;
+	/* @label Margin Top 4px | @desc Auto-extracted from margin-top in selector .calendar-day-events. */
+	--width-4px: 4px;
+	/* @label Width 4px | @desc Auto-extracted from width in selector .calendar-event-dot. */
+	--height-4px: 4px;
+	/* @label Height 4px | @desc Auto-extracted from height in selector .calendar-event-dot. */
+	--font-size-0-75rem-3: 0.75rem;
+	/* @label Font Size 0 75rem 3 | @desc Auto-extracted from font-size in selector .calendar-event-pill. */
+	--background-color-2a313d-4: #2a313d;
+	/* @label Background Color 2a313d 4 | @desc Auto-extracted from background in selector .calendar-event-pill. */
+	--border-radius-4px-5: 4px;
+	/* @label Border Radius 4px 5 | @desc Auto-extracted from border-radius in selector .calendar-event-pill. */
+	--margin-bottom-6px: 6px;
+	/* @label Margin Bottom 6px | @desc Auto-extracted from margin-bottom in selector .calendar-event-pill. */
+	--transition-0-2000ms: all 200ms;
+	/* @label Transition 0 2000ms | @desc Auto-extracted from transition in selector .calendar-event-pill. */
+	--gap-2px-3: 2px;
+	/* @label Gap 2px 3 | @desc Auto-extracted from gap in selector .calendar-event-pill--month. */
+	--font-size-0-66rem: 0.66rem;
+	/* @label Font Size 0 66rem | @desc Auto-extracted from font-size in selector .calendar-event-pill__time. */
+	--font-size-0-68rem-2: 0.68rem;
+	/* @label Font Size 0 68rem 2 | @desc Auto-extracted from font-size in selector .calendar-event-pill__title. */
+	--font-size-0-68rem-3: 0.68rem;
+	/* @label Font Size 0 68rem 3 | @desc Auto-extracted from font-size in selector .calendar-event-more. */
+	--background-color-3a404a-2: #3a404a;
+	/* @label Background Color 3a404a 2 | @desc Auto-extracted from background in selector .calendar-event-pill:hover. */
+	--transform-neg-1px-11: translateY(-1px);
+	/* @label Transform Neg 1px 11 | @desc Auto-extracted from transform in selector .calendar-event-pill:hover. */
+	--opacity-0-45: 0.45;
+	/* @label Opacity 0 45 | @desc Auto-extracted from opacity in selector .calendar-event-pill--dragging. */
+	--transform-0-98: scale(0.98);
+	/* @label Transform 0 98 | @desc Auto-extracted from transform in selector .calendar-event-pill--dragging. */
+	--opacity-0-4: 0.4;
+	/* @label Opacity 0 4 | @desc Auto-extracted from opacity in selector .calendar-event-pill.completed. */
+	--gap-6px-2: 6px;
+	/* @label Gap 6px 2 | @desc Auto-extracted from gap in selector .calendar-event-pill-detail. */
+	--color-color-93c5fd: #93c5fd;
+	/* @label Color Color 93c5fd | @desc Auto-extracted from color in selector .calendar-event-pill--work. */
+	--color-color-6ee7b7: #6ee7b7;
+	/* @label Color Color 6ee7b7 | @desc Auto-extracted from color in selector .calendar-event-pill--health. */
+	--color-color-fde68a: #fde68a;
+	/* @label Color Color Fde68a | @desc Auto-extracted from color in selector .calendar-event-pill--finance. */
+	--color-color-c4b5fd: #c4b5fd;
+	/* @label Color Color C4b5fd | @desc Auto-extracted from color in selector .calendar-event-pill--travel. */
+	--color-color-f9a8d4: #f9a8d4;
+	/* @label Color Color F9a8d4 | @desc Auto-extracted from color in selector .calendar-event-pill--social. */
+	--color-color-fca5a5: #fca5a5;
+	/* @label Color Color Fca5a5 | @desc Auto-extracted from color in selector .calendar-event-pill--home. */
+	--color-color-cbd5e1: #cbd5e1;
+	/* @label Color Color Cbd5e1 | @desc Auto-extracted from color in selector .calendar-event-pill--completed. */
+	--font-size-0-74rem-2: 0.74rem;
+	/* @label Font Size 0 74rem 2 | @desc Auto-extracted from font-size in selector .calendar-event-pill__meta. */
+	--font-size-0-82rem-3: 0.82rem;
+	/* @label Font Size 0 82rem 3 | @desc Auto-extracted from font-size in selector .calendar-event-pill__notes. */
+	--border-radius-10px-4: 10px;
+	/* @label Border Radius 10px 4 | @desc Auto-extracted from border-radius in selector .calendar-hover-tooltip. */
+	--backdrop-filter-10px-2: blur(10px);
+	/* @label Backdrop Filter 10px 2 | @desc Auto-extracted from backdrop-filter in selector .calendar-hover-tooltip. */
+	--font-size-0-9rem-3: 0.9rem;
+	/* @label Font Size 0 9rem 3 | @desc Auto-extracted from font-size in selector .calendar-hover-tooltip__title. */
+	--margin-bottom-4px-4: 4px;
+	/* @label Margin Bottom 4px 4 | @desc Auto-extracted from margin-bottom in selector .calendar-hover-tooltip__title. */
+	--font-size-0-75rem-4: 0.75rem;
+	/* @label Font Size 0 75rem 4 | @desc Auto-extracted from font-size in selector .calendar-hover-tooltip__meta. */
+	--margin-bottom-4px-5: 4px;
+	/* @label Margin Bottom 4px 5 | @desc Auto-extracted from margin-bottom in selector .calendar-hover-tooltip__meta. */
+	--font-size-0-8rem-3: 0.8rem;
+	/* @label Font Size 0 8rem 3 | @desc Auto-extracted from font-size in selector .calendar-hover-tooltip__notes. */
+	--gap-16px: 16px;
+	/* @label Gap 16px | @desc Auto-extracted from gap in selector .writer-body. */
+	--font-size-1-5rem: 1.5rem;
+	/* @label Font Size 1 5rem | @desc Auto-extracted from font-size in selector .writer-title-input. */
+	--transition-0-2000ms-2: border-color 200ms;
+	/* @label Transition 0 2000ms 2 | @desc Auto-extracted from transition in selector .writer-title-input. */
+	--gap-4px-4: 4px;
+	/* @label Gap 4px 4 | @desc Auto-extracted from gap in selector .writer-toolbar. */
+	--background-color-181f2a-6: #181f2a;
+	/* @label Background Color 181f2a 6 | @desc Auto-extracted from background in selector .writer-toolbar. */
+	--padding-6px: 6px;
+	/* @label Padding 6px | @desc Auto-extracted from padding in selector .writer-toolbar. */
+	--border-radius-8px-8: 8px;
+	/* @label Border Radius 8px 8 | @desc Auto-extracted from border-radius in selector .writer-toolbar. */
+	--background-color-2a313d-5: #2a313d;
+	/* @label Background Color 2a313d 5 | @desc Auto-extracted from background in selector .writer-tool-btn. */
+	--border-radius-4px-6: 4px;
+	/* @label Border Radius 4px 6 | @desc Auto-extracted from border-radius in selector .writer-tool-btn. */
+	--font-size-0-9rem-4: 0.9rem;
+	/* @label Font Size 0 9rem 4 | @desc Auto-extracted from font-size in selector .writer-tool-btn. */
+	--transition-0-15000ms-3: all 150ms;
+	/* @label Transition 0 15000ms 3 | @desc Auto-extracted from transition in selector .writer-tool-btn. */
+	--min-width-32px: 32px;
+	/* @label Min Width 32px | @desc Auto-extracted from min-width in selector .writer-tool-btn. */
+	--background-color-3a404a-3: #3a404a;
+	/* @label Background Color 3a404a 3 | @desc Auto-extracted from background in selector .writer-tool-btn:hover. */
+	--transform-neg-1px-12: translateY(-1px);
+	/* @label Transform Neg 1px 12 | @desc Auto-extracted from transform in selector .writer-tool-btn:hover. */
+	--background-color-10151f-5: #10151f;
+	/* @label Background Color 10151f 5 | @desc Auto-extracted from background in selector .doc-writer-editor. */
+	--border-radius-8px-9: 8px;
+	/* @label Border Radius 8px 9 | @desc Auto-extracted from border-radius in selector .doc-writer-editor. */
+	--padding-20px-2: 20px;
+	/* @label Padding 20px 2 | @desc Auto-extracted from padding in selector .doc-writer-editor. */
+	--color-color-fff-9: #fff;
+	/* @label Color Color Fff 9 | @desc Auto-extracted from color in selector .doc-writer-editor. */
+	--min-height-200px: 200px;
+	/* @label Min Height 200px | @desc Auto-extracted from min-height in selector .doc-writer-editor. */
+	--color-color-ffd29f: #ffd29f;
+	/* @label Color Color Ffd29f | @desc Auto-extracted from color in selector .doc-writer-editor code. */
+	--border-radius-4px-7: 4px;
+	/* @label Border Radius 4px 7 | @desc Auto-extracted from border-radius in selector .doc-writer-editor code. */
+	--font-size-0-92em: 0.92em;
+	/* @label Font Size 0 92em | @desc Auto-extracted from font-size in selector .doc-writer-editor code. */
+	--background-color-0b1018: #0b1018;
+	/* @label Background Color 0b1018 | @desc Auto-extracted from background in selector .writer-code-block. */
+	--border-radius-10px-5: 10px;
+	/* @label Border Radius 10px 5 | @desc Auto-extracted from border-radius in selector .writer-code-block. */
+	--color-color-f8fafc-2: #f8fafc;
+	/* @label Color Color F8fafc 2 | @desc Auto-extracted from color in selector .writer-code-block. */
+	--min-width-180px: 180px;
+	/* @label Min Width 180px | @desc Auto-extracted from min-width in selector .writer-image-block. */
+	--padding-12px-4: 12px;
+	/* @label Padding 12px 4 | @desc Auto-extracted from padding in selector .writer-image-block. */
+	--border-radius-12px-6: 12px;
+	/* @label Border Radius 12px 6 | @desc Auto-extracted from border-radius in selector .writer-image-block. */
+	--border-radius-8px-10: 8px;
+	/* @label Border Radius 8px 10 | @desc Auto-extracted from border-radius in selector .writer-image-block img. */
+	--margin-top-10px: 10px;
+	/* @label Margin Top 10px | @desc Auto-extracted from margin-top in selector .writer-image-block figcaption. */
+	--font-size-0-86rem-2: 0.86rem;
+	/* @label Font Size 0 86rem 2 | @desc Auto-extracted from font-size in selector .writer-image-block figcaption. */
+	--gap-10px-10: 10px;
+	/* @label Gap 10px 10 | @desc Auto-extracted from gap in selector .writer-grid-block. */
+	--border-radius-12px-7: 12px;
+	/* @label Border Radius 12px 7 | @desc Auto-extracted from border-radius in selector .writer-grid-block. */
+	--font-size-0-72rem-6: 0.72rem;
+	/* @label Font Size 0 72rem 6 | @desc Auto-extracted from font-size in selector .writer-grid-block__eyebrow. */
+	--letter-spacing-0-08em-3: 0.08em;
+	/* @label Letter Spacing 0 08em 3 | @desc Auto-extracted from letter-spacing in selector .writer-grid-block__eyebrow. */
+	--color-color-fff5e8: #fff5e8;
+	/* @label Color Color Fff5e8 | @desc Auto-extracted from color in selector .writer-grid-block__title. */
+	--font-size-1rem-5: 1rem;
+	/* @label Font Size 1rem 5 | @desc Auto-extracted from font-size in selector .writer-grid-block__title. */
+	--color-color-fff5e8-2: #fff5e8;
+	/* @label Color Color Fff5e8 2 | @desc Auto-extracted from color in selector .writer-grid-block__name,
+.writer-grid-block__mode. */
+	--border-radius-8px-11: 8px;
+	/* @label Border Radius 8px 11 | @desc Auto-extracted from border-radius in selector .writer-grid-block__name,
+.writer-grid-block__mode. */
+	--font-size-1rem-6: 1rem;
+	/* @label Font Size 1rem 6 | @desc Auto-extracted from font-size in selector .writer-grid-block__name. */
+	--font-size-0-84rem-2: 0.84rem;
+	/* @label Font Size 0 84rem 2 | @desc Auto-extracted from font-size in selector .writer-grid-block__meta. */
+	--gap-10px-11: 10px;
+	/* @label Gap 10px 11 | @desc Auto-extracted from gap in selector .writer-grid-block__controls. */
+	--gap-8px-6: 8px;
+	/* @label Gap 8px 6 | @desc Auto-extracted from gap in selector .writer-grid-block__label. */
+	--font-size-0-84rem-3: 0.84rem;
+	/* @label Font Size 0 84rem 3 | @desc Auto-extracted from font-size in selector .writer-grid-block__label. */
+	--gap-8px-7: 8px;
+	/* @label Gap 8px 7 | @desc Auto-extracted from gap in selector .writer-grid-block__columns. */
+	--border-radius-999px-7: 999px;
+	/* @label Border Radius 999px 7 | @desc Auto-extracted from border-radius in selector .writer-grid-block__column. */
+	--color-color-ffd9ae: #ffd9ae;
+	/* @label Color Color Ffd9ae | @desc Auto-extracted from color in selector .writer-grid-block__column. */
+	--font-size-0-78rem: 0.78rem;
+	/* @label Font Size 0 78rem | @desc Auto-extracted from font-size in selector .writer-grid-block__column. */
+	--gap-12px-12: 12px;
+	/* @label Gap 12px 12 | @desc Auto-extracted from gap in selector .writer-actions. */
+	--padding-top-12px: 12px;
+	/* @label Padding Top 12px | @desc Auto-extracted from padding-top in selector .writer-actions. */
+	--background-color-2a313d-6: #2a313d;
+	/* @label Background Color 2a313d 6 | @desc Auto-extracted from background in selector .module-action-btn-secondary. */
+	--background-color-3a404a-4: #3a404a;
+	/* @label Background Color 3a404a 4 | @desc Auto-extracted from background in selector .module-action-btn-secondary:hover. */
+	--transform-neg-1px-13: translateY(-1px);
+	/* @label Transform Neg 1px 13 | @desc Auto-extracted from transform in selector .module-action-btn-secondary:hover. */
+	--transform-neg-1px-14: translateY(-1px);
+	/* @label Transform Neg 1px 14 | @desc Auto-extracted from transform in selector .module-action-btn:hover. */
+	--gap-12px-13: 12px;
+	/* @label Gap 12px 13 | @desc Auto-extracted from gap in selector .file-explorer-body. */
+	--width-14px: 14px;
+	/* @label Width 14px | @desc Auto-extracted from width in selector .file-preview-splitter.active. */
+	--top-12px: 12px;
+	/* @label Top 12px | @desc Auto-extracted from top in selector .file-preview-splitter::before. */
+	--bottom-12px: 12px;
+	/* @label Bottom 12px | @desc Auto-extracted from bottom in selector .file-preview-splitter::before. */
+	--width-1px: 1px;
+	/* @label Width 1px | @desc Auto-extracted from width in selector .file-preview-splitter::before. */
+	--background-color-181f2a-7: #181f2a;
+	/* @label Background Color 181f2a 7 | @desc Auto-extracted from background in selector .file-preview-pane. */
+	--border-radius-8px-12: 8px;
+	/* @label Border Radius 8px 12 | @desc Auto-extracted from border-radius in selector .file-preview-pane. */
+	--width-380px: 380px;
+	/* @label Width 380px | @desc Auto-extracted from width in selector .file-preview-pane. */
+	--background-color-1e293b: #1e293b;
+	/* @label Background Color 1e293b | @desc Auto-extracted from background in selector .file-preview-header. */
+	--padding-16px: 16px;
+	/* @label Padding 16px | @desc Auto-extracted from padding in selector .file-preview-content. */
+	--font-size-0-9rem-5: 0.9rem;
+	/* @label Font Size 0 9rem 5 | @desc Auto-extracted from font-size in selector .file-preview-content. */
+	--background-color-10151f-6: #10151f;
+	/* @label Background Color 10151f 6 | @desc Auto-extracted from background in selector .file-preview-content pre. */
+	--padding-12px-5: 12px;
+	/* @label Padding 12px 5 | @desc Auto-extracted from padding in selector .file-preview-content pre. */
+	--border-radius-4px-8: 4px;
+	/* @label Border Radius 4px 8 | @desc Auto-extracted from border-radius in selector .file-preview-content pre. */
+	--gap-10px-12: 10px;
+	/* @label Gap 10px 12 | @desc Auto-extracted from gap in selector .file-preview-toolbar. */
+	--margin-bottom-12px-2: 12px;
+	/* @label Margin Bottom 12px 2 | @desc Auto-extracted from margin-bottom in selector .file-preview-toolbar. */
+	--font-size-0-78rem-2: 0.78rem;
+	/* @label Font Size 0 78rem 2 | @desc Auto-extracted from font-size in selector .file-preview-meta. */
+	--letter-spacing-0-03em: 0.03em;
+	/* @label Letter Spacing 0 03em | @desc Auto-extracted from letter-spacing in selector .file-preview-meta. */
+	--margin-bottom-12px-3: 12px;
+	/* @label Margin Bottom 12px 3 | @desc Auto-extracted from margin-bottom in selector .file-preview-meta. */
+	--min-height-520px: 520px;
+	/* @label Min Height 520px | @desc Auto-extracted from min-height in selector .pdf-preview-frame. */
+	--border-radius-8px-13: 8px;
+	/* @label Border Radius 8px 13 | @desc Auto-extracted from border-radius in selector .pdf-preview-frame. */
+	--background-color-0d121a: #0d121a;
+	/* @label Background Color 0d121a | @desc Auto-extracted from background in selector .pdf-preview-frame. */
+	--max-height-520px: 520px;
+	/* @label Max Height 520px | @desc Auto-extracted from max-height in selector .video-preview-player. */
+	--border-radius-8px-14: 8px;
+	/* @label Border Radius 8px 14 | @desc Auto-extracted from border-radius in selector .video-preview-player. */
+	--background-color-0d121a-2: #0d121a;
+	/* @label Background Color 0d121a 2 | @desc Auto-extracted from background in selector .video-preview-player. */
+	--gap-8px-8: 8px;
+	/* @label Gap 8px 8 | @desc Auto-extracted from gap in selector .folder-preview-list. */
+	--gap-8px-9: 8px;
+	/* @label Gap 8px 9 | @desc Auto-extracted from gap in selector .zip-preview-list. */
+	--gap-8px-10: 8px;
+	/* @label Gap 8px 10 | @desc Auto-extracted from gap in selector .selection-preview-list. */
+	--gap-10px-13: 10px;
+	/* @label Gap 10px 13 | @desc Auto-extracted from gap in selector .folder-preview-item. */
+	--border-radius-8px-15: 8px;
+	/* @label Border Radius 8px 15 | @desc Auto-extracted from border-radius in selector .folder-preview-item. */
+	--gap-10px-14: 10px;
+	/* @label Gap 10px 14 | @desc Auto-extracted from gap in selector .zip-preview-item. */
+	--border-radius-8px-16: 8px;
+	/* @label Border Radius 8px 16 | @desc Auto-extracted from border-radius in selector .zip-preview-item. */
+	--gap-10px-15: 10px;
+	/* @label Gap 10px 15 | @desc Auto-extracted from gap in selector .selection-preview-item. */
+	--border-radius-8px-17: 8px;
+	/* @label Border Radius 8px 17 | @desc Auto-extracted from border-radius in selector .selection-preview-item. */
+	--font-size-0-78rem-3: 0.78rem;
+	/* @label Font Size 0 78rem 3 | @desc Auto-extracted from font-size in selector .zip-preview-size. */
+	--font-size-0-78rem-4: 0.78rem;
+	/* @label Font Size 0 78rem 4 | @desc Auto-extracted from font-size in selector .selection-preview-kind. */
+	--padding-left-22px: 22px;
+	/* @label Padding Left 22px | @desc Auto-extracted from padding-left in selector .markdown-preview ul. */
+	--padding-left-12px: 12px;
+	/* @label Padding Left 12px | @desc Auto-extracted from padding-left in selector .markdown-preview blockquote. */
+	--border-radius-4px-9: 4px;
+	/* @label Border Radius 4px 9 | @desc Auto-extracted from border-radius in selector .markdown-preview code. */
+	--font-size-0-92em-2: 0.92em;
+	/* @label Font Size 0 92em 2 | @desc Auto-extracted from font-size in selector .markdown-preview code. */
+	--max-width-520px: 520px;
+	/* @label Max Width 520px | @desc Auto-extracted from max-width in selector .fogre-path-modal. */
+	--max-width-460px: 460px;
+	/* @label Max Width 460px | @desc Auto-extracted from max-width in selector .fogre-message-modal. */
+	--gap-10px-16: 10px;
+	/* @label Gap 10px 16 | @desc Auto-extracted from gap in selector .fogre-modal-checkbox. */
+	--font-size-0-84rem-4: 0.84rem;
+	/* @label Font Size 0 84rem 4 | @desc Auto-extracted from font-size in selector .fogre-modal-checkbox. */
+	--gap-12px-14: 12px;
+	/* @label Gap 12px 14 | @desc Auto-extracted from gap in selector .data-transfer-picker. */
+	--font-size-0-82rem-4: 0.82rem;
+	/* @label Font Size 0 82rem 4 | @desc Auto-extracted from font-size in selector .data-transfer-picker__summary. */
+	--letter-spacing-0-08em-4: 0.08em;
+	/* @label Letter Spacing 0 08em 4 | @desc Auto-extracted from letter-spacing in selector .data-transfer-picker__summary. */
+	--font-size-0-82rem-5: 0.82rem;
+	/* @label Font Size 0 82rem 5 | @desc Auto-extracted from font-size in selector .data-transfer-picker__label. */
+	--background-color-0f1520: #0f1520;
+	/* @label Background Color 0f1520 | @desc Auto-extracted from background in selector .data-transfer-picker__input. */
+	--border-radius-8px-18: 8px;
+	/* @label Border Radius 8px 18 | @desc Auto-extracted from border-radius in selector .data-transfer-picker__input. */
+	--gap-10px-17: 10px;
+	/* @label Gap 10px 17 | @desc Auto-extracted from gap in selector .data-transfer-picker__checkbox. */
+	--font-size-0-84rem-5: 0.84rem;
+	/* @label Font Size 0 84rem 5 | @desc Auto-extracted from font-size in selector .data-transfer-picker__checkbox. */
+	--gap-8px-11: 8px;
+	/* @label Gap 8px 11 | @desc Auto-extracted from gap in selector .data-transfer-picker__items. */
+	--gap-3px-2: 3px;
+	/* @label Gap 3px 2 | @desc Auto-extracted from gap in selector .data-transfer-picker__item. */
+	--border-radius-8px-19: 8px;
+	/* @label Border Radius 8px 19 | @desc Auto-extracted from border-radius in selector .data-transfer-picker__item. */
+	--font-size-0-88rem: 0.88rem;
+	/* @label Font Size 0 88rem | @desc Auto-extracted from font-size in selector .data-transfer-picker__name. */
+	--font-size-0-75rem-5: 0.75rem;
+	/* @label Font Size 0 75rem 5 | @desc Auto-extracted from font-size in selector .data-transfer-picker__path. */
+	--gap-10px-18: 10px;
+	/* @label Gap 10px 18 | @desc Auto-extracted from gap in selector .data-transfer-picker__actions. */
+	--gap-12px-15: 12px;
+	/* @label Gap 12px 15 | @desc Auto-extracted from gap in selector .inline-transfer-picker. */
+	--padding-4px-3: 4px;
+	/* @label Padding 4px 3 | @desc Auto-extracted from padding in selector .inline-transfer-picker. */
+	--font-size-0-82rem-6: 0.82rem;
+	/* @label Font Size 0 82rem 6 | @desc Auto-extracted from font-size in selector .inline-transfer-picker__summary. */
+	--letter-spacing-0-08em-5: 0.08em;
+	/* @label Letter Spacing 0 08em 5 | @desc Auto-extracted from letter-spacing in selector .inline-transfer-picker__summary. */
+	--font-size-0-82rem-7: 0.82rem;
+	/* @label Font Size 0 82rem 7 | @desc Auto-extracted from font-size in selector .inline-transfer-picker__label. */
+	--gap-10px-19: 10px;
+	/* @label Gap 10px 19 | @desc Auto-extracted from gap in selector .inline-transfer-picker__field-row. */
+	--background-color-0f1520-2: #0f1520;
+	/* @label Background Color 0f1520 2 | @desc Auto-extracted from background in selector .inline-transfer-picker__input. */
+	--border-radius-8px-20: 8px;
+	/* @label Border Radius 8px 20 | @desc Auto-extracted from border-radius in selector .inline-transfer-picker__input. */
+	--gap-10px-20: 10px;
+	/* @label Gap 10px 20 | @desc Auto-extracted from gap in selector .inline-transfer-picker__checkbox. */
+	--font-size-0-84rem-6: 0.84rem;
+	/* @label Font Size 0 84rem 6 | @desc Auto-extracted from font-size in selector .inline-transfer-picker__checkbox. */
+	--min-width-96px: 96px;
+	/* @label Min Width 96px | @desc Auto-extracted from min-width in selector .inline-transfer-picker__browse. */
+	--gap-8px-12: 8px;
+	/* @label Gap 8px 12 | @desc Auto-extracted from gap in selector .inline-transfer-picker__items. */
+	--gap-3px-3: 3px;
+	/* @label Gap 3px 3 | @desc Auto-extracted from gap in selector .inline-transfer-picker__item. */
+	--border-radius-8px-21: 8px;
+	/* @label Border Radius 8px 21 | @desc Auto-extracted from border-radius in selector .inline-transfer-picker__item. */
+	--font-size-0-88rem-2: 0.88rem;
+	/* @label Font Size 0 88rem 2 | @desc Auto-extracted from font-size in selector .inline-transfer-picker__name. */
+	--font-size-0-75rem-6: 0.75rem;
+	/* @label Font Size 0 75rem 6 | @desc Auto-extracted from font-size in selector .inline-transfer-picker__path. */
+	--gap-10px-21: 10px;
+	/* @label Gap 10px 21 | @desc Auto-extracted from gap in selector .inline-transfer-picker__actions. */
+	--border-radius-20px: 20px;
+	/* @label Border Radius 20px | @desc Auto-extracted from border-radius in selector .quick-access-btn. */
+	--font-size-0-75rem-7: 0.75rem;
+	/* @label Font Size 0 75rem 7 | @desc Auto-extracted from font-size in selector .quick-access-btn. */
+	--gap-6px-3: 6px;
+	/* @label Gap 6px 3 | @desc Auto-extracted from gap in selector .quick-access-btn. */
+	--transform-neg-1px-15: translateY(-1px);
+	/* @label Transform Neg 1px 15 | @desc Auto-extracted from transform in selector .quick-access-btn:hover. */
+	--font-size-0-9rem-6: 0.9rem;
+	/* @label Font Size 0 9rem 6 | @desc Auto-extracted from font-size in selector .quick-access-btn i, .quick-access-btn span.icon. */
+	--opacity-0-8-3: 0.8;
+	/* @label Opacity 0 8 3 | @desc Auto-extracted from opacity in selector .quick-access-btn i, .quick-access-btn span.icon. */
+	--font-size-0-62rem: 0.62rem;
+	/* @label Font Size 0 62rem | @desc Auto-extracted from font-size in selector .quick-access-btn span.icon.icon-text. */
+	--letter-spacing-0-08em-6: 0.08em;
+	/* @label Letter Spacing 0 08em 6 | @desc Auto-extracted from letter-spacing in selector .quick-access-btn span.icon.icon-text. */
+	--opacity-0-72: 0.72;
+	/* @label Opacity 0 72 | @desc Auto-extracted from opacity in selector .quick-access-btn span.icon.icon-text. */
+	--gap-8px-13: 8px;
+	/* @label Gap 8px 13 | @desc Auto-extracted from gap in selector .file-breadcrumbs-container. */
+	--border-radius-8px-22: 8px;
+	/* @label Border Radius 8px 22 | @desc Auto-extracted from border-radius in selector .file-breadcrumbs-container. */
+	--margin-bottom-4px-6: 4px;
+	/* @label Margin Bottom 4px 6 | @desc Auto-extracted from margin-bottom in selector .file-breadcrumbs-container. */
+	--gap-4px-5: 4px;
+	/* @label Gap 4px 5 | @desc Auto-extracted from gap in selector .file-breadcrumbs. */
+	--border-radius-6px-2: 6px;
+	/* @label Border Radius 6px 2 | @desc Auto-extracted from border-radius in selector .breadcrumb-btn. */
+	--font-size-0-76rem: 0.76rem;
+	/* @label Font Size 0 76rem | @desc Auto-extracted from font-size in selector .breadcrumb-btn. */
+	--transform-neg-1px-16: translateY(-1px);
+	/* @label Transform Neg 1px 16 | @desc Auto-extracted from transform in selector .breadcrumb-btn:hover,
+.breadcrumb-btn:focus-visible. */
+	--font-size-0-72rem-7: 0.72rem;
+	/* @label Font Size 0 72rem 7 | @desc Auto-extracted from font-size in selector .breadcrumb-separator. */
+	--font-size-0-75rem-8: 0.75rem;
+	/* @label Font Size 0 75rem 8 | @desc Auto-extracted from font-size in selector .drive-select. */
+	--border-radius-6px-3: 6px;
+	/* @label Border Radius 6px 3 | @desc Auto-extracted from border-radius in selector .drive-select. */
+	--background-color-16202d: #16202d;
+	/* @label Background Color 16202d | @desc Auto-extracted from background in selector .drive-select option. */
+	--color-color-f7e6cf: #f7e6cf;
+	/* @label Color Color F7e6cf | @desc Auto-extracted from color in selector .drive-select option. */
+	--transition-0-15000ms-4: color 150ms;
+	/* @label Transition 0 15000ms 4 | @desc Auto-extracted from transition in selector .breadcrumb-item. */
+	--background-color-10151f-7: #10151f;
+	/* @label Background Color 10151f 7 | @desc Auto-extracted from background in selector .file-list. */
+	--border-radius-8px-23: 8px;
+	/* @label Border Radius 8px 23 | @desc Auto-extracted from border-radius in selector .file-list. */
+	--transition-0-15000ms-5: background 150ms;
+	/* @label Transition 0 15000ms 5 | @desc Auto-extracted from transition in selector .file-item. */
+	--gap-12px-16: 12px;
+	/* @label Gap 12px 16 | @desc Auto-extracted from gap in selector .file-item. */
+	--background-color-1a222f-3: #1a222f;
+	/* @label Background Color 1a222f 3 | @desc Auto-extracted from background in selector .file-item:hover. */
+	--transform-neg-1px-17: translateY(-1px);
+	/* @label Transform Neg 1px 17 | @desc Auto-extracted from transform in selector .file-item:hover. */
+	--font-size-0-68rem-4: 0.68rem;
+	/* @label Font Size 0 68rem 4 | @desc Auto-extracted from font-size in selector .file-icon. */
+	--letter-spacing-0-04em: 0.04em;
+	/* @label Letter Spacing 0 04em | @desc Auto-extracted from letter-spacing in selector .file-icon. */
+	--width-32px-4: 32px;
+	/* @label Width 32px 4 | @desc Auto-extracted from width in selector .file-icon. */
+	--min-width-32px-2: 32px;
+	/* @label Min Width 32px 2 | @desc Auto-extracted from min-width in selector .file-icon. */
+	--opacity-0-92: 0.92;
+	/* @label Opacity 0 92 | @desc Auto-extracted from opacity in selector .file-icon. */
+	--font-size-0-95rem-5: 0.95rem;
+	/* @label Font Size 0 95rem 5 | @desc Auto-extracted from font-size in selector .file-name. */
+	--gap-6px-4: 6px;
+	/* @label Gap 6px 4 | @desc Auto-extracted from gap in selector .file-actions-menu. */
+	--transition-0-15000ms-6: opacity 150ms;
+	/* @label Transition 0 15000ms 6 | @desc Auto-extracted from transition in selector .file-actions-menu. */
+	--border-radius-6px-4: 6px;
+	/* @label Border Radius 6px 4 | @desc Auto-extracted from border-radius in selector .file-action-icon. */
+	--font-size-0-72rem-8: 0.72rem;
+	/* @label Font Size 0 72rem 8 | @desc Auto-extracted from font-size in selector .file-action-icon. */
+	--transform-neg-1px-18: translateY(-1px);
+	/* @label Transform Neg 1px 18 | @desc Auto-extracted from transform in selector .file-action-icon:hover. */
+	--color-color-facc15: #facc15;
+	/* @label Color Color Facc15 | @desc Auto-extracted from color in selector .file-action-icon[data-file-action="cut"]:hover. */
+	--color-color-ef4444: #ef4444;
+	/* @label Color Color Ef4444 | @desc Auto-extracted from color in selector .file-action-icon[data-file-action="delete"]:hover. */
+	--background-color-1e293b-2: #1e293b;
+	/* @label Background Color 1e293b 2 | @desc Auto-extracted from background in selector .scrappy-context-menu. */
+	--border-radius-8px-24: 8px;
+	/* @label Border Radius 8px 24 | @desc Auto-extracted from border-radius in selector .scrappy-context-menu. */
+	--min-width-180px-2: 180px;
+	/* @label Min Width 180px 2 | @desc Auto-extracted from min-width in selector .scrappy-context-menu. */
+	--font-size-0-85rem-5: 0.85rem;
+	/* @label Font Size 0 85rem 5 | @desc Auto-extracted from font-size in selector .scrappy-context-menu. */
+	--gap-10px-22: 10px;
+	/* @label Gap 10px 22 | @desc Auto-extracted from gap in selector .scrappy-context-menu-item. */
+	--transition-0-1000ms: background 100ms;
+	/* @label Transition 0 1000ms | @desc Auto-extracted from transition in selector .scrappy-context-menu-item. */
+	--height-1px: 1px;
+	/* @label Height 1px | @desc Auto-extracted from height in selector .scrappy-context-menu-separator. */
+	--background-color-3a404a-5: #3a404a;
+	/* @label Background Color 3a404a 5 | @desc Auto-extracted from background in selector .scrappy-context-menu-separator. */
+	--width-18px: 18px;
+	/* @label Width 18px | @desc Auto-extracted from width in selector .scrappy-context-menu-item .icon. */
+	--font-size-0-72rem-9: 0.72rem;
+	/* @label Font Size 0 72rem 9 | @desc Auto-extracted from font-size in selector .scrappy-context-menu-item .icon. */
+	--opacity-0-5-2: 0.5;
+	/* @label Opacity 0 5 2 | @desc Auto-extracted from opacity in selector .scrappy-context-menu-item.disabled. */
 }
 
 body[data-theme="scrappy-default"] {
@@ -448,7 +1404,7 @@ html, body {
 	box-sizing: border-box;
 }
 body {
-	height: 100vh;
+	height: var(--height-100vh);
 	display: flex;
 	flex-direction: column;
 	background: var(--scrappy-bg);
@@ -460,30 +1416,30 @@ body {
 .brand-lockup {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
+	gap: var(--gap-2px);
 	min-width: 0;
 }
 
 .brand-name {
-	font-size: 1rem;
+	font-size: var(--font-size-1rem-4);
 	font-weight: 700;
-	letter-spacing: 0.01em;
+	letter-spacing: var(--letter-spacing-0-01em);
 }
 
 .brand-byline {
 	color: rgba(248, 250, 252, 0.58);
-	font-size: 0.72rem;
-	letter-spacing: 0.08em;
+	font-size: var(--font-size-0-72rem-3);
+	letter-spacing: var(--letter-spacing-0-08em);
 	text-transform: uppercase;
 }
 .header {
 	flex: 0 0 auto;
-	height: 60px;
+	height: var(--height-60px);
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 25px;
-	background: #181f2a;
+	background: var(--background-color-181f2a);
 	border-bottom: 4px solid #222;
 	z-index: 100;
 }
@@ -494,20 +1450,20 @@ body {
 	height: 0;
 	min-height: 0;
 	width: 100%;
-	gap: 0px;
+	gap: var(--gap-0px);
 	position: relative;
 	overflow: hidden;
 }
 .panel {
 	flex: 1 1 0;
-	min-width: 120px;
-	background: #181f2a;
-	border-radius: 10px;
+	min-width: var(--min-width-120px);
+	background: var(--background-color-181f2a-2);
+	border-radius: var(--border-radius-10px-2);
 	margin: 7px 9px 10px 9px;
 	display: flex;
 	flex-direction: column;
 	box-shadow: 0 2px 8px #0002;
-	transition: outline 0.2s, box-shadow 180ms ease, transform 180ms ease, opacity 180ms ease;
+	transition: outline 200ms, box-shadow 180ms ease, transform 180ms ease, opacity 180ms ease;
 	overflow: hidden;
 	position: relative;
 	transform-origin: center center;
@@ -524,7 +1480,7 @@ body {
 .drag-handle {
 	position: absolute;
 	top: 0; right: 0; bottom: 0;
-	width: 8px;
+	width: var(--width-8px);
 	cursor: col-resize;
 	z-index: 10;
 	background: transparent !important;
@@ -543,40 +1499,43 @@ body {
 	background: none;
 	border: 1px solid transparent;
 	color: var(--scrappy-charcoal);
-	font-size: 1.35rem;
+	font-size: var(--font-size-1-35rem);
 	font-weight: 600;
 	line-height: 1;
-	margin-left: 14px;
+	margin-left: var(--margin-left-14px);
 	cursor: pointer;
-	border-radius: 8px;
+	border-radius: var(--border-radius-8px-4);
 	padding: 7px 10px;
-	min-width: 38px;
+	min-width: var(--min-width-38px);
 	transition: background 120ms, color 120ms, border-color 120ms;
 }
 .icon-btn:hover {
-	background: #2a313d;
-	border-color: #3a404a;
+	background: var(--background-color-2a313d-2);
+	border-color: var(--border-color-color-3a404a-2);
 	color: var(--scrappy-orange);
+	box-shadow: 0 0 16px rgba(255, 154, 60, 0.12);
+	transform: var(--transform-neg-1px-5);
+	animation: scrappy-hover-breath 1250ms ease-in-out infinite;
 }
 #module-switcher {
 	display: flex;
 	align-items: center;
-	gap: 4px;
+	gap: var(--gap-4px);
 }
 .window-controls {
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	margin-left: 24px;
+	gap: var(--gap-8px-3);
+	margin-left: var(--margin-left-24px);
 }
 .window-btn {
 	background: none;
 	border: none;
 	color: var(--scrappy-white);
-	font-size: 1.2rem;
-	width: 32px;
-	height: 32px;
-	border-radius: 8px;
+	font-size: var(--font-size-1-2rem);
+	width: var(--width-32px-3);
+	height: var(--height-32px-3);
+	border-radius: var(--border-radius-8px-5);
 	cursor: pointer;
 	transition: background 120ms, color 120ms;
 	display: flex;
@@ -586,10 +1545,12 @@ body {
 .window-btn:hover {
 	background: var(--scrappy-grey);
 	color: var(--scrappy-orange);
+	box-shadow: 0 0 14px rgba(255, 154, 60, 0.1);
+	transform: var(--transform-neg-1px-6);
 }
 .window-btn-close:hover {
-	background: #7f1d1d;
-	color: #fff;
+	background: var(--background-color-7f1d1d-2);
+	color: var(--color-color-fff-4);
 }
 .panel.selected {
 	outline: 2px solid var(--scrappy-orange);
@@ -604,9 +1565,9 @@ body {
 }
 
 .panel-content.module-swap-out {
-	opacity: 0.22;
-	transform: translateY(8px) scale(0.987);
-	filter: blur(5px) saturate(0.9);
+	opacity: var(--opacity-0-22);
+	transform: var(--transform-8px);
+	filter: var(--filter-5px);
 }
 
 .panel-content.module-swap-in .module-shell {
@@ -614,8 +1575,8 @@ body {
 }
 #scrappy-footer {
     flex: 0 0 auto;
-    height: 32px;
-    background: #181f2a;
+    height: var(--height-32px-4);
+    background: var(--background-color-181f2a-3);
     border-top: 1px solid #222;
     display: flex;
     align-items: center;
@@ -628,8 +1589,8 @@ body {
 @keyframes panel-enter {
 	from {
 		opacity: 0;
-		transform: translateY(14px) scale(0.985);
-		filter: saturate(0.88);
+		transform: var(--transform-14px);
+		filter: var(--filter-0-88);
 	}
 	to {
 		opacity: 1;
@@ -645,15 +1606,15 @@ body {
 	}
 	to {
 		opacity: 0;
-		transform: translateY(10px) scale(0.986);
+		transform: var(--transform-10px);
 	}
 }
 
 @keyframes module-reveal {
 	from {
 		opacity: 0;
-		transform: translateY(12px) scale(0.992);
-		filter: blur(5px);
+		transform: var(--transform-12px);
+		filter: var(--filter-5px-2);
 	}
 	to {
 		opacity: 1;
@@ -664,25 +1625,25 @@ body {
 
 #scrappy-footer-text {
     color: var(--scrappy-grey);
-    font-size: 12px;
+    font-size: var(--font-size-12px);
     white-space: nowrap;
     text-align: center;
 }
 
 .scrappy-footer-actions {
 	position: absolute;
-	right: 18px;
+	right: var(--right-18px);
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: var(--gap-10px-4);
 }
 
 .footer-link-btn {
 	background: transparent;
 	border: 1px solid rgba(255, 255, 255, 0.08);
-	border-radius: 999px;
+	border-radius: var(--border-radius-999px-3);
 	color: var(--scrappy-grey);
-	font-size: 11px;
+	font-size: var(--font-size-11px);
 	padding: 4px 10px;
 	cursor: pointer;
 	transition: background 120ms, color 120ms, border-color 120ms;
@@ -692,6 +1653,8 @@ body {
 	background: rgba(255, 154, 60, 0.12);
 	border-color: rgba(255, 154, 60, 0.28);
 	color: var(--scrappy-orange);
+	box-shadow: 0 0 16px rgba(255, 154, 60, 0.12);
+	transform: var(--transform-neg-1px-7);
 }
 
 .footer-link-btn[hidden],
@@ -705,9 +1668,9 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 24px;
+	padding: var(--padding-24px);
 	background: rgba(4, 6, 10, 0.72);
-	backdrop-filter: blur(10px);
+	backdrop-filter: var(--backdrop-filter-10px);
 	z-index: 1200;
 }
 
@@ -718,7 +1681,7 @@ body {
 .brand-modal {
 	width: min(520px, 100%);
 	padding: 30px 28px;
-	border-radius: 22px;
+	border-radius: var(--border-radius-22px);
 	border: 1px solid rgba(255, 154, 60, 0.18);
 	background:
 		radial-gradient(circle at top right, rgba(255, 154, 60, 0.14), transparent 34%),
@@ -729,15 +1692,15 @@ body {
 
 .brand-modal__eyebrow {
 	color: var(--scrappy-orange);
-	font-size: 0.74rem;
+	font-size: var(--font-size-0-74rem);
 	font-weight: 700;
-	letter-spacing: 0.14em;
+	letter-spacing: var(--letter-spacing-0-14em);
 	text-transform: uppercase;
 }
 
 .brand-modal__title {
 	margin: 10px 0 8px;
-	font-size: 2rem;
+	font-size: var(--font-size-2rem);
 	line-height: 1.05;
 }
 
@@ -750,38 +1713,38 @@ body {
 .brand-modal__meta {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 10px;
-	margin-top: 18px;
+	gap: var(--gap-10px-5);
+	margin-top: var(--margin-top-18px-3);
 }
 
 .brand-modal__meta-chip {
 	padding: 8px 12px;
-	border-radius: 999px;
+	border-radius: var(--border-radius-999px-4);
 	background: rgba(255, 255, 255, 0.04);
 	border: 1px solid rgba(255, 255, 255, 0.08);
 	color: rgba(248, 250, 252, 0.82);
-	font-size: 0.84rem;
+	font-size: var(--font-size-0-84rem);
 }
 
 .brand-modal__actions {
 	display: flex;
 	justify-content: flex-end;
-	gap: 10px;
-	margin-top: 22px;
+	gap: var(--gap-10px-6);
+	margin-top: var(--margin-top-22px);
 }
 
 .brand-modal__btn {
 	border: none;
-	border-radius: 999px;
+	border-radius: var(--border-radius-999px-5);
 	padding: 10px 16px;
 	cursor: pointer;
-	font-size: 0.9rem;
+	font-size: var(--font-size-0-9rem);
 	font-weight: 700;
 	transition: transform 120ms, filter 120ms, background 120ms, color 120ms;
 }
 
 .brand-modal__btn:hover {
-	transform: translateY(-1px);
+	transform: var(--transform-neg-1px-8);
 	filter: brightness(1.05);
 }
 
@@ -793,39 +1756,39 @@ body {
 
 .brand-modal__btn--primary {
 	background: var(--scrappy-orange);
-	color: #111;
+	color: var(--color-color-111);
 }
 
 /* SCRAPPY GLITCH EFFECT */
 .scrappy-glitch {
     position: relative;
     display: inline-block;
-    animation: scrappyGlitch 0.25s steps(2, end);
-    color: #ff6b6b;
+    animation: scrappyGlitch 250ms steps(2, end);
+    color: var(--color-color-ff6b6b);
     text-shadow: 1px 0px #00eaff, -1px 0px #ff00ff;
 }
 
 .scrappy-blink {
-    animation: scrappyBlink 0.1s steps(2, start) infinite;
+    animation: scrappyBlink 100ms steps(2, start) infinite;
     color: var(--scrappy-orange);
 }
 
 .scrappy-pulse {
-    animation: scrappyPulse 0.3s ease-in-out;
+    animation: scrappyPulse 300ms ease-in-out;
     filter: brightness(2);
 }
 
 .scrappy-scatter {
     display: inline-block;
-    animation: scrappyScatter 0.4s ease-in forwards;
+    animation: scrappyScatter 400ms ease-in forwards;
 }
 
 @keyframes scrappyGlitch {
     0% { transform: translate(0, 0); opacity: 1; }
-    20% { transform: translate(-1px, 1px); opacity: 0.8; }
-    40% { transform: translate(1px, -1px); opacity: 0.6; }
-    60% { transform: translate(-1px, -1px); opacity: 0.9; }
-    80% { transform: translate(1px, 1px); opacity: 0.7; }
+    20% { transform: translate(-1px, 1px); opacity: var(--opacity-0-8); }
+    40% { transform: translate(1px, -1px); opacity: var(--opacity-0-6); }
+    60% { transform: translate(-1px, -1px); opacity: var(--opacity-0-9); }
+    80% { transform: translate(1px, 1px); opacity: var(--opacity-0-7); }
     100% { transform: translate(0, 0); opacity: 1; }
 }
 
@@ -835,14 +1798,29 @@ body {
 
 @keyframes scrappyPulse {
     0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: var(--opacity-0-5); }
     100% { transform: scale(1); opacity: 1; }
 }
 
+@keyframes scrappy-hover-breath {
+	0% {
+		box-shadow: 0 0 0 rgba(255, 154, 60, 0);
+		filter: brightness(1);
+	}
+	50% {
+		box-shadow: 0 0 18px rgba(255, 154, 60, 0.16);
+		filter: brightness(1.05);
+	}
+	100% {
+		box-shadow: 0 0 0 rgba(255, 154, 60, 0);
+		filter: brightness(1);
+	}
+}
+
 @keyframes scrappyScatter {
-    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    50% { transform: translateY(2px) rotate(1deg); opacity: 0.8; }
-    100% { transform: translateY(5px) rotate(-2deg); opacity: 0; }
+    0% { transform: var(--transform-0); opacity: 1; }
+    50% { transform: var(--transform-2px); opacity: var(--opacity-0-8-2); }
+    100% { transform: var(--transform-5px); opacity: 0; }
 }
 
 /* Calendar Module Styles */
@@ -856,27 +1834,27 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
-  gap: 12px;
+  margin-bottom: var(--margin-bottom-12px);
+  gap: var(--gap-12px-7);
   flex-wrap: wrap;
 }
 
 .calendar-nav-group, .calendar-view-group {
   display: flex;
-  gap: 4px;
+  gap: var(--gap-4px-2);
 }
 
 .calendar-view-btn {
-  background: #2a313d;
+  background: var(--background-color-2a313d-3);
   color: var(--scrappy-grey);
   border: 1px solid #3a404a;
   padding: 6px 12px;
-  font-size: 0.85rem;
+  font-size: var(--font-size-0-85rem-2);
 }
 
 .calendar-view-btn.active {
   background: var(--scrappy-orange);
-  color: #fff;
+  color: var(--color-color-fff-5);
   border-color: var(--scrappy-orange);
 }
 
@@ -885,7 +1863,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 12px;
+  gap: var(--gap-12px-8);
 }
 
 .calendar-new-event-btn {
@@ -900,7 +1878,7 @@ body {
 
 .calendar-month-label {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: var(--font-size-1-1rem);
   color: var(--scrappy-orange);
 }
 
@@ -908,10 +1886,10 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #10151f;
-  border-radius: 8px;
+  background: var(--background-color-10151f-3);
+  border-radius: var(--border-radius-8px-6);
   border: 1px solid #3a404a;
-  padding: 8px;
+  padding: var(--padding-8px);
   min-height: 0;
   overflow: hidden;
 }
@@ -920,9 +1898,9 @@ body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
-  font-size: 0.8rem;
+  font-size: var(--font-size-0-8rem);
   color: var(--scrappy-grey);
-  margin-bottom: 8px;
+  margin-bottom: var(--margin-bottom-8px);
   font-weight: bold;
 }
 
@@ -931,7 +1909,7 @@ body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: minmax(80px, auto);
-  gap: 2px;
+  gap: var(--gap-2px-2);
   overflow-y: auto;
 }
 
@@ -942,25 +1920,27 @@ body {
 .calendar-grid--year {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-auto-rows: minmax(220px, auto);
-  gap: 12px;
+  gap: var(--gap-12px-9);
   align-content: start;
-  padding: 4px;
+  padding: var(--padding-4px);
 }
 
 .calendar-day {
-  background: #1a222f;
-  border-radius: 4px;
-  padding: 4px;
-  min-height: 80px;
+  background: var(--background-color-1a222f);
+  border-radius: var(--border-radius-4px);
+  padding: var(--padding-4px-2);
+  min-height: var(--min-height-80px);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: background 0.15s;
+  transition: var(--transition-0-15000ms-2);
   overflow: hidden;
 }
 
 .calendar-day:hover {
-  background: #252d3d;
+  background: var(--background-color-252d3d);
+  box-shadow: inset 0 0 0 1px rgba(255, 154, 60, 0.14), 0 0 16px rgba(255, 154, 60, 0.08);
+  transform: var(--transform-neg-1px-9);
 }
 
 .calendar-day.today {
@@ -968,7 +1948,7 @@ body {
 }
 
 .calendar-day.selected {
-  background: #2d3748;
+  background: var(--background-color-2d3748);
   outline: 1px solid var(--scrappy-orange);
 }
 
@@ -978,21 +1958,21 @@ body {
 }
 
 .calendar-day.other-month {
-  opacity: 0.3;
+  opacity: var(--opacity-0-3);
 }
 
 .calendar-day-num {
-  font-size: 0.85rem;
+  font-size: var(--font-size-0-85rem-3);
   font-weight: 500;
 }
 
 .calendar-year-month {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--gap-10px-7);
   min-height: 0;
-  padding: 12px;
-  border-radius: 12px;
+  padding: var(--padding-12px-2);
+  border-radius: var(--border-radius-12px-4);
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
     radial-gradient(circle at top right, rgba(255, 154, 60, 0.08), transparent 30%),
@@ -1003,39 +1983,39 @@ body {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 10px;
+  gap: var(--gap-10px-8);
 }
 
 .calendar-year-month__title {
   color: var(--scrappy-white);
-  font-size: 0.95rem;
+  font-size: var(--font-size-0-95rem-4);
   font-weight: 700;
 }
 
 .calendar-year-month__meta {
   color: rgba(248, 250, 252, 0.52);
-  font-size: 0.72rem;
+  font-size: var(--font-size-0-72rem-4);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-0-08em-2);
 }
 
 .calendar-year-month__weekdays,
 .calendar-year-month__days {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 6px;
+  gap: var(--gap-6px);
 }
 
 .calendar-year-month__weekdays {
   color: rgba(248, 250, 252, 0.5);
-  font-size: 0.68rem;
+  font-size: var(--font-size-0-68rem);
   font-weight: 700;
   text-align: center;
 }
 
 .calendar-year-day {
   position: relative;
-  min-height: 34px;
+  min-height: var(--min-height-34px);
   padding: 0;
   align-items: center;
   justify-content: center;
@@ -1046,34 +2026,36 @@ body {
 
 .calendar-year-day:hover {
   background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 14px rgba(255, 154, 60, 0.1);
+  transform: var(--transform-neg-1px-10);
 }
 
 .calendar-year-day--placeholder {
-  min-height: 34px;
+  min-height: var(--min-height-34px-2);
   background: transparent;
   border: none;
   pointer-events: none;
 }
 
 .calendar-year-day__number {
-  font-size: 0.8rem;
+  font-size: var(--font-size-0-8rem-2);
   font-weight: 600;
   color: var(--scrappy-white);
 }
 
 .calendar-year-day__count {
   position: absolute;
-  right: 4px;
-  bottom: 3px;
-  min-width: 14px;
-  height: 14px;
+  right: var(--right-4px);
+  bottom: var(--bottom-3px);
+  min-width: var(--min-width-14px);
+  height: var(--height-14px);
   padding: 0 3px;
-  border-radius: 999px;
+  border-radius: var(--border-radius-999px-6);
   background: rgba(255, 154, 60, 0.22);
   color: var(--scrappy-orange);
-  font-size: 0.58rem;
+  font-size: var(--font-size-0-58rem);
   font-weight: 700;
-  line-height: 14px;
+  line-height: var(--line-height-14px);
   text-align: center;
 }
 
@@ -1085,22 +2067,22 @@ body {
 .calendar-events-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 8px;
+  gap: var(--gap-8px-4);
+  padding: var(--padding-8px-2);
   overflow-y: auto;
 }
 
 .calendar-event-item {
-  background: #1a222f;
+  background: var(--background-color-1a222f-2);
   border-left: 4px solid var(--scrappy-orange);
-  padding: 10px;
-  border-radius: 4px;
+  padding: var(--padding-10px);
+  border-radius: var(--border-radius-4px-2);
 }
 
 .calendar-event-date {
-  font-size: 0.75rem;
+  font-size: var(--font-size-0-75rem);
   color: var(--scrappy-grey);
-  margin-bottom: 4px;
+  margin-bottom: var(--margin-bottom-4px);
 }
 
 .calendar-event-title {
@@ -1108,18 +2090,18 @@ body {
 }
 
 .calendar-detail-card {
-  margin-top: 12px;
-  background: #181f2a;
+  margin-top: var(--margin-top-12px-2);
+  background: var(--background-color-181f2a-4);
   border: 1px solid #3a404a;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: var(--border-radius-8px-7);
+  padding: var(--padding-12px-3);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8px-5);
 }
 
 .calendar-detail-label {
-  font-size: 0.75rem;
+  font-size: var(--font-size-0-75rem-2);
   color: var(--scrappy-grey);
   text-transform: uppercase;
 }
@@ -1130,7 +2112,7 @@ body {
 }
 
 .calendar-detail-notes {
-  font-size: 0.9rem;
+  font-size: var(--font-size-0-9rem-2);
   color: var(--scrappy-white);
   line-height: 1.4;
 }
@@ -1147,15 +2129,15 @@ body {
 }
 
 .event-modal {
-  background: #181f2a;
+  background: var(--background-color-181f2a-5);
   border: 1px solid var(--scrappy-orange);
-  border-radius: 12px;
+  border-radius: var(--border-radius-12px-5);
   width: 90%;
-  max-width: 400px;
-  padding: 20px;
+  max-width: var(--max-width-400px);
+  padding: var(--padding-20px);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--gap-12px-10);
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
@@ -1165,36 +2147,36 @@ body {
 }
 
 .event-modal input, .event-modal textarea {
-  background: #10151f;
+  background: var(--background-color-10151f-4);
   border: 1px solid #3a404a;
-  color: #fff;
-  padding: 8px;
-  border-radius: 4px;
+  color: var(--color-color-fff-6);
+  padding: var(--padding-8px-3);
+  border-radius: var(--border-radius-4px-3);
   font-family: inherit;
 }
 
 .event-modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 8px;
+  gap: var(--gap-12px-11);
+  margin-top: var(--margin-top-8px);
 }
 
 .event-modal-btn {
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: var(--border-radius-4px-4);
   cursor: pointer;
   border: none;
 }
 
 .event-modal-btn.save {
   background: var(--scrappy-orange);
-  color: #fff;
+  color: var(--color-color-fff-7);
 }
 
 .event-modal-btn.cancel {
-  background: #3a404a;
-  color: #fff;
+  background: var(--background-color-3a404a);
+  color: var(--color-color-fff-8);
 }
 
 .unsaved-modal-overlay {
@@ -1203,19 +2185,19 @@ body {
 
 .unsaved-modal {
   width: min(540px, calc(100vw - 48px));
-  max-width: 540px;
+  max-width: var(--max-width-540px);
   background: linear-gradient(180deg, #1a2331 0%, #121925 100%);
   border: 1px solid rgba(255, 154, 60, 0.22);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
 }
 
 .unsaved-modal__eyebrow {
-  font-size: 0.72rem;
+  font-size: var(--font-size-0-72rem-5);
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--letter-spacing-0-14em-2);
   text-transform: uppercase;
   color: rgba(255, 154, 60, 0.8);
-  margin-bottom: -4px;
+  margin-bottom: var(--margin-bottom-neg-4px);
 }
 
 .unsaved-modal__copy {
@@ -1227,71 +2209,71 @@ body {
 .unsaved-modal__list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  max-height: 260px;
+  gap: var(--gap-10px-9);
+  max-height: var(--max-height-260px);
   overflow-y: auto;
-  padding-right: 4px;
+  padding-right: var(--padding-right-4px);
 }
 
 .unsaved-change-item {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 10px;
+  border-radius: var(--border-radius-10px-3);
   padding: 12px 14px;
 }
 
 .unsaved-change-item__title {
-  color: #f8fafc;
+  color: var(--color-color-f8fafc);
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: var(--margin-bottom-4px-2);
 }
 
 .unsaved-change-item__meta {
   color: rgba(255, 154, 60, 0.82);
-  font-size: 0.82rem;
-  margin-bottom: 4px;
+  font-size: var(--font-size-0-82rem-2);
+  margin-bottom: var(--margin-bottom-4px-3);
   word-break: break-word;
 }
 
 .unsaved-change-item__detail {
   color: rgba(226, 232, 240, 0.74);
-  font-size: 0.85rem;
+  font-size: var(--font-size-0-85rem-4);
 }
 
 /* Event Indicators on Calendar */
 .calendar-day-events {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-top: 4px;
+  gap: var(--gap-4px-3);
+  margin-top: var(--margin-top-4px);
   min-height: 0;
   overflow: hidden;
 }
 
 .calendar-event-dot {
-  width: 4px;
-  height: 4px;
+  width: var(--width-4px);
+  height: var(--height-4px);
   background: var(--scrappy-orange);
   border-radius: 50%;
 }
 
 .calendar-event-pill {
-  font-size: 0.75rem;
-  background: #2a313d;
+  font-size: var(--font-size-0-75rem-3);
+  background: var(--background-color-2a313d-4);
   color: var(--scrappy-orange);
   border: 1px solid var(--scrappy-orange);
-  border-radius: 4px;
+  border-radius: var(--border-radius-4px-5);
   padding: 6px 10px;
-  margin-bottom: 6px;
+  margin-bottom: var(--margin-bottom-6px);
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: var(--transition-0-2000ms);
   user-select: none;
 }
 
 .calendar-event-pill--month {
-  gap: 2px;
+  gap: var(--gap-2px-3);
   padding: 4px 6px;
   margin-bottom: 0;
   min-width: 0;
@@ -1299,7 +2281,7 @@ body {
 }
 
 .calendar-event-pill__time {
-  font-size: 0.66rem;
+  font-size: var(--font-size-0-66rem);
   font-weight: 700;
   line-height: 1.2;
   white-space: nowrap;
@@ -1307,7 +2289,7 @@ body {
 
 .calendar-event-pill__title {
   color: var(--scrappy-white);
-  font-size: 0.68rem;
+  font-size: var(--font-size-0-68rem-2);
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
@@ -1316,24 +2298,25 @@ body {
 
 .calendar-event-more {
   color: rgba(248, 250, 252, 0.58);
-  font-size: 0.68rem;
+  font-size: var(--font-size-0-68rem-3);
   font-weight: 600;
   padding: 0 2px;
   white-space: nowrap;
 }
 
 .calendar-event-pill:hover {
-  background: #3a404a;
-  transform: translateY(-1px);
+  background: var(--background-color-3a404a-2);
+  transform: var(--transform-neg-1px-11);
+  box-shadow: 0 0 14px rgba(255, 154, 60, 0.12);
 }
 
 .calendar-event-pill--dragging {
-  opacity: 0.45;
-  transform: scale(0.98);
+  opacity: var(--opacity-0-45);
+  transform: var(--transform-0-98);
 }
 
 .calendar-event-pill.completed {
-  opacity: 0.4;
+  opacity: var(--opacity-0-4);
   text-decoration: line-through;
   border-color: var(--scrappy-grey);
   color: var(--scrappy-grey);
@@ -1345,7 +2328,7 @@ body {
 
 .calendar-event-pill-detail {
   align-items: flex-start;
-  gap: 6px;
+  gap: var(--gap-6px-2);
 }
 
 .calendar-event-pill--general {
@@ -1356,53 +2339,53 @@ body {
 .calendar-event-pill--work {
   border-color: rgba(96, 165, 250, 0.8);
   background: rgba(96, 165, 250, 0.14);
-  color: #93c5fd;
+  color: var(--color-color-93c5fd);
 }
 
 .calendar-event-pill--health {
   border-color: rgba(52, 211, 153, 0.8);
   background: rgba(52, 211, 153, 0.14);
-  color: #6ee7b7;
+  color: var(--color-color-6ee7b7);
 }
 
 .calendar-event-pill--finance {
   border-color: rgba(250, 204, 21, 0.8);
   background: rgba(250, 204, 21, 0.14);
-  color: #fde68a;
+  color: var(--color-color-fde68a);
 }
 
 .calendar-event-pill--travel {
   border-color: rgba(167, 139, 250, 0.8);
   background: rgba(167, 139, 250, 0.14);
-  color: #c4b5fd;
+  color: var(--color-color-c4b5fd);
 }
 
 .calendar-event-pill--social {
   border-color: rgba(244, 114, 182, 0.8);
   background: rgba(244, 114, 182, 0.14);
-  color: #f9a8d4;
+  color: var(--color-color-f9a8d4);
 }
 
 .calendar-event-pill--home {
   border-color: rgba(248, 113, 113, 0.8);
   background: rgba(248, 113, 113, 0.14);
-  color: #fca5a5;
+  color: var(--color-color-fca5a5);
 }
 
 .calendar-event-pill--completed {
   border-color: rgba(148, 163, 184, 0.5);
   background: rgba(148, 163, 184, 0.12);
-  color: #cbd5e1;
+  color: var(--color-color-cbd5e1);
 }
 
 .calendar-event-pill__meta {
   color: rgba(248, 250, 252, 0.62);
-  font-size: 0.74rem;
+  font-size: var(--font-size-0-74rem-2);
 }
 
 .calendar-event-pill__notes {
   color: var(--scrappy-white);
-  font-size: 0.82rem;
+  font-size: var(--font-size-0-82rem-3);
   line-height: 1.45;
   white-space: normal;
 }
@@ -1417,30 +2400,30 @@ body {
   z-index: 1200;
   width: min(280px, calc(100vw - 24px));
   padding: 12px 14px;
-  border-radius: 10px;
+  border-radius: var(--border-radius-10px-4);
   border: 1px solid rgba(255, 154, 60, 0.2);
   background: rgba(12, 17, 24, 0.96);
   box-shadow: 0 16px 38px rgba(0, 0, 0, 0.38);
   pointer-events: none;
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--backdrop-filter-10px-2);
 }
 
 .calendar-hover-tooltip__title {
   color: var(--scrappy-white);
-  font-size: 0.9rem;
+  font-size: var(--font-size-0-9rem-3);
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: var(--margin-bottom-4px-4);
 }
 
 .calendar-hover-tooltip__meta {
   color: rgba(248, 250, 252, 0.62);
-  font-size: 0.75rem;
-  margin-bottom: 4px;
+  font-size: var(--font-size-0-75rem-4);
+  margin-bottom: var(--margin-bottom-4px-5);
 }
 
 .calendar-hover-tooltip__notes {
   color: rgba(248, 250, 252, 0.82);
-  font-size: 0.8rem;
+  font-size: var(--font-size-0-8rem-3);
   line-height: 1.45;
 }
 
@@ -1462,7 +2445,7 @@ body {
 .writer-body {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--gap-16px);
   height: 100%;
 }
 
@@ -1471,12 +2454,12 @@ body {
   border: none;
   border-bottom: 2px solid #3a404a;
   color: var(--scrappy-orange);
-  font-size: 1.5rem;
+  font-size: var(--font-size-1-5rem);
   font-weight: bold;
   padding: 8px 0;
   width: 100%;
   outline: none;
-  transition: border-color 0.2s;
+  transition: var(--transition-0-2000ms-2);
 }
 
 .writer-title-input:focus {
@@ -1485,41 +2468,44 @@ body {
 
 .writer-toolbar {
   display: flex;
-  gap: 4px;
-  background: #181f2a;
-  padding: 6px;
-  border-radius: 8px;
+  gap: var(--gap-4px-4);
+  background: var(--background-color-181f2a-6);
+  padding: var(--padding-6px);
+  border-radius: var(--border-radius-8px-8);
   border: 1px solid #3a404a;
   flex-wrap: wrap;
 }
 
 .writer-tool-btn {
-  background: #2a313d;
+  background: var(--background-color-2a313d-5);
   color: var(--scrappy-white);
   border: 1px solid transparent;
   padding: 6px 10px;
-  border-radius: 4px;
+  border-radius: var(--border-radius-4px-6);
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: all 0.15s;
-  min-width: 32px;
+  font-size: var(--font-size-0-9rem-4);
+  transition: var(--transition-0-15000ms-3);
+  min-width: var(--min-width-32px);
 }
 
 .writer-tool-btn:hover {
-  background: #3a404a;
+  background: var(--background-color-3a404a-3);
   border-color: var(--scrappy-orange);
   color: var(--scrappy-orange);
+  box-shadow: 0 0 16px rgba(255, 154, 60, 0.12);
+  transform: var(--transform-neg-1px-12);
+  animation: scrappy-hover-breath 1300ms ease-in-out infinite;
 }
 
 .doc-writer-editor {
   flex: 1;
-  background: #10151f;
+  background: var(--background-color-10151f-5);
   border: 1px solid #3a404a;
-  border-radius: 8px;
-  padding: 20px;
-  color: #fff;
+  border-radius: var(--border-radius-8px-9);
+  padding: var(--padding-20px-2);
+  color: var(--color-color-fff-9);
   overflow-y: auto;
-  min-height: 200px;
+  min-height: var(--min-height-200px);
   outline: none;
   line-height: 1.6;
   cursor: text;
@@ -1534,23 +2520,23 @@ body {
 
 .doc-writer-editor code {
   background: rgba(255, 154, 60, 0.16);
-  color: #ffd29f;
-  border-radius: 4px;
+  color: var(--color-color-ffd29f);
+  border-radius: var(--border-radius-4px-7);
   padding: 0.12rem 0.35rem;
   font-family: "Consolas", "Courier New", monospace;
-  font-size: 0.92em;
+  font-size: var(--font-size-0-92em);
 }
 
 .writer-code-block {
-  background: #0b1018;
+  background: var(--background-color-0b1018);
   border: 1px solid rgba(255, 154, 60, 0.22);
-  border-radius: 10px;
+  border-radius: var(--border-radius-10px-5);
   padding: 14px 16px;
   margin: 16px 0;
   overflow-x: auto;
   white-space: pre-wrap;
   font-family: "Consolas", "Courier New", monospace;
-  color: #f8fafc;
+  color: var(--color-color-f8fafc-2);
 }
 
 .writer-code-block code {
@@ -1562,12 +2548,12 @@ body {
 .writer-image-block {
   display: inline-block;
   width: min(100%, 420px);
-  min-width: 180px;
+  min-width: var(--min-width-180px);
   max-width: 100%;
   margin: 18px 0;
-  padding: 12px;
+  padding: var(--padding-12px-4);
   border: 1px solid rgba(255, 154, 60, 0.18);
-  border-radius: 12px;
+  border-radius: var(--border-radius-12px-6);
   background: rgba(255, 255, 255, 0.03);
   resize: both;
   overflow: auto;
@@ -1579,15 +2565,15 @@ body {
   height: auto;
   max-height: none;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-10);
   margin: 0 auto;
 }
 
 .writer-image-block figcaption {
-  margin-top: 10px;
+  margin-top: var(--margin-top-10px);
   text-align: center;
   color: rgba(248, 250, 252, 0.72);
-  font-size: 0.86rem;
+  font-size: var(--font-size-0-86rem-2);
 }
 
 .writer-image-block:focus-within,
@@ -1599,74 +2585,74 @@ body {
 .writer-grid-block {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--gap-10px-10);
   margin: 18px 0;
   padding: 14px 16px;
   border: 1px solid rgba(255, 154, 60, 0.2);
-  border-radius: 12px;
+  border-radius: var(--border-radius-12px-7);
   background: linear-gradient(180deg, rgba(255, 154, 60, 0.1), rgba(255, 255, 255, 0.02));
 }
 
 .writer-grid-block__eyebrow {
   color: rgba(255, 210, 159, 0.82);
-  font-size: 0.72rem;
+  font-size: var(--font-size-0-72rem-6);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-0-08em-3);
   text-transform: uppercase;
 }
 
 .writer-grid-block__title {
-  color: #fff5e8;
-  font-size: 1rem;
+  color: var(--color-color-fff5e8);
+  font-size: var(--font-size-1rem-5);
   font-weight: 700;
 }
 
 .writer-grid-block__name,
 .writer-grid-block__mode {
   background: rgba(10, 14, 20, 0.72);
-  color: #fff5e8;
+  color: var(--color-color-fff5e8-2);
   border: 1px solid rgba(255, 154, 60, 0.22);
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-11);
   padding: 8px 10px;
   font: inherit;
 }
 
 .writer-grid-block__name {
-  font-size: 1rem;
+  font-size: var(--font-size-1rem-6);
   font-weight: 700;
 }
 
 .writer-grid-block__meta {
   color: rgba(248, 250, 252, 0.72);
-  font-size: 0.84rem;
+  font-size: var(--font-size-0-84rem-2);
 }
 
 .writer-grid-block__controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--gap-10px-11);
 }
 
 .writer-grid-block__label {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--gap-8px-6);
   color: rgba(248, 250, 252, 0.78);
-  font-size: 0.84rem;
+  font-size: var(--font-size-0-84rem-3);
 }
 
 .writer-grid-block__columns {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--gap-8px-7);
 }
 
 .writer-grid-block__column {
   padding: 4px 8px;
-  border-radius: 999px;
+  border-radius: var(--border-radius-999px-7);
   background: rgba(255, 154, 60, 0.14);
-  color: #ffd9ae;
-  font-size: 0.78rem;
+  color: var(--color-color-ffd9ae);
+  font-size: var(--font-size-0-78rem);
 }
 
 .writer-grid-block__column--empty {
@@ -1682,19 +2668,28 @@ body {
 .writer-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--gap-12px-12);
   margin-top: auto;
-  padding-top: 12px;
+  padding-top: var(--padding-top-12px);
 }
 
 .module-action-btn-secondary {
-  background: #2a313d;
+  background: var(--background-color-2a313d-6);
   color: var(--scrappy-grey);
 }
 
 .module-action-btn-secondary:hover {
-  background: #3a404a;
+  background: var(--background-color-3a404a-4);
   color: var(--scrappy-white);
+  box-shadow: 0 0 16px rgba(255, 154, 60, 0.1);
+  transform: var(--transform-neg-1px-13);
+}
+
+.module-action-btn:hover {
+  filter: brightness(1.07);
+  box-shadow: 0 0 20px rgba(255, 154, 60, 0.18);
+  transform: var(--transform-neg-1px-14);
+  animation: scrappy-hover-breath 1250ms ease-in-out infinite;
 }
 
 /* File Explorer Styles */
@@ -1702,7 +2697,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--gap-12px-13);
 }
 
 .file-explorer-main {
@@ -1729,7 +2724,7 @@ body {
 }
 
 .file-preview-splitter.active {
-  width: 14px;
+  width: var(--width-14px);
   opacity: 1;
   pointer-events: auto;
   cursor: col-resize;
@@ -1738,10 +2733,10 @@ body {
 .file-preview-splitter::before {
   content: "";
   position: absolute;
-  top: 12px;
-  bottom: 12px;
+  top: var(--top-12px);
+  bottom: var(--bottom-12px);
   left: 50%;
-  width: 1px;
+  width: var(--width-1px);
   transform: translateX(-50%);
   background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.1) 12%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0.1) 88%, transparent 100%);
   transition: background 140ms ease, box-shadow 140ms ease;
@@ -1756,13 +2751,13 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 
 .file-preview-pane {
   flex: 0 0 auto;
-  background: #181f2a;
+  background: var(--background-color-181f2a-7);
   border: 1px solid #3a404a;
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-12);
   display: none; /* hidden by default */
   flex-direction: column;
   min-width: 0;
-  width: 380px;
+  width: var(--width-380px);
 }
 
 .file-preview-pane.active {
@@ -1775,14 +2770,14 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1e293b;
+  background: var(--background-color-1e293b);
 }
 
 .file-preview-content {
   flex: 1;
-  padding: 16px;
+  padding: var(--padding-16px);
   overflow-y: auto;
-  font-size: 0.9rem;
+  font-size: var(--font-size-0-9rem-5);
   line-height: 1.5;
   color: var(--scrappy-white);
 }
@@ -1793,31 +2788,34 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 }
 
 .file-preview-content pre {
-  background: #10151f;
-  padding: 12px;
-  border-radius: 4px;
+  background: var(--background-color-10151f-6);
+  padding: var(--padding-12px-5);
+  border-radius: var(--border-radius-4px-8);
   overflow-x: auto;
 }
 
 .file-preview-toolbar {
   display: flex;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: var(--gap-10px-12);
+  margin-bottom: var(--margin-bottom-12px-2);
 }
 
 .file-preview-meta {
   color: rgba(248, 250, 252, 0.62);
-  font-size: 0.78rem;
-  letter-spacing: 0.03em;
+  font-size: var(--font-size-0-78rem-2);
+  letter-spacing: var(--letter-spacing-0-03em);
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: var(--margin-bottom-12px-3);
 }
 
 .pdf-preview,
 .url-preview,
 .folder-preview,
 .markdown-preview,
-.zip-preview {
+.zip-preview,
+.text-preview,
+.video-preview,
+.generic-file-preview {
   display: flex;
   flex-direction: column;
   min-height: 100%;
@@ -1825,11 +2823,19 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 
 .pdf-preview-frame {
   width: 100%;
-  min-height: 520px;
+  min-height: var(--min-height-520px);
   flex: 1;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  background: #0d121a;
+  border-radius: var(--border-radius-8px-13);
+  background: var(--background-color-0d121a);
+}
+
+.video-preview-player {
+  width: 100%;
+  max-height: var(--max-height-520px);
+  border-radius: var(--border-radius-8px-14);
+  background: var(--background-color-0d121a-2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .url-preview a,
@@ -1841,51 +2847,51 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 .folder-preview-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8px-8);
 }
 
 .zip-preview-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8px-9);
 }
 
 .selection-preview-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8px-10);
 }
 
 .folder-preview-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--gap-10px-13);
   padding: 10px 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-15);
 }
 
 .zip-preview-item {
   display: grid;
   grid-template-columns: 36px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 10px;
+  gap: var(--gap-10px-14);
   padding: 10px 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-16);
 }
 
 .selection-preview-item {
   display: grid;
   grid-template-columns: 36px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 10px;
+  gap: var(--gap-10px-15);
   padding: 10px 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-17);
 }
 
 .folder-preview-name {
@@ -1911,13 +2917,13 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 
 .zip-preview-size {
   color: rgba(248, 250, 252, 0.62);
-  font-size: 0.78rem;
+  font-size: var(--font-size-0-78rem-3);
   white-space: nowrap;
 }
 
 .selection-preview-kind {
   color: rgba(248, 250, 252, 0.62);
-  font-size: 0.78rem;
+  font-size: var(--font-size-0-78rem-4);
   white-space: nowrap;
 }
 
@@ -1945,31 +2951,31 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 }
 
 .markdown-preview ul {
-  padding-left: 22px;
+  padding-left: var(--padding-left-22px);
 }
 
 .markdown-preview blockquote {
   border-left: 3px solid rgba(255, 154, 60, 0.45);
-  padding-left: 12px;
+  padding-left: var(--padding-left-12px);
   color: rgba(248, 250, 252, 0.82);
 }
 
 .markdown-preview code {
   background: rgba(255, 154, 60, 0.14);
-  border-radius: 4px;
+  border-radius: var(--border-radius-4px-9);
   padding: 0.08rem 0.3rem;
   font-family: "Consolas", "Courier New", monospace;
-  font-size: 0.92em;
+  font-size: var(--font-size-0-92em-2);
 }
 
 .fogre-path-modal {
   width: min(520px, calc(100vw - 48px));
-  max-width: 520px;
+  max-width: var(--max-width-520px);
 }
 
 .fogre-message-modal {
   width: min(460px, calc(100vw - 48px));
-  max-width: 460px;
+  max-width: var(--max-width-460px);
 }
 
 .fogre-message-modal--error {
@@ -1986,9 +2992,9 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 .fogre-modal-checkbox {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--gap-10px-16);
   color: rgba(248, 250, 252, 0.78);
-  font-size: 0.84rem;
+  font-size: var(--font-size-0-84rem-4);
 }
 
 .fogre-modal-checkbox input {
@@ -1998,7 +3004,7 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 .data-transfer-picker {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--gap-12px-14);
 }
 
 .data-transfer-picker__copy,
@@ -2010,23 +3016,23 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 
 .data-transfer-picker__summary {
   color: var(--scrappy-orange);
-  font-size: 0.82rem;
+  font-size: var(--font-size-0-82rem-4);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-0-08em-4);
   text-transform: uppercase;
 }
 
 .data-transfer-picker__label {
   color: rgba(248, 250, 252, 0.82);
-  font-size: 0.82rem;
+  font-size: var(--font-size-0-82rem-5);
 }
 
 .data-transfer-picker__input {
-  background: #0f1520;
+  background: var(--background-color-0f1520);
   border: 1px solid #3a404a;
   color: var(--scrappy-white);
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-18);
   font: inherit;
 }
 
@@ -2039,9 +3045,9 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 .data-transfer-picker__checkbox {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--gap-10px-17);
   color: rgba(248, 250, 252, 0.78);
-  font-size: 0.84rem;
+  font-size: var(--font-size-0-84rem-5);
 }
 
 .data-transfer-picker__checkbox input {
@@ -2051,42 +3057,42 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 .data-transfer-picker__items {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8px-11);
 }
 
 .data-transfer-picker__item {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: var(--gap-3px-2);
   padding: 10px 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-19);
 }
 
 .data-transfer-picker__name {
   color: var(--scrappy-white);
-  font-size: 0.88rem;
+  font-size: var(--font-size-0-88rem);
   font-weight: 600;
 }
 
 .data-transfer-picker__path {
   color: rgba(248, 250, 252, 0.58);
-  font-size: 0.75rem;
+  font-size: var(--font-size-0-75rem-5);
   word-break: break-all;
 }
 
 .data-transfer-picker__actions {
   display: flex;
-  gap: 10px;
+  gap: var(--gap-10px-18);
   justify-content: flex-end;
 }
 
 .inline-transfer-picker {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 4px;
+  gap: var(--gap-12px-15);
+  padding: var(--padding-4px-3);
 }
 
 .inline-transfer-picker__copy,
@@ -2098,30 +3104,30 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 
 .inline-transfer-picker__summary {
   color: var(--scrappy-orange);
-  font-size: 0.82rem;
+  font-size: var(--font-size-0-82rem-6);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-0-08em-5);
   text-transform: uppercase;
 }
 
 .inline-transfer-picker__label {
   color: rgba(248, 250, 252, 0.82);
-  font-size: 0.82rem;
+  font-size: var(--font-size-0-82rem-7);
 }
 
 .inline-transfer-picker__field-row {
   display: flex;
-  gap: 10px;
+  gap: var(--gap-10px-19);
   align-items: stretch;
 }
 
 .inline-transfer-picker__input {
   flex: 1 1 auto;
-  background: #0f1520;
+  background: var(--background-color-0f1520-2);
   border: 1px solid #3a404a;
   color: var(--scrappy-white);
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-20);
   font: inherit;
 }
 
@@ -2134,9 +3140,9 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 .inline-transfer-picker__checkbox {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--gap-10px-20);
   color: rgba(248, 250, 252, 0.78);
-  font-size: 0.84rem;
+  font-size: var(--font-size-0-84rem-6);
 }
 
 .inline-transfer-picker__checkbox input {
@@ -2145,40 +3151,40 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 
 .inline-transfer-picker__browse {
   flex: 0 0 auto;
-  min-width: 96px;
+  min-width: var(--min-width-96px);
 }
 
 .inline-transfer-picker__items {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--gap-8px-12);
 }
 
 .inline-transfer-picker__item {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: var(--gap-3px-3);
   padding: 10px 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-21);
 }
 
 .inline-transfer-picker__name {
   color: var(--scrappy-white);
-  font-size: 0.88rem;
+  font-size: var(--font-size-0-88rem-2);
   font-weight: 600;
 }
 
 .inline-transfer-picker__path {
   color: rgba(248, 250, 252, 0.58);
-  font-size: 0.75rem;
+  font-size: var(--font-size-0-75rem-6);
   word-break: break-all;
 }
 
 .inline-transfer-picker__actions {
   display: flex;
-  gap: 10px;
+  gap: var(--gap-10px-21);
   justify-content: flex-end;
 }
 
@@ -2186,15 +3192,15 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--scrappy-grey);
-  border-radius: 20px;
+  border-radius: var(--border-radius-20px);
   padding: 6px 12px;
-  font-size: 0.75rem;
+  font-size: var(--font-size-0-75rem-7);
   font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--gap-6px-3);
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
 }
 
@@ -2202,30 +3208,32 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   background: rgba(255, 154, 60, 0.1);
   border-color: rgba(255, 154, 60, 0.4);
   color: var(--scrappy-orange);
-  transform: translateY(-1px);
+  transform: var(--transform-neg-1px-15);
+  box-shadow: 0 0 18px rgba(255, 154, 60, 0.12);
+  animation: scrappy-hover-breath 1300ms ease-in-out infinite;
 }
 
 .quick-access-btn i, .quick-access-btn span.icon {
-  font-size: 0.9rem;
-  opacity: 0.8;
+  font-size: var(--font-size-0-9rem-6);
+  opacity: var(--opacity-0-8-3);
 }
 
 .quick-access-btn span.icon.icon-text {
-  font-size: 0.62rem;
+  font-size: var(--font-size-0-62rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
-  opacity: 0.72;
+  letter-spacing: var(--letter-spacing-0-08em-6);
+  opacity: var(--opacity-0-72);
 }
 
 .file-breadcrumbs-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--gap-8px-13);
   background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-22);
   border: 1px solid rgba(255, 255, 255, 0.06);
   padding: 4px 8px;
-  margin-bottom: 4px;
+  margin-bottom: var(--margin-bottom-4px-6);
 }
 
 .file-breadcrumbs {
@@ -2234,7 +3242,7 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: var(--gap-4px-5);
   padding: 2px 0;
 }
 
@@ -2243,10 +3251,10 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   background: transparent;
   color: rgba(248, 250, 252, 0.72);
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: var(--border-radius-6px-2);
   padding: 3px 6px;
   font: inherit;
-  font-size: 0.76rem;
+  font-size: var(--font-size-0-76rem);
   line-height: 1.25;
   cursor: pointer;
   transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
@@ -2254,24 +3262,26 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 
 .breadcrumb-btn:hover,
 .breadcrumb-btn:focus-visible {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 154, 60, 0.14);
+  border-color: rgba(255, 154, 60, 0.24);
   color: var(--scrappy-white);
+  box-shadow: 0 0 14px rgba(255, 154, 60, 0.1);
+  transform: var(--transform-neg-1px-16);
   outline: none;
 }
 
 .breadcrumb-separator {
   color: rgba(248, 250, 252, 0.34);
-  font-size: 0.72rem;
+  font-size: var(--font-size-0-72rem-7);
   user-select: none;
 }
 
 .drive-select {
   flex: 0 0 auto;
-  font-size: 0.75rem;
+  font-size: var(--font-size-0-75rem-8);
   font-weight: 600;
   padding: 5px 10px;
-  border-radius: 6px;
+  border-radius: var(--border-radius-6px-3);
   outline: none;
   cursor: pointer;
   background: rgba(255, 255, 255, 0.04) !important;
@@ -2288,14 +3298,13 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 }
 
 .drive-select option {
-  background: #16202d;
-  color: #f7e6cf;
+  background: var(--background-color-16202d);
+  color: var(--color-color-f7e6cf);
 }
-
 
 .breadcrumb-item {
   cursor: pointer;
-  transition: color 0.15s;
+  transition: var(--transition-0-15000ms-4);
 }
 
 .breadcrumb-item:hover {
@@ -2304,9 +3313,9 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 
 .file-list {
   flex: 1;
-  background: #10151f;
+  background: var(--background-color-10151f-7);
   border: 1px solid #3a404a;
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-23);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -2324,12 +3333,14 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   padding: 10px 14px;
   border-bottom: 1px solid #1e293b;
   cursor: pointer;
-  transition: background 0.15s;
-  gap: 12px;
+  transition: var(--transition-0-15000ms-5);
+  gap: var(--gap-12px-16);
 }
 
 .file-item:hover {
-  background: #1a222f;
+  background: var(--background-color-1a222f-3);
+  box-shadow: inset 0 0 0 1px rgba(255, 154, 60, 0.12), 0 0 16px rgba(255, 154, 60, 0.08);
+  transform: var(--transform-neg-1px-17);
 }
 
 .file-item.selected {
@@ -2343,20 +3354,20 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 }
 
 .file-icon {
-  font-size: 0.68rem;
+  font-size: var(--font-size-0-68rem-4);
   font-weight: 700;
-  letter-spacing: 0.04em;
-  width: 32px;
-  min-width: 32px;
+  letter-spacing: var(--letter-spacing-0-04em);
+  width: var(--width-32px-4);
+  min-width: var(--min-width-32px-2);
   text-align: center;
   color: var(--scrappy-orange);
   font-family: "Consolas", "Courier New", monospace;
-  opacity: 0.92;
+  opacity: var(--opacity-0-92);
 }
 
 .file-name {
   flex: 1;
-  font-size: 0.95rem;
+  font-size: var(--font-size-0-95rem-5);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -2365,9 +3376,9 @@ body.is-resizing-preview .file-preview-splitter.active::before {
 .file-actions-menu {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--gap-6px-4);
   opacity: 0;
-  transition: opacity 0.15s;
+  transition: var(--transition-0-15000ms-6);
   margin-left: auto;
 }
 
@@ -2379,43 +3390,45 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   color: var(--scrappy-grey);
   padding: 4px 6px;
   cursor: pointer;
-  border-radius: 6px;
-  font-size: 0.72rem;
+  border-radius: var(--border-radius-6px-4);
+  font-size: var(--font-size-0-72rem-8);
   font-weight: 700;
   font-family: "Consolas", "Courier New", monospace;
   border: 1px solid transparent;
-  transition: color 0.15s, background 0.15s, border-color 0.15s;
+  transition: color 150ms, background 150ms, border-color 150ms;
 }
 
 .file-action-icon:hover {
   background: rgba(255, 154, 60, 0.1);
   border-color: rgba(255, 154, 60, 0.28);
   color: var(--scrappy-orange);
+  box-shadow: 0 0 12px rgba(255, 154, 60, 0.12);
+  transform: var(--transform-neg-1px-18);
 }
 
 .file-action-icon[data-file-action="cut"]:hover {
   background: rgba(250, 204, 21, 0.12);
   border-color: rgba(250, 204, 21, 0.28);
-  color: #facc15;
+  color: var(--color-color-facc15);
 }
 
 .file-action-icon[data-file-action="delete"]:hover {
   background: rgba(239, 68, 68, 0.12);
   border-color: rgba(239, 68, 68, 0.28);
-  color: #ef4444;
+  color: var(--color-color-ef4444);
 }
 
 /* Context Menu Styles */
 .scrappy-context-menu {
   position: fixed;
-  background: #1e293b;
+  background: var(--background-color-1e293b-2);
   border: 1px solid #3a404a;
-  border-radius: 8px;
+  border-radius: var(--border-radius-8px-24);
   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
   padding: 6px 0;
-  min-width: 180px;
+  min-width: var(--min-width-180px-2);
   z-index: 5000;
-  font-size: 0.85rem;
+  font-size: var(--font-size-0-85rem-5);
 }
 
 .scrappy-context-menu-item {
@@ -2423,32 +3436,33 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 10px;
-  transition: background 0.1s;
+  gap: var(--gap-10px-22);
+  transition: var(--transition-0-1000ms);
 }
 
 .scrappy-context-menu-item:hover {
   background: rgba(255, 154, 60, 0.15);
   color: var(--scrappy-orange);
+  box-shadow: inset 0 0 0 1px rgba(255, 154, 60, 0.1);
 }
 
 .scrappy-context-menu-separator {
-  height: 1px;
-  background: #3a404a;
+  height: var(--height-1px);
+  background: var(--background-color-3a404a-5);
   margin: 4px 0;
 }
 
 .scrappy-context-menu-item .icon {
-  width: 18px;
+  width: var(--width-18px);
   text-align: center;
-  font-size: 0.72rem;
+  font-size: var(--font-size-0-72rem-9);
   font-weight: 700;
   color: var(--scrappy-orange);
   font-family: "Consolas", "Courier New", monospace;
 }
 
 .scrappy-context-menu-item.disabled {
-  opacity: 0.5;
+  opacity: var(--opacity-0-5-2);
   cursor: default;
 }
 
@@ -2456,3 +3470,4 @@ body.is-resizing-preview .file-preview-splitter.active::before {
   background: transparent;
   color: inherit;
 }
+

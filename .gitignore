@@ -1,6 +1,8 @@
 node_modules/
 dist/
 .Clairvoyance/
+.forge-backups/
+*.org
 *.log
 Thumbs.db
 .DS_Store

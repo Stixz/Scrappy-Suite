@@ -1,0 +1,274 @@
+
+# 🜁 **THE SCRAPPY CORE ENGINE**  
+*A tiny, flexible, duct‑tape‑and‑magic runtime for Scrappy Suite.*
+
+This engine provides:
+
+- module registration  
+- shared data layer  
+- event bus  
+- deep link resolver  
+- UI mounting  
+- module switching  
+
+All in a tiny, Scrappy‑sized footprint.
+
+Below is the full engine — clean, readable, and ready to drop in.
+
+---
+
+# 🜂 **1. The Scrappy Engine Skeleton**
+
+```
+const scrappy = {
+  modules: {},
+  db: {},
+  events: {},
+  currentModule: null,
+
+  register(module) {
+    this.modules[module.id] = module
+
+    // Initialize module data store if missing
+    if (!this.db[module.id]) {
+      this.db[module.id] = []
+    }
+
+    // Optional: module init hook
+    if (module.init) {
+      module.init()
+    }
+  },
+
+  mount(mainContainer, sideContainer) {
+    this.mainContainer = mainContainer
+    this.sideContainer = sideContainer
+  },
+
+  open(moduleId, itemId = null) {
+    const mod = this.modules[moduleId]
+    if (!mod) return
+
+    this.currentModule = moduleId
+
+    // Update module state
+    if (itemId && mod.actions.open) {
+      mod.actions.open(itemId)
+    }
+
+    // Render UI
+    mod.renderMain(this.mainContainer)
+    if (mod.renderSide) {
+      mod.renderSide(this.sideContainer)
+    }
+  }
+}
+```
+
+This is the **core**.  
+Everything else plugs into it.
+
+---
+
+# 🜃 **2. The Scrappy Event Bus (MMB)**  
+Modules talk through this tiny event system.
+
+```
+scrappy.on = function(event, callback) {
+  if (!this.events[event]) this.events[event] = []
+  this.events[event].push(callback)
+}
+
+scrappy.emit = function(event, payload) {
+  if (!this.events[event]) return
+  for (const cb of this.events[event]) {
+    cb(payload)
+  }
+}
+```
+
+This is how Notes talks to Tasks.  
+How Tasks talks to Ideas.  
+How anything talks to anything.
+
+No DB.  
+No contracts.  
+Just vibes.
+
+---
+
+# 🜄 **3. The Scrappy Deep Link Resolver (MLP)**  
+Scrappy Suite uses a tiny linking protocol:
+
+```
+scrappy://<module>/<id>
+```
+
+Here’s the resolver:
+
+```
+scrappy.resolve = function(link) {
+  if (!link.startsWith("scrappy://")) return
+
+  const parts = link.replace("scrappy://", "").split("/")
+  const moduleId = parts[0]
+  const itemId = parts[1]
+
+  this.open(moduleId, itemId)
+}
+```
+
+This is all Scrappy needs.  
+No tags.  
+No clusters.  
+No relationship maps.
+
+Just “click → open.”
+
+---
+
+# 🜅 **4. The Scrappy Data Layer (TSDL)**  
+Scrappy Suite uses a single shared JSON object as its “database.”
+
+```
+scrappy.db = {
+  notes: [],
+  tasks: [],
+  ideas: [],
+  journal: []
+}
+```
+
+Modules read/write directly.  
+No clearance.  
+No RLS.  
+No redaction.
+
+Scrappy Suite trusts you.
+
+---
+
+# 🜆 **5. Module Switching Logic**
+
+This is how Scrappy jumps between modules:
+
+```
+scrappy.switch = function(moduleId) {
+  this.open(moduleId)
+}
+```
+
+You can wire this to:
+
+- sidebar buttons  
+- hotkeys  
+- deep links  
+- events  
+
+Scrappy Suite becomes a tiny OS.
+
+---
+
+# 🜇 **6. Optional: Scrappy Startup Routine**
+
+```
+scrappy.start = function(defaultModule = null) {
+  if (defaultModule) {
+    this.open(defaultModule)
+  }
+}
+```
+
+You can call:
+
+```
+scrappy.start("notes")
+```
+
+And boom — Scrappy Suite boots into Notes.
+
+---
+
+# 🜈 **7. Putting It All Together**
+
+Here’s the full engine in one piece (clean, readable, ready to paste):
+
+```
+const scrappy = {
+  modules: {},
+  db: {},
+  events: {},
+  currentModule: null,
+  mainContainer: null,
+  sideContainer: null,
+
+  register(module) {
+    this.modules[module.id] = module
+
+    if (!this.db[module.id]) {
+      this.db[module.id] = []
+    }
+
+    if (module.init) {
+      module.init()
+    }
+  },
+
+  mount(mainContainer, sideContainer) {
+    this.mainContainer = mainContainer
+    this.sideContainer = sideContainer
+  },
+
+  open(moduleId, itemId = null) {
+    const mod = this.modules[moduleId]
+    if (!mod) return
+
+    this.currentModule = moduleId
+
+    if (itemId && mod.actions.open) {
+      mod.actions.open(itemId)
+    }
+
+    mod.renderMain(this.mainContainer)
+    if (mod.renderSide) {
+      mod.renderSide(this.sideContainer)
+    }
+  },
+
+  switch(moduleId) {
+    this.open(moduleId)
+  },
+
+  on(event, callback) {
+    if (!this.events[event]) this.events[event] = []
+    this.events[event].push(callback)
+  },
+
+  emit(event, payload) {
+    if (!this.events[event]) return
+    for (const cb of this.events[event]) {
+      cb(payload)
+    }
+  },
+
+  resolve(link) {
+    if (!link.startsWith("scrappy://")) return
+    const parts = link.replace("scrappy://", "").split("/")
+    const moduleId = parts[0]
+    const itemId = parts[1]
+    this.open(moduleId, itemId)
+  },
+
+  start(defaultModule = null) {
+    if (defaultModule) {
+      this.open(defaultModule)
+    }
+  }
+}
+```
+
+This is the **Scrappy Core Engine**.  
+It’s tiny.  
+It’s flexible.  
+It’s personal.  
+It’s Ravenforge‑compatible.
