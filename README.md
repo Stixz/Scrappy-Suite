@@ -2,6 +2,8 @@
 
 Scrappy Suite is a freeware desktop workspace from [Ravenforge Creations Studio](https://ravenforge.info).
 
+<img width="1200" height="800" alt="Screenshot 2026-05-10 141618" src="https://github.com/user-attachments/assets/80aff73c-d82d-40f1-a627-8a4797bdb094" />
+
 It is built around panels, lightweight modules, and a simple launcher so you can combine writing, files, and planning in one window without a lot of ceremony.
 
 ## What It Does
